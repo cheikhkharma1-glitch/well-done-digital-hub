@@ -38,6 +38,8 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Well Done Services Company — Solutions IT & transformation digitale" },
       { name: "twitter:description", content: "Well Done Services Company SARL : développement web, ERP/CRM, gestion scolaire, maintenance et réseaux. Acteur de la transformation digitale au Sénégal et en Afrique." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/81825bfa-3fd4-4951-b733-d54fc8301a19/id-preview-77a163da--11705bce-94e6-408b-b1f2-0182e744b6b1.lovable.app-1777752611989.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/81825bfa-3fd4-4951-b733-d54fc8301a19/id-preview-77a163da--11705bce-94e6-408b-b1f2-0182e744b6b1.lovable.app-1777752611989.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
