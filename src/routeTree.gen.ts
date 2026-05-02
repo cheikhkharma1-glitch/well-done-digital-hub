@@ -9,38 +9,154 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RealisationsIndexRouteImport } from './routes/realisations.index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AProposRoute = AProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RealisationsIndexRoute = RealisationsIndexRouteImport.update({
+  id: '/realisations/',
+  path: '/realisations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
+  id: '/realisations/$slug',
+  path: '/realisations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/contact': typeof ContactRoute
+  '/services': typeof ServicesRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/realisations/$slug': typeof RealisationsSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/realisations/': typeof RealisationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/contact': typeof ContactRoute
+  '/services': typeof ServicesRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/realisations/$slug': typeof RealisationsSlugRoute
+  '/blog': typeof BlogIndexRoute
+  '/realisations': typeof RealisationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/contact': typeof ContactRoute
+  '/services': typeof ServicesRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/realisations/$slug': typeof RealisationsSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/realisations/': typeof RealisationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/a-propos'
+    | '/contact'
+    | '/services'
+    | '/blog/$slug'
+    | '/realisations/$slug'
+    | '/blog/'
+    | '/realisations/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/a-propos'
+    | '/contact'
+    | '/services'
+    | '/blog/$slug'
+    | '/realisations/$slug'
+    | '/blog'
+    | '/realisations'
+  id:
+    | '__root__'
+    | '/'
+    | '/a-propos'
+    | '/contact'
+    | '/services'
+    | '/blog/$slug'
+    | '/realisations/$slug'
+    | '/blog/'
+    | '/realisations/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AProposRoute: typeof AProposRoute
+  ContactRoute: typeof ContactRoute
+  ServicesRoute: typeof ServicesRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  RealisationsSlugRoute: typeof RealisationsSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+  RealisationsIndexRoute: typeof RealisationsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a-propos': {
+      id: '/a-propos'
+      path: '/a-propos'
+      fullPath: '/a-propos'
+      preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +164,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/realisations/': {
+      id: '/realisations/'
+      path: '/realisations'
+      fullPath: '/realisations/'
+      preLoaderRoute: typeof RealisationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realisations/$slug': {
+      id: '/realisations/$slug'
+      path: '/realisations/$slug'
+      fullPath: '/realisations/$slug'
+      preLoaderRoute: typeof RealisationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AProposRoute: AProposRoute,
+  ContactRoute: ContactRoute,
+  ServicesRoute: ServicesRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  RealisationsSlugRoute: RealisationsSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+  RealisationsIndexRoute: RealisationsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
