@@ -1,19 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   return (
     <footer className="bg-foreground text-background mt-24">
       <div className="container mx-auto px-4 lg:px-8 py-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-9 w-9 rounded-lg bg-gradient-primary flex items-center justify-center font-display font-bold">
-              W
-            </div>
-            <div>
-              <div className="font-display font-bold">Well Done Services</div>
-              <div className="text-xs opacity-70">Company SARL</div>
-            </div>
+          <div className="bg-background/95 rounded-lg p-3 inline-block mb-4">
+            <img src={logo} alt="Well Done Services Company" className="h-12 w-auto" />
           </div>
           <p className="text-sm opacity-75 leading-relaxed">
             Acteur de la transformation digitale au Sénégal et en Afrique. Nous concevons des solutions IT robustes et orientées résultats.
