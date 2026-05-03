@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote } from "lucide-react";
+import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote, Linkedin } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
+import ceoImg from "@/assets/ceo-kharma.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
