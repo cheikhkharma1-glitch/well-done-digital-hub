@@ -35,14 +35,12 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-4 lg:px-8 h-16 lg:h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="h-9 w-9 rounded-lg bg-gradient-primary shadow-glow flex items-center justify-center text-primary-foreground font-display font-bold">
-            W
-          </div>
-          <div className="leading-tight">
-            <div className="font-display font-bold text-base lg:text-lg">Well Done</div>
-            <div className="text-[10px] lg:text-xs text-muted-foreground -mt-0.5">Services Company</div>
-          </div>
+        <Link to="/" className="flex items-center gap-3 group">
+          <img
+            src={logo}
+            alt="Well Done Services Company"
+            className="h-10 lg:h-12 w-auto transition-smooth group-hover:scale-105"
+          />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
