@@ -144,6 +144,7 @@ export function Header() {
             />
           </span>
         </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
