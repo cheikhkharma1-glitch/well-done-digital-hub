@@ -92,16 +92,16 @@ export function Header() {
               activeOptions={{ exact: l.to === "/" }}
               style={{ animationDelay: `${i * 60}ms` }}
               className={cn(
-                "relative px-4 py-2 text-sm font-medium rounded-md transition-colors duration-300",
-                "hover:text-primary animate-fade-in",
+                "relative px-4 py-2 text-sm font-bold uppercase tracking-wide rounded-md transition-colors duration-300",
+                "text-foreground/80 hover:text-amber-500 dark:hover:text-amber-400 animate-fade-in",
                 "after:content-[''] after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-0.5",
-                "after:bg-gradient-primary after:rounded-full after:origin-center",
+                "after:bg-gradient-to-r after:from-amber-400 after:to-amber-600 after:rounded-full after:origin-center",
                 "after:scale-x-0 after:transition-transform after:duration-300 after:ease-out",
                 "hover:after:scale-x-100",
               )}
               activeProps={{
                 className:
-                  "text-primary font-semibold bg-primary/5 after:scale-x-100",
+                  "text-amber-500 dark:text-amber-400 font-extrabold bg-amber-500/10 after:scale-x-100",
               }}
             >
               {l.label}
