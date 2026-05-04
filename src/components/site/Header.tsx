@@ -66,15 +66,22 @@ export function Header() {
         )}
       >
         <Link to="/" className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md">
-          <img
-            src={logo}
-            alt="Well Done Services Company"
+          <span
             className={cn(
-              "w-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              "group-hover:scale-105 group-hover:drop-shadow-[0_4px_12px_hsl(var(--primary)/0.25)]",
-              scrolled ? "h-9 lg:h-10" : "h-11 lg:h-14",
+              "inline-flex items-center justify-center rounded-md transition-all duration-500",
+              "dark:bg-background/90 dark:p-1.5 dark:shadow-sog dark:ring-1 dark:ring-border/40",
             )}
-          />
+          >
+            <img
+              src={logo}
+              alt="Well Done Services Company"
+              className={cn(
+                "w-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "group-hover:scale-105 group-hover:drop-shadow-[0_4px_12px_hsl(var(--primary)/0.25)]",
+                scrolled ? "h-9 lg:h-10" : "h-11 lg:h-14",
+              )}
+            />
+          </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
