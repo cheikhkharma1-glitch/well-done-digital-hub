@@ -101,7 +101,7 @@ export function Header() {
               )}
               activeProps={{
                 className:
-                  "text-primary font-semibold after:scale-x-100",
+                  "text-primary font-semibold bg-primary/5 after:scale-x-100",
               }}
             >
               {l.label}
@@ -110,6 +110,7 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <Button
             asChild
             variant="default"
@@ -118,6 +119,9 @@ export function Header() {
             <Link to="/contact">Demander un devis</Link>
           </Button>
         </div>
+
+        <div className="lg:hidden flex items-center gap-1">
+        <ThemeToggle />
 
         <button
           className="lg:hidden p-2 rounded-md hover:bg-accent transition-colors relative"
