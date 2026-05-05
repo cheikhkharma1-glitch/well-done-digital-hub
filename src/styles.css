@@ -173,4 +173,36 @@
     color: transparent;
   }
   .transition-smooth { transition: all 0.4s var(--transition-smooth); }
+  .bg-gradient-cyber { background: var(--gradient-cyber); }
+  .shadow-cyber { box-shadow: var(--shadow-cyber); }
+  .text-cyber {
+    background: var(--gradient-cyber);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-grid-cyber {
+    background-image:
+      linear-gradient(to right, oklch(0.82 0.16 210 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.82 0.16 210 / 0.08) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  @keyframes cyber-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+  @keyframes cyber-float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, -30px); }
+  }
+  @keyframes cyber-scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes cyber-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .animate-cyber-pulse { animation: cyber-pulse 4s ease-in-out infinite; }
+  .animate-cyber-float { animation: cyber-float 12s ease-in-out infinite; }
 }
