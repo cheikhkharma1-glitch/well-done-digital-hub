@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote, Linkedin } from "lucide-react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
