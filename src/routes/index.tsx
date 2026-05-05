@@ -49,6 +49,7 @@ const testimonials = [
 
 function HomePage() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
     supabase
@@ -59,6 +60,15 @@ function HomePage() {
       .limit(3)
       .then(({ data }) => setProjects(data ?? []));
   }, []);
+
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 24 },
+    visible: (i: number = 0) => ({
+      opacity: 1, y: 0,
+      transition: { duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+    }),
+  };
+  const stagger: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } } };
 
   return (
     <SiteLayout>
