@@ -78,72 +78,127 @@ function HomePage() {
           <img src={heroImg} alt="" width={1920} height={1080} className="w-full h-full object-cover opacity-40" />
           <div className="absolute inset-0 bg-gradient-hero opacity-90" />
           <div className="absolute inset-0 bg-gradient-glow" />
+          <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-30" />
         </div>
 
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute top-20 -left-32 h-96 w-96 rounded-full blur-3xl"
+          style={{ background: "var(--gradient-cyber)", opacity: 0.3 }}
+          animate={prefersReduced ? undefined : { x: [0, 60, 0], y: [0, 40, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute bottom-0 -right-32 h-[28rem] w-[28rem] rounded-full bg-[oklch(0.82_0.16_210)]/25 blur-3xl"
+          animate={prefersReduced ? undefined : { x: [0, -50, 0], y: [0, -30, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+
         <div className="container mx-auto px-4 lg:px-8 relative">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 backdrop-blur px-4 py-1.5 text-xs lg:text-sm text-primary-foreground/90 mb-6">
-              <Sparkles className="h-3.5 w-3.5" />
+          <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-4xl">
+            <motion.div
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 rounded-full border border-[oklch(0.82_0.16_210)]/40 bg-primary-foreground/10 backdrop-blur px-4 py-1.5 text-xs lg:text-sm text-primary-foreground/90 mb-6"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-[oklch(0.82_0.16_210)]" />
               <span>Acteur de la transformation digitale en Afrique</span>
-            </div>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-foreground leading-[1.05] mb-6">
+            </motion.div>
+            <motion.h1
+              variants={fadeUp}
+              className="font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-foreground leading-[1.05] mb-6"
+            >
               Des solutions IT
               <br />
-              <span className="bg-gradient-to-r from-primary-foreground to-[oklch(0.85_0.08_240)] bg-clip-text text-transparent">
-                qui transforment
+              <span className="relative inline-block">
+                <span className="text-cyber">qui transforment</span>
+                <motion.span
+                  aria-hidden
+                  className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-cyber"
+                  initial={{ scaleX: 0, transformOrigin: "left" }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                />
               </span>{" "}
               votre entreprise.
-            </h1>
-            <p className="text-base lg:text-xl text-primary-foreground/80 max-w-2xl leading-relaxed mb-10">
+            </motion.h1>
+            <motion.p variants={fadeUp} className="text-base lg:text-xl text-primary-foreground/80 max-w-2xl leading-relaxed mb-10">
               Well Done Services Company conçoit et déploie des solutions web, logicielles et réseau sur mesure pour les PME, écoles, administrations et startups au Sénégal et en Afrique.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-glow">
+            </motion.p>
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3">
+              <Button asChild size="lg" className="bg-gradient-cyber text-white hover:opacity-90 shadow-cyber hover:-translate-y-0.5 transition-all">
                 <Link to="/contact">Demander un devis <ArrowRight className="ml-1 h-4 w-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
                 <Link to="/services">Découvrir nos services</Link>
               </Button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
-            {stats.map((s) => (
-              <div key={s.label} className="border-l-2 border-primary-foreground/30 pl-4">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10"
+          >
+            {stats.map((s, i) => (
+              <motion.div key={s.label} custom={i} variants={fadeUp} className="border-l-2 border-[oklch(0.82_0.16_210)]/60 pl-4">
                 <div className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground">{s.value}</div>
                 <div className="text-xs lg:text-sm text-primary-foreground/70 mt-1">{s.label}</div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-2xl mb-14">
-            <p className="text-sm font-semibold text-primary-glow uppercase tracking-wider mb-3">Nos expertises</p>
+      <section className="py-24 lg:py-32 relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mb-14"
+          >
+            <p className="text-sm font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-widest mb-3">Nos expertises</p>
             <h2 className="font-display text-3xl lg:text-5xl font-bold mb-4">
-              Une offre <span className="text-gradient">complète</span> pour digitaliser votre activité.
+              Une offre <span className="text-cyber">complète</span> pour digitaliser votre activité.
             </h2>
             <p className="text-muted-foreground text-lg">
               Du site vitrine à l'ERP métier, en passant par la gestion scolaire et l'infrastructure réseau.
             </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((s) => (
-              <div key={s.title} className="group p-6 lg:p-8 rounded-2xl bg-gradient-card border border-border hover:border-primary-glow/50 hover:shadow-elegant transition-smooth">
-                <div className="h-12 w-12 rounded-xl bg-gradient-primary text-primary-foreground flex items-center justify-center mb-5 group-hover:shadow-glow transition-smooth">
+          </motion.div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {services.map((s, i) => (
+              <motion.div
+                key={s.title}
+                custom={i}
+                variants={fadeUp}
+                whileHover={prefersReduced ? undefined : { y: -6 }}
+                transition={{ type: "spring", stiffness: 220, damping: 22 }}
+                className="group relative p-6 lg:p-8 rounded-2xl bg-gradient-card border border-border hover:border-[oklch(0.82_0.16_210)]/60 hover:shadow-cyber transition-all duration-500 overflow-hidden"
+              >
+                <div aria-hidden className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[oklch(0.82_0.16_210)]/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div aria-hidden className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-cyber scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
+                <div className="relative h-12 w-12 rounded-xl bg-gradient-cyber text-white flex items-center justify-center mb-5 shadow-cyber transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
                   <s.icon className="h-6 w-6" />
                 </div>
-                <h3 className="font-display text-lg font-bold mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              </div>
+                <h3 className="font-display text-lg font-bold mb-2 relative">{s.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed relative">{s.desc}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className="mt-10">
-            <Button asChild variant="ghost" className="group">
+            <Button asChild variant="ghost" className="group hover:text-[oklch(0.62_0.2_255)]">
               <Link to="/services">Voir tous les services <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-smooth" /></Link>
             </Button>
           </div>
@@ -151,42 +206,56 @@ function HomePage() {
       </section>
 
       {/* PROJETS */}
-      <section className="py-24 lg:py-32 bg-surface">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+      <section className="py-24 lg:py-32 bg-surface relative overflow-hidden">
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14"
+          >
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold text-primary-glow uppercase tracking-wider mb-3">Réalisations</p>
-              <h2 className="font-display text-3xl lg:text-5xl font-bold">Nos projets <span className="text-gradient">récents</span>.</h2>
+              <p className="text-sm font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-widest mb-3">Réalisations</p>
+              <h2 className="font-display text-3xl lg:text-5xl font-bold">Nos projets <span className="text-cyber">récents</span>.</h2>
             </div>
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="hover:border-[oklch(0.62_0.2_255)] hover:text-[oklch(0.62_0.2_255)]">
               <Link to="/realisations">Voir le portfolio complet</Link>
             </Button>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((p) => (
-              <Link
-                to="/realisations/$slug"
-                params={{ slug: p.slug }}
-                key={p.id}
-                className="group rounded-2xl overflow-hidden bg-card border border-border hover:shadow-elegant transition-smooth"
-              >
-                <div className="aspect-[4/3] bg-gradient-primary relative overflow-hidden">
-                  {p.image_url ? (
-                    <img src={p.image_url} alt={p.title} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-primary flex items-center justify-center">
-                      <span className="font-display text-6xl text-primary-foreground/30">{p.title[0]}</span>
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <p className="text-xs font-medium text-primary-glow uppercase tracking-wider mb-2">{p.category}</p>
-                  <h3 className="font-display text-lg font-bold mb-2 group-hover:text-primary transition-smooth">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">{p.description}</p>
-                </div>
-              </Link>
+          </motion.div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {projects.map((p, i) => (
+              <motion.div key={p.id} custom={i} variants={fadeUp}>
+                <Link
+                  to="/realisations/$slug"
+                  params={{ slug: p.slug }}
+                  className="group block rounded-2xl overflow-hidden bg-card border border-border hover:border-[oklch(0.82_0.16_210)]/60 hover:shadow-cyber transition-all duration-500 hover:-translate-y-1"
+                >
+                  <div className="aspect-[4/3] bg-gradient-primary relative overflow-hidden">
+                    {p.image_url ? (
+                      <img src={p.image_url} alt={p.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-cyber flex items-center justify-center">
+                        <span className="font-display text-6xl text-white/30">{p.title[0]}</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                  <div className="p-6">
+                    <p className="text-xs font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-widest mb-2">{p.category}</p>
+                    <h3 className="font-display text-lg font-bold mb-2 group-hover:text-[oklch(0.62_0.2_255)] transition-colors duration-300">{p.title}</h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2">{p.description}</p>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
