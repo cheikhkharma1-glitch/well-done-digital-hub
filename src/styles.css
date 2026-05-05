@@ -97,6 +97,13 @@
   --shadow-soft: 0 4px 20px -4px oklch(0.22 0.08 265 / 0.12);
   --shadow-glow: 0 0 80px -20px oklch(0.58 0.11 245 / 0.5);
 
+  /* Cyber IT accents */
+  --cyber-cyan: oklch(0.82 0.16 210);
+  --cyber-blue: oklch(0.62 0.2 255);
+  --cyber-deep: oklch(0.18 0.08 265);
+  --shadow-cyber: 0 0 40px -8px oklch(0.82 0.16 210 / 0.55);
+  --gradient-cyber: linear-gradient(135deg, oklch(0.62 0.2 255) 0%, oklch(0.82 0.16 210) 100%);
+
   --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 
   --sidebar: oklch(0.98 0.005 240);
