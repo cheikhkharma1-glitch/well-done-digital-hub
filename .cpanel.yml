@@ -1,0 +1,17 @@
+# Configuration de déploiement automatique cPanel
+# Déclenché par "Update from Remote" + "Deploy HEAD Commit" dans Git Version Control
+#
+# IMPORTANT : le build (npm install && npm run build) doit être exécuté
+# AVANT le push Git, car cPanel mutualisé n'exécute pas Node.js.
+# Le dossier dist/ doit donc être commité (ou généré via GitHub Actions).
+
+deployment:
+  tasks:
+    # Chemin de destination sur l'hébergement cPanel
+    - export DEPLOYPATH=/home1/welldxvv/public_html/
+
+    # Copie récursive du build vers public_html
+    - /bin/cp -R dist/* $DEPLOYPATH
+
+    # Copie du .htaccess (routing SPA + sécurité)
+    - /bin/cp -f public/.htaccess $DEPLOYPATH.htaccess

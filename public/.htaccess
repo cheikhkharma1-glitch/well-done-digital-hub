@@ -1,0 +1,58 @@
+# =====================================================================
+# .htaccess — Configuration Apache pour hébergement cPanel mutualisé
+# Compatible : cPanel, Hostinger, Namecheap, OVH, CloudLinux
+# =====================================================================
+
+# ---------- 1. Routing SPA (React Router / TanStack Router côté client)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Sert index.html directement si demandé
+  RewriteRule ^index\.html$ - [L]
+
+  # Si le fichier ou dossier n'existe pas → fallback vers index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# ---------- 2. Forcer HTTPS en production
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ---------- 3. Compression Gzip pour performance
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---------- 4. Cache navigateur pour assets statiques
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ---------- 5. En-têtes de sécurité
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ---------- 6. Bloquer accès aux fichiers sensibles
+<FilesMatch "(\.env|\.git|package\.json|package-lock\.json|tsconfig\.json|vite\.config\.|\.yml|\.toml)$">
+  Require all denied
+</FilesMatch>
+
+# ---------- 7. Page d'erreur personnalisée
+ErrorDocument 404 /index.html
