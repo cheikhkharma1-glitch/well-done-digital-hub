@@ -161,13 +161,15 @@ function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl mb-14"
+            className="max-w-3xl mb-16"
           >
-            <p className="text-sm font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-widest mb-3">Nos expertises</p>
-            <h2 className="font-display text-3xl lg:text-5xl font-bold mb-4">
-              Une offre <span className="text-cyber">complète</span> pour digitaliser votre activité.
+            <p className="text-xs font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-[0.35em] mb-5">Nos expertises</p>
+            <h2 className="font-display text-4xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+              Une offre <span className="text-cyber">complète</span>
+              <br className="hidden sm:block" />
+              <span className="text-muted-foreground font-light"> pour digitaliser votre activité.</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
               Du site vitrine à l'ERP métier, en passant par la gestion scolaire et l'infrastructure réseau.
             </p>
           </motion.div>
