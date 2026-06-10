@@ -111,13 +111,18 @@ function PortfolioPage() {
         />
         <motion.div
           aria-hidden
-          className="pointer-events-none absolute -bottom-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-amber-400/20 blur-3xl"
+          className="pointer-events-none absolute -bottom-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-[oklch(0.82_0.16_210)]/25 blur-3xl"
           animate={prefersReduced ? undefined : { x: [0, -50, 0], y: [0, -30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div
+        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-30" />
+        {/* Scanning beam */}
+        <motion.div
           aria-hidden
-          className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:48px_48px]"
+          className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[oklch(0.82_0.16_210)] to-transparent"
+          initial={{ top: "0%" }}
+          animate={prefersReduced ? undefined : { top: ["0%", "100%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
         />
 
         <div className="relative container mx-auto px-4 lg:px-8 py-24 lg:py-36">
