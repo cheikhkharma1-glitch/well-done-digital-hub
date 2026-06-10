@@ -105,19 +105,24 @@ function PortfolioPage() {
       <section className="relative overflow-hidden bg-gradient-hero text-primary-foreground">
         <motion.div
           aria-hidden
-          className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary-glow/30 blur-3xl"
+          className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[oklch(0.62_0.2_255)]/30 blur-3xl"
           animate={prefersReduced ? undefined : { x: [0, 60, 0], y: [0, 40, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           aria-hidden
-          className="pointer-events-none absolute -bottom-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-amber-400/20 blur-3xl"
+          className="pointer-events-none absolute -bottom-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-[oklch(0.82_0.16_210)]/25 blur-3xl"
           animate={prefersReduced ? undefined : { x: [0, -50, 0], y: [0, -30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div
+        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-30" />
+        {/* Scanning beam */}
+        <motion.div
           aria-hidden
-          className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:48px_48px]"
+          className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[oklch(0.82_0.16_210)] to-transparent"
+          initial={{ top: "0%" }}
+          animate={prefersReduced ? undefined : { top: ["0%", "100%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
         />
 
         <div className="relative container mx-auto px-4 lg:px-8 py-24 lg:py-36">
@@ -126,7 +131,7 @@ function PortfolioPage() {
               variants={fadeUp}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6"
             >
-              <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+              <Sparkles className="h-3.5 w-3.5 text-[oklch(0.82_0.16_210)]" />
               <span className="text-xs font-bold uppercase tracking-widest text-white/90">
                 Portfolio
               </span>
@@ -138,12 +143,12 @@ function PortfolioPage() {
             >
               Nos réalisations qui{" "}
               <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[oklch(0.82_0.16_210)] via-[oklch(0.62_0.2_255)] to-[oklch(0.82_0.16_210)] bg-clip-text text-transparent">
                   parlent
                 </span>
                 <motion.span
                   aria-hidden
-                  className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-to-r from-amber-300 to-amber-600"
+                  className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-to-r from-[oklch(0.82_0.16_210)] to-[oklch(0.62_0.2_255)]"
                   initial={{ scaleX: 0, transformOrigin: "left" }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -178,7 +183,7 @@ function PortfolioPage() {
               >
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center">
-                    <s.icon className="h-5 w-5 text-amber-300" />
+                    <s.icon className="h-5 w-5 text-[oklch(0.82_0.16_210)]" />
                   </div>
                   <div>
                     <div className="text-2xl font-extrabold leading-none">{s.value}</div>
@@ -203,7 +208,7 @@ function PortfolioPage() {
             className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10"
           >
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-2">
+              <p className="text-xs font-bold uppercase tracking-widest text-[oklch(0.62_0.2_255)] mb-2">
                 <Filter className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5" />
                 Filtrer par catégorie
               </p>
@@ -218,7 +223,7 @@ function PortfolioPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Rechercher un projet, une techno…"
-                className="w-full pl-10 pr-4 py-3 rounded-full bg-secondary/60 border border-border focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500/40 text-sm transition-all"
+                className="w-full pl-10 pr-4 py-3 rounded-full bg-secondary/60 border border-border focus:outline-none focus:ring-2 focus:ring-[oklch(0.62_0.2_255)]/40 focus:border-[oklch(0.62_0.2_255)]/40 text-sm transition-all"
               />
             </div>
           </motion.div>
@@ -249,7 +254,7 @@ function PortfolioPage() {
                   {active && (
                     <motion.span
                       layoutId="active-cat-pill"
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500 to-amber-600"
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-[oklch(0.82_0.16_210)] to-[oklch(0.62_0.2_255)]"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -317,12 +322,12 @@ function PortfolioPage() {
                       {/* Glow */}
                       <div
                         aria-hidden
-                        className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-amber-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                        className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-[oklch(0.82_0.16_210)]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                       />
                       {/* Top gradient bar */}
                       <div
                         aria-hidden
-                        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-amber-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out z-10"
+                        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[oklch(0.82_0.16_210)] to-[oklch(0.62_0.2_255)] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out z-10"
                       />
 
                       <div className="aspect-[4/3] bg-gradient-primary relative overflow-hidden">
@@ -349,7 +354,7 @@ function PortfolioPage() {
                         </span>
 
                         {/* Hover arrow */}
-                        <div className="absolute top-4 right-4 h-10 w-10 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-glow translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                        <div className="absolute top-4 right-4 h-10 w-10 rounded-full bg-gradient-cyber text-white flex items-center justify-center shadow-glow translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                           <ArrowUpRight className="h-5 w-5" />
                         </div>
 
@@ -369,13 +374,13 @@ function PortfolioPage() {
                       </div>
 
                       <div className="p-6 relative">
-                        <h3 className="font-display text-xl font-bold mb-2 group-hover:text-amber-600 transition-colors duration-300">
+                        <h3 className="font-display text-xl font-bold mb-2 group-hover:text-[oklch(0.62_0.2_255)] transition-colors duration-300">
                           {p.title}
                         </h3>
                         <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
                           {p.description}
                         </p>
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[oklch(0.62_0.2_255)]">
                           Voir le projet
                           <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                         </span>
@@ -401,13 +406,13 @@ function PortfolioPage() {
           >
             <motion.div
               aria-hidden
-              className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-amber-400/20 blur-3xl"
+              className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[oklch(0.82_0.16_210)]/20 blur-3xl"
               animate={prefersReduced ? undefined : { scale: [1, 1.2, 1] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
               aria-hidden
-              className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-primary-glow/30 blur-3xl"
+              className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-[oklch(0.62_0.2_255)]/30 blur-3xl"
               animate={prefersReduced ? undefined : { scale: [1.1, 1, 1.1] }}
               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             />
