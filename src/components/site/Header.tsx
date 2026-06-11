@@ -118,8 +118,27 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2">
           <ThemeToggle />
+          {user ? (
+            <>
+              <Link to="/admin" className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors px-2">
+                <UserIcon className="h-4 w-4" /> Espace
+              </Link>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => supabase.auth.signOut()}
+                className="gap-1.5"
+              >
+                <LogOut className="h-4 w-4" /> Déconnexion
+              </Button>
+            </>
+          ) : (
+            <Button asChild variant="outline" size="sm" className="gap-1.5">
+              <Link to="/auth"><LogIn className="h-4 w-4" /> Connexion</Link>
+            </Button>
+          )}
           <Button
             asChild
             variant="default"
