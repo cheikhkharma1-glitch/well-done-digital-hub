@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, LogOut, User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
+import { supabase } from "@/integrations/supabase/client";
+import type { User } from "@supabase/supabase-js";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
@@ -20,6 +22,13 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -109,8 +118,27 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2">
           <ThemeToggle />
+          {user ? (
+            <>
+              <Link to="/admin" className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors px-2">
+                <UserIcon className="h-4 w-4" /> Espace
+              </Link>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => supabase.auth.signOut()}
+                className="gap-1.5"
+              >
+                <LogOut className="h-4 w-4" /> Déconnexion
+              </Button>
+            </>
+          ) : (
+            <Button asChild variant="outline" size="sm" className="gap-1.5">
+              <Link to="/auth"><LogIn className="h-4 w-4" /> Connexion</Link>
+            </Button>
+          )}
           <Button
             asChild
             variant="default"

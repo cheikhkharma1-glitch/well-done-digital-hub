@@ -19,10 +19,14 @@ import { Route as RealisationsIndexRouteImport } from './routes/realisations.ind
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
+import { Route as BlogAssistantRouteImport } from './routes/blog.assistant'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminProjetsRouteImport } from './routes/admin.projets'
 import { Route as AdminDemandesRouteImport } from './routes/admin.demandes'
 import { Route as AdminArticlesRouteImport } from './routes/admin.articles'
+import { Route as BlogAssistantIndexRouteImport } from './routes/blog.assistant.index'
+import { Route as BlogAssistantThreadIdRouteImport } from './routes/blog.assistant.$threadId'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -74,9 +78,19 @@ const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
   path: '/realisations/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogAssistantRoute = BlogAssistantRouteImport.update({
+  id: '/blog/assistant',
+  path: '/blog/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminProjetsRoute = AdminProjetsRouteImport.update({
@@ -94,6 +108,16 @@ const AdminArticlesRoute = AdminArticlesRouteImport.update({
   path: '/articles',
   getParentRoute: () => AdminRoute,
 } as any)
+const BlogAssistantIndexRoute = BlogAssistantIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogAssistantRoute,
+} as any)
+const BlogAssistantThreadIdRoute = BlogAssistantThreadIdRouteImport.update({
+  id: '/$threadId',
+  path: '/$threadId',
+  getParentRoute: () => BlogAssistantRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -105,11 +129,15 @@ export interface FileRoutesByFullPath {
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/projets': typeof AdminProjetsRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
+  '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
+  '/blog/assistant/': typeof BlogAssistantIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -120,11 +148,14 @@ export interface FileRoutesByTo {
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/projets': typeof AdminProjetsRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/realisations': typeof RealisationsIndexRoute
+  '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
+  '/blog/assistant': typeof BlogAssistantIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -137,11 +168,15 @@ export interface FileRoutesById {
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/projets': typeof AdminProjetsRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
+  '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
+  '/blog/assistant/': typeof BlogAssistantIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -155,11 +190,15 @@ export interface FileRouteTypes {
     | '/admin/articles'
     | '/admin/demandes'
     | '/admin/projets'
+    | '/api/chat'
     | '/blog/$slug'
+    | '/blog/assistant'
     | '/realisations/$slug'
     | '/admin/'
     | '/blog/'
     | '/realisations/'
+    | '/blog/assistant/$threadId'
+    | '/blog/assistant/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -170,11 +209,14 @@ export interface FileRouteTypes {
     | '/admin/articles'
     | '/admin/demandes'
     | '/admin/projets'
+    | '/api/chat'
     | '/blog/$slug'
     | '/realisations/$slug'
     | '/admin'
     | '/blog'
     | '/realisations'
+    | '/blog/assistant/$threadId'
+    | '/blog/assistant'
   id:
     | '__root__'
     | '/'
@@ -186,11 +228,15 @@ export interface FileRouteTypes {
     | '/admin/articles'
     | '/admin/demandes'
     | '/admin/projets'
+    | '/api/chat'
     | '/blog/$slug'
+    | '/blog/assistant'
     | '/realisations/$slug'
     | '/admin/'
     | '/blog/'
     | '/realisations/'
+    | '/blog/assistant/$threadId'
+    | '/blog/assistant/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -200,7 +246,9 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
+  ApiChatRoute: typeof ApiChatRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogAssistantRoute: typeof BlogAssistantRouteWithChildren
   RealisationsSlugRoute: typeof RealisationsSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   RealisationsIndexRoute: typeof RealisationsIndexRoute
@@ -278,11 +326,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RealisationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/assistant': {
+      id: '/blog/assistant'
+      path: '/blog/assistant'
+      fullPath: '/blog/assistant'
+      preLoaderRoute: typeof BlogAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/projets': {
@@ -306,6 +368,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminArticlesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/blog/assistant/': {
+      id: '/blog/assistant/'
+      path: '/'
+      fullPath: '/blog/assistant/'
+      preLoaderRoute: typeof BlogAssistantIndexRouteImport
+      parentRoute: typeof BlogAssistantRoute
+    }
+    '/blog/assistant/$threadId': {
+      id: '/blog/assistant/$threadId'
+      path: '/$threadId'
+      fullPath: '/blog/assistant/$threadId'
+      preLoaderRoute: typeof BlogAssistantThreadIdRouteImport
+      parentRoute: typeof BlogAssistantRoute
+    }
   }
 }
 
@@ -325,6 +401,20 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface BlogAssistantRouteChildren {
+  BlogAssistantThreadIdRoute: typeof BlogAssistantThreadIdRoute
+  BlogAssistantIndexRoute: typeof BlogAssistantIndexRoute
+}
+
+const BlogAssistantRouteChildren: BlogAssistantRouteChildren = {
+  BlogAssistantThreadIdRoute: BlogAssistantThreadIdRoute,
+  BlogAssistantIndexRoute: BlogAssistantIndexRoute,
+}
+
+const BlogAssistantRouteWithChildren = BlogAssistantRoute._addFileChildren(
+  BlogAssistantRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AProposRoute: AProposRoute,
@@ -332,7 +422,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
+  ApiChatRoute: ApiChatRoute,
   BlogSlugRoute: BlogSlugRoute,
+  BlogAssistantRoute: BlogAssistantRouteWithChildren,
   RealisationsSlugRoute: RealisationsSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   RealisationsIndexRoute: RealisationsIndexRoute,
@@ -340,12 +432,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

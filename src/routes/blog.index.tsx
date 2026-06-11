@@ -143,6 +143,20 @@ function BlogIndex() {
                 <span className="text-white font-bold">{articles.length}</span> publiés
               </span>
             </motion.div>
+
+            <motion.div variants={fadeUp} className="mt-6">
+              <Link
+                to="/blog/assistant"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-r from-[oklch(0.62_0.2_255)]/30 to-[oklch(0.82_0.16_210)]/30 backdrop-blur-md px-5 py-3 text-sm font-semibold text-white hover:from-[oklch(0.62_0.2_255)]/50 hover:to-[oklch(0.82_0.16_210)]/50 transition-all shadow-glow"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Assistant IA en direct — Cybersécurité & Dev
+                <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
