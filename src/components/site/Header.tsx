@@ -22,6 +22,13 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     setMounted(true);
