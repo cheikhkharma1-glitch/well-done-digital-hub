@@ -5,12 +5,31 @@ import { Sparkles, ArrowUpRight, Calendar, Tag, Search, Terminal, Clock, BookOpe
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { supabase } from "@/integrations/supabase/client";
 
+const SITE_URL = "https://well-done-digital-hub.lovable.app";
+
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog & actualités — Well Done Services Company" },
-      { name: "description", content: "Conseils IT, cybersécurité, transformation digitale et études de cas par les experts de Well Done Services." },
+      { title: "Blog cybersécurité, dev web & mobile — Well Done Services" },
+      { name: "description", content: "Analyses, tutoriels et études de cas par les experts Well Done Services : cybersécurité défensive, développement web et mobile, transformation digitale." },
+      { property: "og:title", content: "Blog Well Done Services — Cybersécurité, Web & Mobile" },
+      { property: "og:description", content: "Conseils IT, cybersécurité, transformation digitale et études de cas." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/blog` },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/blog` }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "Blog Well Done Services Company",
+        url: `${SITE_URL}/blog`,
+        description: "Cybersécurité défensive, développement web & mobile, transformation digitale.",
+        publisher: { "@type": "Organization", name: "Well Done Services Company", url: SITE_URL },
+      }),
+    }],
   }),
   component: BlogIndex,
 });

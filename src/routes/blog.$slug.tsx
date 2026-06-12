@@ -5,12 +5,74 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
+const SITE_URL = "https://well-done-digital-hub.lovable.app";
+
 export const Route = createFileRoute("/blog/$slug")({
+  loader: async ({ params }) => {
+    const { data } = await supabase
+      .from("articles")
+      .select("title,excerpt,category,cover_image_url,published_at")
+      .eq("slug", params.slug)
+      .eq("published", true)
+      .maybeSingle();
+    return { meta: data };
+  },
+  head: ({ params, loaderData }) => {
+    const a = loaderData?.meta;
+    const title = a ? `${a.title} — Blog Well Done Services` : "Article — Well Done Services";
+    const description = a?.excerpt ?? "Article du blog Well Done Services Company.";
+    const url = `${SITE_URL}/blog/${params.slug}`;
+    const image = a?.cover_image_url ?? undefined;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        ...(image ? [{ property: "og:image", content: image }, { name: "twitter:image", content: image }] : []),
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        ...(a?.category ? [{ property: "article:section", content: a.category }] : []),
+        ...(a?.published_at ? [{ property: "article:published_time", content: a.published_at }] : []),
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: a ? [{
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: a.title,
+          description: a.excerpt,
+          image: image ? [image] : undefined,
+          datePublished: a.published_at ?? undefined,
+          articleSection: a.category ?? undefined,
+          mainEntityOfPage: url,
+          author: { "@type": "Organization", name: "Well Done Services Company" },
+          publisher: {
+            "@type": "Organization",
+            name: "Well Done Services Company",
+            url: SITE_URL,
+          },
+        }),
+      }] : [],
+    };
+  },
   component: ArticlePage,
   notFoundComponent: () => (
     <SiteLayout>
       <div className="container mx-auto px-4 py-32 text-center">
         <h1 className="font-display text-3xl font-bold mb-4">Article introuvable</h1>
+        <Button asChild><Link to="/blog">Retour au blog</Link></Button>
+      </div>
+    </SiteLayout>
+  ),
+  errorComponent: () => (
+    <SiteLayout>
+      <div className="container mx-auto px-4 py-32 text-center">
+        <h1 className="font-display text-3xl font-bold mb-4">Erreur de chargement</h1>
         <Button asChild><Link to="/blog">Retour au blog</Link></Button>
       </div>
     </SiteLayout>
