@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ProfilRouteImport } from './routes/profil'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -31,6 +32,11 @@ import { Route as BlogAssistantThreadIdRouteImport } from './routes/blog.assista
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilRoute = ProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/profil': typeof ProfilRoute
   '/services': typeof ServicesRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/profil': typeof ProfilRoute
   '/services': typeof ServicesRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
@@ -164,6 +172,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/profil': typeof ProfilRoute
   '/services': typeof ServicesRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/profil'
     | '/services'
     | '/admin/articles'
     | '/admin/demandes'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/auth'
     | '/contact'
+    | '/profil'
     | '/services'
     | '/admin/articles'
     | '/admin/demandes'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/profil'
     | '/services'
     | '/admin/articles'
     | '/admin/demandes'
@@ -245,6 +257,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  ProfilRoute: typeof ProfilRoute
   ServicesRoute: typeof ServicesRoute
   ApiChatRoute: typeof ApiChatRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -261,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profil': {
+      id: '/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof ProfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -421,6 +441,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  ProfilRoute: ProfilRoute,
   ServicesRoute: ServicesRoute,
   ApiChatRoute: ApiChatRoute,
   BlogSlugRoute: BlogSlugRoute,
@@ -432,12 +453,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
