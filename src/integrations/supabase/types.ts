@@ -156,21 +156,30 @@ export type Database = {
       }
       profiles: {
         Row: {
+          ai_subscribed: boolean
+          company: string | null
           created_at: string
           full_name: string | null
           id: string
+          preferences: Json
           updated_at: string
         }
         Insert: {
+          ai_subscribed?: boolean
+          company?: string | null
           created_at?: string
           full_name?: string | null
           id: string
+          preferences?: Json
           updated_at?: string
         }
         Update: {
+          ai_subscribed?: boolean
+          company?: string | null
           created_at?: string
           full_name?: string | null
           id?: string
+          preferences?: Json
           updated_at?: string
         }
         Relationships: []
