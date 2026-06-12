@@ -122,8 +122,8 @@ export function Header() {
           <ThemeToggle />
           {user ? (
             <>
-              <Link to="/admin" className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors px-2">
-                <UserIcon className="h-4 w-4" /> Espace
+              <Link to="/profil" className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors px-2">
+                <UserIcon className="h-4 w-4" /> Mon profil
               </Link>
               <Button
                 variant="outline"

@@ -31,6 +31,9 @@ const schema = z.object({
   message: z.string().trim().min(5, "Message trop court").max(4000),
 });
 
+// 🔧 Mettez à jour ce numéro WhatsApp au format international sans "+" (ex: 221771234567)
+const WHATSAPP_NUMBER = "221000000000";
+
 const types = ["Site web", "E-commerce", "ERP / CRM", "Gestion scolaire", "Maintenance & réseau", "Autre"];
 const perks = [
   { icon: Clock, label: "Réponse sous 48h" },
@@ -75,8 +78,22 @@ function ContactPage() {
       toast.error("Erreur lors de l'envoi. Réessayez.");
       return;
     }
+
+    // Forward qualified lead to WhatsApp (opens in new tab)
+    const waMsg = [
+      "🆕 Nouvelle demande Well Done Services",
+      `👤 ${parsed.data.name}`,
+      `✉️ ${parsed.data.email}`,
+      parsed.data.phone ? `📞 ${parsed.data.phone}` : null,
+      parsed.data.company ? `🏢 ${parsed.data.company}` : null,
+      parsed.data.project_type ? `📌 ${parsed.data.project_type}` : null,
+      "",
+      parsed.data.message,
+    ].filter(Boolean).join("\n");
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, "_blank", "noopener");
+
     setSubmitted(true);
-    toast.success("Message envoyé !");
+    toast.success("Message envoyé ! WhatsApp ouvert pour confirmation.");
   };
 
   const waText = encodeURIComponent("Bonjour Well Done Services, je souhaite discuter d'un projet.");
@@ -157,7 +174,7 @@ function ContactPage() {
             </div>
 
             <motion.a
-              href={`https://wa.me/221000000000?text=${waText}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={prefersReduced ? undefined : { y: -4 }}
