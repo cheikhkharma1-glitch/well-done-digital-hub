@@ -8,6 +8,5 @@
   "find_additional_modules": true,
   "assets": {
     "directory": "dist/client",
-    "run_worker_first": true,
   },
 }
