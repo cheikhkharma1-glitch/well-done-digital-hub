@@ -98,44 +98,56 @@ function HomePage() {
         />
 
         <div className="container mx-auto px-4 lg:px-8 relative">
-          <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-4xl">
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-16 items-center">
+            <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-3xl">
+              <motion.div
+                variants={fadeUp}
+                className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs lg:text-sm text-primary-foreground mb-6"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--cyber-cyan)]" />
+                <span>Acteur de la transformation digitale en Afrique</span>
+              </motion.div>
+              <motion.h1
+                variants={fadeUp}
+                className="font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-foreground leading-[1.05] mb-6"
+              >
+                Des solutions IT
+                <br />
+                <span className="relative inline-block">
+                  <span className="text-holo">qui transforment</span>
+                  <motion.span
+                    aria-hidden
+                    className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-cyber"
+                    initial={{ scaleX: 0, transformOrigin: "left" }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </span>{" "}
+                votre entreprise.
+              </motion.h1>
+              <motion.p variants={fadeUp} className="text-base lg:text-xl text-primary-foreground/85 max-w-2xl leading-relaxed mb-10">
+                Well Done Services Company conçoit et déploie des solutions web, logicielles et réseau sur mesure pour les PME, écoles, administrations et startups au Sénégal et en Afrique.
+              </motion.p>
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="bg-gradient-cyber text-white hover:opacity-90 shadow-cyber hover:-translate-y-0.5 transition-all focus-visible:ring-2 focus-visible:ring-[color:var(--cyber-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]">
+                  <Link to="/contact">Demander un devis <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/30 text-primary-foreground hover:bg-white/10 bg-transparent">
+                  <Link to="/contact">Nous contacter</Link>
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            {/* Holographic 3D rig */}
             <motion.div
-              variants={fadeUp}
-              className="inline-flex items-center gap-2 rounded-full border border-[oklch(0.82_0.16_210)]/40 bg-primary-foreground/10 backdrop-blur px-4 py-1.5 text-xs lg:text-sm text-primary-foreground/90 mb-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="hidden lg:block"
             >
-              <Sparkles className="h-3.5 w-3.5 text-[oklch(0.82_0.16_210)]" />
-              <span>Acteur de la transformation digitale en Afrique</span>
+              <HoloRig className="max-w-lg mx-auto" />
             </motion.div>
-            <motion.h1
-              variants={fadeUp}
-              className="font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-foreground leading-[1.05] mb-6"
-            >
-              Des solutions IT
-              <br />
-              <span className="relative inline-block">
-                <span className="text-cyber">qui transforment</span>
-                <motion.span
-                  aria-hidden
-                  className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-cyber"
-                  initial={{ scaleX: 0, transformOrigin: "left" }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                />
-              </span>{" "}
-              votre entreprise.
-            </motion.h1>
-            <motion.p variants={fadeUp} className="text-base lg:text-xl text-primary-foreground/80 max-w-2xl leading-relaxed mb-10">
-              Well Done Services Company conçoit et déploie des solutions web, logicielles et réseau sur mesure pour les PME, écoles, administrations et startups au Sénégal et en Afrique.
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="bg-gradient-cyber text-white hover:opacity-90 shadow-cyber hover:-translate-y-0.5 transition-all">
-                <Link to="/contact">Demander un devis <ArrowRight className="ml-1 h-4 w-4" /></Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
-                <Link to="/services">Découvrir nos services</Link>
-              </Button>
-            </motion.div>
-          </motion.div>
+          </div>
 
           <motion.div
             variants={stagger}
@@ -145,7 +157,7 @@ function HomePage() {
             className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10"
           >
             {stats.map((s, i) => (
-              <motion.div key={s.label} custom={i} variants={fadeUp} className="border-l-2 border-[oklch(0.82_0.16_210)]/60 pl-4">
+              <motion.div key={s.label} custom={i} variants={fadeUp} className="border-l-2 border-[color:var(--cyber-cyan)]/60 pl-4">
                 <div className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground">{s.value}</div>
                 <div className="text-xs lg:text-sm text-primary-foreground/70 mt-1">{s.label}</div>
               </motion.div>
