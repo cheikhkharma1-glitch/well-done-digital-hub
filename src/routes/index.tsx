@@ -354,6 +354,80 @@ function HomePage() {
         </div>
       </section>
 
+      {/* CYBERSÉCURITÉ */}
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0f172a] text-white">
+        <div aria-hidden className="absolute inset-0 bg-gradient-mesh opacity-60" />
+        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_75%)]" />
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <CyberShield />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7 }}
+            >
+              <p className="text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">Cybersécurité</p>
+              <h2 className="font-display text-3xl lg:text-5xl font-bold leading-tight mb-6">
+                Protégez votre <span className="text-holo">infrastructure</span> et vos données sensibles.
+              </h2>
+              <p className="text-white/75 text-base lg:text-lg leading-relaxed mb-8 max-w-xl">
+                Audit de sécurité, durcissement des systèmes, gestion des accès, sauvegardes chiffrées et supervision 24/7. Nous mettons en place une défense en profondeur adaptée à votre organisation.
+              </p>
+              <ul className="grid sm:grid-cols-2 gap-3 mb-10">
+                {[
+                  { icon: ShieldCheck, label: "Audit & pentest" },
+                  { icon: Lock, label: "Chiffrement AES-256" },
+                  { icon: Eye, label: "Supervision 24/7 (SOC)" },
+                  { icon: Zap, label: "Réponse à incident" },
+                ].map((x) => (
+                  <li key={x.label} className="flex items-center gap-3 rounded-xl glass px-4 py-3 text-sm">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-cyber shadow-cyber">
+                      <x.icon className="h-4 w-4 text-white" />
+                    </span>
+                    <span className="text-white/90 font-medium">{x.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="bg-gradient-cyber text-white shadow-cyber hover:opacity-90 hover:-translate-y-0.5 transition-all">
+                  <Link to="/contact">Sécuriser mon SI <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10">
+                  <Link to="/services">Voir toutes nos expertises</Link>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTENAIRES */}
+      <section className="py-16 lg:py-24 bg-surface">
+        <div className="container mx-auto px-4 lg:px-8">
+          <p className="text-center text-xs font-bold text-muted-foreground uppercase tracking-[0.35em] mb-10">
+            Ils nous font confiance
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
+            {["Ministère", "Groupe Scolaire", "PME Industrielle", "Fintech", "ONG", "Startup"].map((name) => (
+              <div
+                key={name}
+                className="glass rounded-xl h-16 grid place-items-center text-sm font-display font-bold text-primary/80 hover:text-primary hover:-translate-y-0.5 transition-all"
+              >
+                {name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 lg:py-32">
         <div className="container mx-auto px-4 lg:px-8">
