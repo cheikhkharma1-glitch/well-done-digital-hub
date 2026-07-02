@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote } from "lucide-react";
+import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote, ShieldCheck, Lock, Eye, Zap } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
+import { CyberShield } from "@/components/site/CyberShield";
+import { HoloRig } from "@/components/site/HoloRig";
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
 import ceoImg from "@/assets/ceo-kharma.png";
@@ -96,44 +98,56 @@ function HomePage() {
         />
 
         <div className="container mx-auto px-4 lg:px-8 relative">
-          <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-4xl">
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-16 items-center">
+            <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-3xl">
+              <motion.div
+                variants={fadeUp}
+                className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs lg:text-sm text-primary-foreground mb-6"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--cyber-cyan)]" />
+                <span>Acteur de la transformation digitale en Afrique</span>
+              </motion.div>
+              <motion.h1
+                variants={fadeUp}
+                className="font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-foreground leading-[1.05] mb-6"
+              >
+                Des solutions IT
+                <br />
+                <span className="relative inline-block">
+                  <span className="text-holo">qui transforment</span>
+                  <motion.span
+                    aria-hidden
+                    className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-cyber"
+                    initial={{ scaleX: 0, transformOrigin: "left" }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </span>{" "}
+                votre entreprise.
+              </motion.h1>
+              <motion.p variants={fadeUp} className="text-base lg:text-xl text-primary-foreground/85 max-w-2xl leading-relaxed mb-10">
+                Well Done Services Company conçoit et déploie des solutions web, logicielles et réseau sur mesure pour les PME, écoles, administrations et startups au Sénégal et en Afrique.
+              </motion.p>
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="bg-gradient-cyber text-white hover:opacity-90 shadow-cyber hover:-translate-y-0.5 transition-all focus-visible:ring-2 focus-visible:ring-[color:var(--cyber-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]">
+                  <Link to="/contact">Demander un devis <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/30 text-primary-foreground hover:bg-white/10 bg-transparent">
+                  <Link to="/contact">Nous contacter</Link>
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            {/* Holographic 3D rig */}
             <motion.div
-              variants={fadeUp}
-              className="inline-flex items-center gap-2 rounded-full border border-[oklch(0.82_0.16_210)]/40 bg-primary-foreground/10 backdrop-blur px-4 py-1.5 text-xs lg:text-sm text-primary-foreground/90 mb-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="hidden lg:block"
             >
-              <Sparkles className="h-3.5 w-3.5 text-[oklch(0.82_0.16_210)]" />
-              <span>Acteur de la transformation digitale en Afrique</span>
+              <HoloRig className="max-w-lg mx-auto" />
             </motion.div>
-            <motion.h1
-              variants={fadeUp}
-              className="font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-foreground leading-[1.05] mb-6"
-            >
-              Des solutions IT
-              <br />
-              <span className="relative inline-block">
-                <span className="text-cyber">qui transforment</span>
-                <motion.span
-                  aria-hidden
-                  className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-cyber"
-                  initial={{ scaleX: 0, transformOrigin: "left" }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                />
-              </span>{" "}
-              votre entreprise.
-            </motion.h1>
-            <motion.p variants={fadeUp} className="text-base lg:text-xl text-primary-foreground/80 max-w-2xl leading-relaxed mb-10">
-              Well Done Services Company conçoit et déploie des solutions web, logicielles et réseau sur mesure pour les PME, écoles, administrations et startups au Sénégal et en Afrique.
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="bg-gradient-cyber text-white hover:opacity-90 shadow-cyber hover:-translate-y-0.5 transition-all">
-                <Link to="/contact">Demander un devis <ArrowRight className="ml-1 h-4 w-4" /></Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
-                <Link to="/services">Découvrir nos services</Link>
-              </Button>
-            </motion.div>
-          </motion.div>
+          </div>
 
           <motion.div
             variants={stagger}
@@ -143,7 +157,7 @@ function HomePage() {
             className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10"
           >
             {stats.map((s, i) => (
-              <motion.div key={s.label} custom={i} variants={fadeUp} className="border-l-2 border-[oklch(0.82_0.16_210)]/60 pl-4">
+              <motion.div key={s.label} custom={i} variants={fadeUp} className="border-l-2 border-[color:var(--cyber-cyan)]/60 pl-4">
                 <div className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground">{s.value}</div>
                 <div className="text-xs lg:text-sm text-primary-foreground/70 mt-1">{s.label}</div>
               </motion.div>
@@ -340,6 +354,80 @@ function HomePage() {
         </div>
       </section>
 
+      {/* CYBERSÉCURITÉ */}
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0f172a] text-white">
+        <div aria-hidden className="absolute inset-0 bg-gradient-mesh opacity-60" />
+        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_75%)]" />
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <CyberShield />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7 }}
+            >
+              <p className="text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">Cybersécurité</p>
+              <h2 className="font-display text-3xl lg:text-5xl font-bold leading-tight mb-6">
+                Protégez votre <span className="text-holo">infrastructure</span> et vos données sensibles.
+              </h2>
+              <p className="text-white/75 text-base lg:text-lg leading-relaxed mb-8 max-w-xl">
+                Audit de sécurité, durcissement des systèmes, gestion des accès, sauvegardes chiffrées et supervision 24/7. Nous mettons en place une défense en profondeur adaptée à votre organisation.
+              </p>
+              <ul className="grid sm:grid-cols-2 gap-3 mb-10">
+                {[
+                  { icon: ShieldCheck, label: "Audit & pentest" },
+                  { icon: Lock, label: "Chiffrement AES-256" },
+                  { icon: Eye, label: "Supervision 24/7 (SOC)" },
+                  { icon: Zap, label: "Réponse à incident" },
+                ].map((x) => (
+                  <li key={x.label} className="flex items-center gap-3 rounded-xl glass px-4 py-3 text-sm">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-cyber shadow-cyber">
+                      <x.icon className="h-4 w-4 text-white" />
+                    </span>
+                    <span className="text-white/90 font-medium">{x.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="bg-gradient-cyber text-white shadow-cyber hover:opacity-90 hover:-translate-y-0.5 transition-all">
+                  <Link to="/contact">Sécuriser mon SI <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10">
+                  <Link to="/services">Voir toutes nos expertises</Link>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTENAIRES */}
+      <section className="py-16 lg:py-24 bg-surface">
+        <div className="container mx-auto px-4 lg:px-8">
+          <p className="text-center text-xs font-bold text-muted-foreground uppercase tracking-[0.35em] mb-10">
+            Ils nous font confiance
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
+            {["Ministère", "Groupe Scolaire", "PME Industrielle", "Fintech", "ONG", "Startup"].map((name) => (
+              <div
+                key={name}
+                className="glass rounded-xl h-16 grid place-items-center text-sm font-display font-bold text-primary/80 hover:text-primary hover:-translate-y-0.5 transition-all"
+              >
+                {name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 lg:py-32">
         <div className="container mx-auto px-4 lg:px-8">
@@ -357,7 +445,7 @@ function HomePage() {
                   <Link to="/contact">Demander un devis gratuit <ArrowRight className="ml-1 h-4 w-4" /></Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
-                  <Link to="/realisations">Voir nos réalisations</Link>
+                  <Link to="/contact">Nous contacter</Link>
                 </Button>
               </div>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/70">
