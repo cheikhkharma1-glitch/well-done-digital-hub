@@ -445,7 +445,7 @@ function HomePage() {
                   <Link to="/contact">Demander un devis gratuit <ArrowRight className="ml-1 h-4 w-4" /></Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
-                  <Link to="/realisations">Voir nos réalisations</Link>
+                  <Link to="/contact">Nous contacter</Link>
                 </Button>
               </div>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/70">
