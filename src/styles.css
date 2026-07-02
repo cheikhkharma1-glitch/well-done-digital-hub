@@ -213,4 +213,46 @@
   }
   .animate-cyber-pulse { animation: cyber-pulse 4s ease-in-out infinite; }
   .animate-cyber-float { animation: cyber-float 12s ease-in-out infinite; }
+
+  /* Glassmorphism */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  .glass-strong {
+    background: color-mix(in oklab, var(--glass-bg) 80%, transparent);
+    backdrop-filter: blur(28px) saturate(200%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  .bg-gradient-mesh { background-image: var(--gradient-mesh); }
+
+  /* Holographic sweep */
+  @keyframes holo-sweep {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .text-holo {
+    background: linear-gradient(90deg, #2563eb, #06b6d4, #22d3ee, #2563eb);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: holo-sweep 6s linear infinite;
+  }
+
+  /* 3D orbit */
+  @keyframes orbit-3d {
+    0% { transform: rotateY(0deg) rotateX(15deg); }
+    100% { transform: rotateY(360deg) rotateX(15deg); }
+  }
+  .animate-orbit-3d { animation: orbit-3d 24s linear infinite; transform-style: preserve-3d; }
+
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  .animate-float-y { animation: float-y 6s ease-in-out infinite; }
 }
