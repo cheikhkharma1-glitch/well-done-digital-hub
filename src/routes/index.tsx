@@ -278,6 +278,68 @@ function HomePage() {
         </div>
       </section>
 
+      {/* INFRASTRUCTURE 3D */}
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0b1226] text-white">
+        <div aria-hidden className="absolute inset-0 bg-gradient-mesh opacity-50" />
+        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-25 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]" />
+        <ParticleField density={40} />
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7 }}
+            >
+              <p className="text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
+                Infrastructure · Cloud · IA
+              </p>
+              <h2 className="font-display text-3xl lg:text-5xl font-bold leading-tight mb-6">
+                Une plateforme <span className="text-holo">connectée</span> de bout en bout.
+              </h2>
+              <p className="text-white/75 text-base lg:text-lg leading-relaxed mb-10 max-w-xl">
+                Datacenter souverain, cloud multi-région, réseau SD-WAN, cluster GPU pour l'IA et supervision temps réel.
+                Chaque brique est orchestrée pour une performance et une résilience de niveau industriel.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-10">
+                {[
+                  { k: "99.99%", v: "Disponibilité SLA" },
+                  { k: "12 ms", v: "Latence médiane" },
+                  { k: "10 Gbps", v: "Backbone réseau" },
+                  { k: "24/7", v: "Supervision SOC" },
+                ].map((s) => (
+                  <div key={s.v} className="glass rounded-xl p-4">
+                    <div className="font-display text-2xl font-bold text-white">{s.k}</div>
+                    <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--cyber-cyan)] mt-1">
+                      {s.v}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="bg-gradient-cyber text-white shadow-cyber hover:opacity-90 hover:-translate-y-0.5 transition-all">
+                  <Link to="/contact">Demander un devis <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10">
+                  <Link to="/services">Découvrir l'infrastructure</Link>
+                </Button>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <DataCube3D />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* MOT DU PDG */}
       <section className="py-24 lg:py-32 relative overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8">
