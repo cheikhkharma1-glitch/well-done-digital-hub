@@ -83,6 +83,7 @@ function HomePage() {
           <div className="absolute inset-0 bg-gradient-hero opacity-90" />
           <div className="absolute inset-0 bg-gradient-glow" />
           <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-30" />
+          <ParticleField density={36} />
         </div>
 
         <motion.div
