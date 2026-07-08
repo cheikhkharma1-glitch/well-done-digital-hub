@@ -6,6 +6,8 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { CyberShield } from "@/components/site/CyberShield";
 import { HoloRig } from "@/components/site/HoloRig";
+import { DataCube3D } from "@/components/site/DataCube3D";
+import { ParticleField } from "@/components/site/ParticleField";
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
 import ceoImg from "@/assets/ceo-kharma.png";
