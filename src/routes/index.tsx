@@ -341,6 +341,11 @@ function HomePage() {
         </div>
       </section>
 
+      {/* TRANSFORMATION TIMELINE */}
+      <Timeline3D />
+
+
+
       {/* MOT DU PDG */}
       <section className="py-24 lg:py-32 relative overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8">
