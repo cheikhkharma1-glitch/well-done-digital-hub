@@ -128,6 +128,7 @@ export type Database = {
           name: string
           phone: string | null
           project_type: string | null
+          source: string | null
           status: string
         }
         Insert: {
@@ -139,6 +140,7 @@ export type Database = {
           name: string
           phone?: string | null
           project_type?: string | null
+          source?: string | null
           status?: string
         }
         Update: {
@@ -150,6 +152,7 @@ export type Database = {
           name?: string
           phone?: string | null
           project_type?: string | null
+          source?: string | null
           status?: string
         }
         Relationships: []
