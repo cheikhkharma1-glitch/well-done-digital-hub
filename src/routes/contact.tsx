@@ -95,18 +95,24 @@ function ContactPage() {
       return;
     }
 
-    // Forward qualified lead to WhatsApp (opens in new tab)
-    const waMsg = [
+    const bodyText = [
       "🆕 Nouvelle demande Well Done Services",
       `👤 ${parsed.data.name}`,
       `✉️ ${parsed.data.email}`,
       parsed.data.phone ? `📞 ${parsed.data.phone}` : null,
       parsed.data.company ? `🏢 ${parsed.data.company}` : null,
       parsed.data.project_type ? `📌 ${parsed.data.project_type}` : null,
+      search.source ? `🎯 Source : ${search.source}` : null,
       "",
       parsed.data.message,
     ].filter(Boolean).join("\n");
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, "_blank", "noopener");
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(bodyText)}`;
+    const mailLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      `Demande de devis — ${parsed.data.name}`,
+    )}&body=${encodeURIComponent(bodyText)}`;
+    setWaHref(waLink);
+    setMailHref(mailLink);
+    window.open(waLink, "_blank", "noopener");
 
     setSubmitted(true);
     toast.success("Message envoyé ! WhatsApp ouvert pour confirmation.");
