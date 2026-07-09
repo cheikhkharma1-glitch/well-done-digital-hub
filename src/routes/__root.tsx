@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { MotionToggle } from "@/components/site/MotionToggle";
 
 import appCss from "../styles.css?url";
 
