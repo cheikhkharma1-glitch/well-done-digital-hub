@@ -8,6 +8,7 @@ import { CyberShield } from "@/components/site/CyberShield";
 import { HoloRig } from "@/components/site/HoloRig";
 import { DataCube3D } from "@/components/site/DataCube3D";
 import { ParticleField } from "@/components/site/ParticleField";
+import { Timeline3D } from "@/components/site/Timeline3D";
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
 import ceoImg from "@/assets/ceo-kharma.png";
