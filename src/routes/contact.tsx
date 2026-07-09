@@ -12,7 +12,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
+const searchSchema = z.object({
+  source: z.string().max(60).optional(),
+});
+
 export const Route = createFileRoute("/contact")({
+  validateSearch: (s) => searchSchema.parse(s),
   head: () => ({
     meta: [
       { title: "Contact & devis — Well Done Services Company" },
@@ -28,7 +33,7 @@ const schema = z.object({
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   company: z.string().trim().max(200).optional().or(z.literal("")),
   project_type: z.string().max(100).optional().or(z.literal("")),
-  message: z.string().trim().min(5, "Message trop court").max(4000),
+  message: z.string().trim().min(20, "Message trop court (20 caractères min.)").max(4000),
 });
 
 // 🔧 Mettez à jour ce numéro WhatsApp au format international sans "+" (ex: 221771234567)
