@@ -46,10 +46,15 @@ const perks = [
   { icon: Zap, label: "Devis gratuit" },
 ];
 
+const CONTACT_EMAIL = "contact@welldonescompany.com";
+
 function ContactPage() {
+  const search = Route.useSearch();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", project_type: "", message: "" });
+  const [waHref, setWaHref] = useState<string>("");
+  const [mailHref, setMailHref] = useState<string>("");
   const prefersReduced = useReducedMotion();
 
   const fadeUp: Variants = {
@@ -76,8 +81,14 @@ function ContactPage() {
       company: parsed.data.company || null,
       project_type: parsed.data.project_type || null,
       message: parsed.data.message,
+      source: search.source ?? "contact-form",
     };
     const { error } = await supabase.from("contacts").insert(payload);
+    setLoading(false);
+    if (error) {
+      toast.error("Erreur lors de l'envoi. Réessayez.");
+      return;
+    }
     setLoading(false);
     if (error) {
       toast.error("Erreur lors de l'envoi. Réessayez.");
