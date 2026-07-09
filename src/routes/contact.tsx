@@ -12,7 +12,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
+const searchSchema = z.object({
+  source: z.string().max(60).optional(),
+});
+
 export const Route = createFileRoute("/contact")({
+  validateSearch: (s) => searchSchema.parse(s),
   head: () => ({
     meta: [
       { title: "Contact & devis — Well Done Services Company" },
@@ -28,7 +33,7 @@ const schema = z.object({
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   company: z.string().trim().max(200).optional().or(z.literal("")),
   project_type: z.string().max(100).optional().or(z.literal("")),
-  message: z.string().trim().min(5, "Message trop court").max(4000),
+  message: z.string().trim().min(20, "Message trop court (20 caractères min.)").max(4000),
 });
 
 // 🔧 Mettez à jour ce numéro WhatsApp au format international sans "+" (ex: 221771234567)
@@ -41,10 +46,15 @@ const perks = [
   { icon: Zap, label: "Devis gratuit" },
 ];
 
+const CONTACT_EMAIL = "contact@welldonescompany.com";
+
 function ContactPage() {
+  const search = Route.useSearch();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", project_type: "", message: "" });
+  const [waHref, setWaHref] = useState<string>("");
+  const [mailHref, setMailHref] = useState<string>("");
   const prefersReduced = useReducedMotion();
 
   const fadeUp: Variants = {
@@ -71,6 +81,7 @@ function ContactPage() {
       company: parsed.data.company || null,
       project_type: parsed.data.project_type || null,
       message: parsed.data.message,
+      source: search.source ?? "contact-form",
     };
     const { error } = await supabase.from("contacts").insert(payload);
     setLoading(false);
@@ -78,19 +89,30 @@ function ContactPage() {
       toast.error("Erreur lors de l'envoi. Réessayez.");
       return;
     }
+    setLoading(false);
+    if (error) {
+      toast.error("Erreur lors de l'envoi. Réessayez.");
+      return;
+    }
 
-    // Forward qualified lead to WhatsApp (opens in new tab)
-    const waMsg = [
+    const bodyText = [
       "🆕 Nouvelle demande Well Done Services",
       `👤 ${parsed.data.name}`,
       `✉️ ${parsed.data.email}`,
       parsed.data.phone ? `📞 ${parsed.data.phone}` : null,
       parsed.data.company ? `🏢 ${parsed.data.company}` : null,
       parsed.data.project_type ? `📌 ${parsed.data.project_type}` : null,
+      search.source ? `🎯 Source : ${search.source}` : null,
       "",
       parsed.data.message,
     ].filter(Boolean).join("\n");
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, "_blank", "noopener");
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(bodyText)}`;
+    const mailLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      `Demande de devis — ${parsed.data.name}`,
+    )}&body=${encodeURIComponent(bodyText)}`;
+    setWaHref(waLink);
+    setMailHref(mailLink);
+    window.open(waLink, "_blank", "noopener");
 
     setSubmitted(true);
     toast.success("Message envoyé ! WhatsApp ouvert pour confirmation.");
@@ -212,8 +234,24 @@ function ContactPage() {
                   <CheckCircle2 className="h-10 w-10 text-white" strokeWidth={2.5} />
                 </motion.div>
                 <h2 className="font-display text-2xl font-bold mb-3">Merci pour votre message !</h2>
-                <p className="text-muted-foreground mb-6">Notre équipe vous contactera sous 48h.</p>
-                <Button onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", company: "", project_type: "", message: "" }); }}>
+                <p className="text-muted-foreground mb-6">Notre équipe vous contactera sous 48h. Vous pouvez aussi poursuivre l'échange dès maintenant :</p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+                  {waHref && (
+                    <Button asChild size="lg" className="bg-gradient-cyber text-white shadow-cyber">
+                      <a href={waHref} target="_blank" rel="noopener noreferrer">
+                        <MessageCircle className="mr-2 h-4 w-4" /> Continuer sur WhatsApp
+                      </a>
+                    </Button>
+                  )}
+                  {mailHref && (
+                    <Button asChild size="lg" variant="outline">
+                      <a href={mailHref}>
+                        <Mail className="mr-2 h-4 w-4" /> Envoyer par email
+                      </a>
+                    </Button>
+                  )}
+                </div>
+                <Button variant="ghost" onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", company: "", project_type: "", message: "" }); }}>
                   Envoyer un autre message
                 </Button>
               </div>
