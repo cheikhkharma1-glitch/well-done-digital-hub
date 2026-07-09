@@ -234,8 +234,24 @@ function ContactPage() {
                   <CheckCircle2 className="h-10 w-10 text-white" strokeWidth={2.5} />
                 </motion.div>
                 <h2 className="font-display text-2xl font-bold mb-3">Merci pour votre message !</h2>
-                <p className="text-muted-foreground mb-6">Notre équipe vous contactera sous 48h.</p>
-                <Button onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", company: "", project_type: "", message: "" }); }}>
+                <p className="text-muted-foreground mb-6">Notre équipe vous contactera sous 48h. Vous pouvez aussi poursuivre l'échange dès maintenant :</p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+                  {waHref && (
+                    <Button asChild size="lg" className="bg-gradient-cyber text-white shadow-cyber">
+                      <a href={waHref} target="_blank" rel="noopener noreferrer">
+                        <MessageCircle className="mr-2 h-4 w-4" /> Continuer sur WhatsApp
+                      </a>
+                    </Button>
+                  )}
+                  {mailHref && (
+                    <Button asChild size="lg" variant="outline">
+                      <a href={mailHref}>
+                        <Mail className="mr-2 h-4 w-4" /> Envoyer par email
+                      </a>
+                    </Button>
+                  )}
+                </div>
+                <Button variant="ghost" onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", company: "", project_type: "", message: "" }); }}>
                   Envoyer un autre message
                 </Button>
               </div>
