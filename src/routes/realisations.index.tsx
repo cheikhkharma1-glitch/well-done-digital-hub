@@ -47,6 +47,111 @@ const stats = [
   { icon: Rocket, value: "98%", label: "Taux de succès" },
 ];
 
+// Portfolio de démonstration (affiché si la table `projects` est vide)
+// Images IT réelles servies par Unsplash (libres de droits).
+const DEMO_PROJECTS: Project[] = [
+  {
+    id: "demo-1",
+    slug: "plateforme-gestion-scolaire",
+    title: "Plateforme de gestion scolaire",
+    description:
+      "SaaS multi-établissements : notes, paiements, communication parents, tableaux de bord temps réel.",
+    category: "EdTech",
+    image_url:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["React", "Node.js", "PostgreSQL", "Redis"],
+  },
+  {
+    id: "demo-2",
+    slug: "erp-industriel",
+    title: "ERP industriel sur-mesure",
+    description:
+      "Gestion production, stocks, achats et RH pour une PME manufacturière — 40% de gain de productivité.",
+    category: "ERP",
+    image_url:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["Next.js", "NestJS", "PostgreSQL", "Docker"],
+  },
+  {
+    id: "demo-3",
+    slug: "crm-commercial",
+    title: "CRM commercial B2B",
+    description:
+      "Pipeline de vente, automatisations et scoring IA pour une force commerciale de 120 personnes.",
+    category: "CRM",
+    image_url:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["React", "TypeScript", "Supabase", "OpenAI"],
+  },
+  {
+    id: "demo-4",
+    slug: "app-mobile-fintech",
+    title: "Application mobile FinTech",
+    description:
+      "Wallet mobile avec transferts, paiements marchands et KYC vidéo — 50k+ utilisateurs actifs.",
+    category: "Mobile",
+    image_url:
+      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["React Native", "Node.js", "MongoDB", "Stripe"],
+  },
+  {
+    id: "demo-5",
+    slug: "infrastructure-cloud",
+    title: "Migration Cloud & DevOps",
+    description:
+      "Migration on-premise vers Kubernetes managé, CI/CD, observabilité et sécurité zero-trust.",
+    category: "Cloud",
+    image_url:
+      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["Kubernetes", "Terraform", "AWS", "Grafana"],
+  },
+  {
+    id: "demo-6",
+    slug: "audit-cybersecurite",
+    title: "Audit & durcissement cybersécurité",
+    description:
+      "Pentest, hardening des serveurs, WAF, SIEM et formation des équipes pour un groupe bancaire.",
+    category: "Cybersécurité",
+    image_url:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["Wazuh", "Suricata", "Cloudflare", "Vault"],
+  },
+  {
+    id: "demo-7",
+    slug: "site-vitrine-corporate",
+    title: "Site vitrine corporate premium",
+    description:
+      "Refonte identitaire avec animations 3D, CMS headless et SEO — +180% de leads qualifiés.",
+    category: "Web",
+    image_url:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["Next.js", "Sanity", "Framer Motion", "Vercel"],
+  },
+  {
+    id: "demo-8",
+    slug: "dashboard-ia-analytics",
+    title: "Dashboard analytics dopé à l'IA",
+    description:
+      "Décisionnel temps réel avec prédictions ML, alertes intelligentes et exports automatisés.",
+    category: "Data & IA",
+    image_url:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["Python", "FastAPI", "React", "TensorFlow"],
+  },
+  {
+    id: "demo-9",
+    slug: "datacenter-supervision",
+    title: "Supervision datacenter 24/7",
+    description:
+      "Monitoring infrastructure, alertes multicanal et automatisation des remédiations niveau 1.",
+    category: "Cloud",
+    image_url:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80",
+    technologies: ["Prometheus", "Grafana", "Ansible", "PagerDuty"],
+  },
+];
+
+
 function PortfolioPage() {
   const prefersReduced = useReducedMotion();
   const [projects, setProjects] = useState<Project[]>([]);
