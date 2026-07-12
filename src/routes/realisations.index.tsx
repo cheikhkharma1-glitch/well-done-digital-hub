@@ -11,7 +11,13 @@ import {
   Rocket,
   Search,
   Filter,
+  Calendar,
+  Clock,
+  Building2,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
+
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
