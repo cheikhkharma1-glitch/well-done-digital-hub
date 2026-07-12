@@ -72,6 +72,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80",
     technologies: ["React", "Node.js", "PostgreSQL", "Redis"],
+    client: "Groupe scolaire privé",
+    year: "2024",
+    duration: "6 mois",
+    kpis: [
+      { label: "Établissements", value: "12" },
+      { label: "Élèves gérés", value: "8 500+" },
+      { label: "Temps admin", value: "-60%" },
+    ],
+    highlights: ["Paiements mobiles intégrés", "App parents iOS/Android", "Bulletins auto-générés"],
   },
   {
     id: "demo-2",
@@ -83,6 +92,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Next.js", "NestJS", "PostgreSQL", "Docker"],
+    client: "PME manufacturière",
+    year: "2024",
+    duration: "9 mois",
+    kpis: [
+      { label: "Productivité", value: "+40%" },
+      { label: "Stocks morts", value: "-55%" },
+      { label: "Modules", value: "14" },
+    ],
+    highlights: ["MES temps réel", "Traçabilité lot complète", "API partenaires"],
   },
   {
     id: "demo-3",
@@ -94,6 +112,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
     technologies: ["React", "TypeScript", "Supabase", "OpenAI"],
+    client: "Groupe distribution B2B",
+    year: "2025",
+    duration: "4 mois",
+    kpis: [
+      { label: "Taux conversion", value: "+32%" },
+      { label: "Commerciaux", value: "120" },
+      { label: "Leads/mois", value: "5k+" },
+    ],
+    highlights: ["Scoring IA prédictif", "Séquences email auto", "Mobile terrain offline"],
   },
   {
     id: "demo-4",
@@ -105,6 +132,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1400&q=80",
     technologies: ["React Native", "Node.js", "MongoDB", "Stripe"],
+    client: "Startup FinTech",
+    year: "2024",
+    duration: "8 mois",
+    kpis: [
+      { label: "Utilisateurs", value: "50k+" },
+      { label: "Transactions/j", value: "12k" },
+      { label: "Note stores", value: "4.7★" },
+    ],
+    highlights: ["KYC vidéo IA", "Paiements QR marchands", "PCI-DSS niveau 1"],
   },
   {
     id: "demo-5",
@@ -116,6 +152,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Kubernetes", "Terraform", "AWS", "Grafana"],
+    client: "Assureur régional",
+    year: "2025",
+    duration: "5 mois",
+    kpis: [
+      { label: "Coûts infra", value: "-38%" },
+      { label: "Uptime", value: "99.98%" },
+      { label: "Deploys/sem", value: "45+" },
+    ],
+    highlights: ["Zero-downtime migration", "IaC 100% Terraform", "Zero-trust réseau"],
   },
   {
     id: "demo-6",
@@ -127,6 +172,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Wazuh", "Suricata", "Cloudflare", "Vault"],
+    client: "Groupe bancaire",
+    year: "2025",
+    duration: "3 mois",
+    kpis: [
+      { label: "Vulnérabilités", value: "142 → 0" },
+      { label: "MTTR incidents", value: "-72%" },
+      { label: "Collaborateurs", value: "850" },
+    ],
+    highlights: ["Pentest interne + externe", "SOC 24/7 opérationnel", "Certif ISO 27001"],
   },
   {
     id: "demo-7",
@@ -138,6 +192,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Next.js", "Sanity", "Framer Motion", "Vercel"],
+    client: "Cabinet de conseil",
+    year: "2025",
+    duration: "10 semaines",
+    kpis: [
+      { label: "Leads qualifiés", value: "+180%" },
+      { label: "PageSpeed", value: "98/100" },
+      { label: "Trafic organique", value: "×3,2" },
+    ],
+    highlights: ["Animations 3D WebGL", "CMS éditorial autonome", "SEO technique complet"],
   },
   {
     id: "demo-8",
@@ -149,6 +212,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Python", "FastAPI", "React", "TensorFlow"],
+    client: "Retail multi-enseignes",
+    year: "2025",
+    duration: "6 mois",
+    kpis: [
+      { label: "Précision ML", value: "94%" },
+      { label: "Décisions/jour", value: "1 200+" },
+      { label: "Sources data", value: "23" },
+    ],
+    highlights: ["Prédiction ventes J+30", "Alertes Slack/Teams", "Exports PDF auto"],
   },
   {
     id: "demo-9",
@@ -160,8 +232,18 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Prometheus", "Grafana", "Ansible", "PagerDuty"],
+    client: "Opérateur télécom",
+    year: "2024",
+    duration: "4 mois",
+    kpis: [
+      { label: "Serveurs supervisés", value: "2 400+" },
+      { label: "Incidents auto-résolus", value: "78%" },
+      { label: "Alertes/jour", value: "-85%" },
+    ],
+    highlights: ["Runbooks Ansible", "Escalade PagerDuty", "Dashboards NOC"],
   },
 ];
+
 
 
 function PortfolioPage() {
