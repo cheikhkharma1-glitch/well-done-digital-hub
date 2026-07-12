@@ -61,10 +61,12 @@ function PortfolioPage() {
       .eq("published", true)
       .order("display_order", { ascending: true })
       .then(({ data }) => {
-        setProjects(data ?? []);
+        const list = data ?? [];
+        setProjects(list.length ? list : DEMO_PROJECTS);
         setLoading(false);
       });
   }, []);
+
 
   const cats = useMemo(
     () => ["Tous", ...Array.from(new Set(projects.map((p) => p.category)))],
