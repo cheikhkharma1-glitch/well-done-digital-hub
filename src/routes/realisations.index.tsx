@@ -44,7 +44,13 @@ type Project = {
   category: string;
   image_url: string | null;
   technologies: string[] | null;
+  client?: string;
+  year?: string;
+  duration?: string;
+  kpis?: { label: string; value: string }[];
+  highlights?: string[];
 };
+
 
 const stats = [
   { icon: Trophy, value: "50+", label: "Projets livrés" },
