@@ -11,7 +11,13 @@ import {
   Rocket,
   Search,
   Filter,
+  Calendar,
+  Clock,
+  Building2,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
+
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -38,7 +44,13 @@ type Project = {
   category: string;
   image_url: string | null;
   technologies: string[] | null;
+  client?: string;
+  year?: string;
+  duration?: string;
+  kpis?: { label: string; value: string }[];
+  highlights?: string[];
 };
+
 
 const stats = [
   { icon: Trophy, value: "50+", label: "Projets livrés" },
@@ -60,6 +72,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80",
     technologies: ["React", "Node.js", "PostgreSQL", "Redis"],
+    client: "Groupe scolaire privé",
+    year: "2024",
+    duration: "6 mois",
+    kpis: [
+      { label: "Établissements", value: "12" },
+      { label: "Élèves gérés", value: "8 500+" },
+      { label: "Temps admin", value: "-60%" },
+    ],
+    highlights: ["Paiements mobiles intégrés", "App parents iOS/Android", "Bulletins auto-générés"],
   },
   {
     id: "demo-2",
@@ -71,6 +92,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Next.js", "NestJS", "PostgreSQL", "Docker"],
+    client: "PME manufacturière",
+    year: "2024",
+    duration: "9 mois",
+    kpis: [
+      { label: "Productivité", value: "+40%" },
+      { label: "Stocks morts", value: "-55%" },
+      { label: "Modules", value: "14" },
+    ],
+    highlights: ["MES temps réel", "Traçabilité lot complète", "API partenaires"],
   },
   {
     id: "demo-3",
@@ -82,6 +112,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
     technologies: ["React", "TypeScript", "Supabase", "OpenAI"],
+    client: "Groupe distribution B2B",
+    year: "2025",
+    duration: "4 mois",
+    kpis: [
+      { label: "Taux conversion", value: "+32%" },
+      { label: "Commerciaux", value: "120" },
+      { label: "Leads/mois", value: "5k+" },
+    ],
+    highlights: ["Scoring IA prédictif", "Séquences email auto", "Mobile terrain offline"],
   },
   {
     id: "demo-4",
@@ -93,6 +132,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1400&q=80",
     technologies: ["React Native", "Node.js", "MongoDB", "Stripe"],
+    client: "Startup FinTech",
+    year: "2024",
+    duration: "8 mois",
+    kpis: [
+      { label: "Utilisateurs", value: "50k+" },
+      { label: "Transactions/j", value: "12k" },
+      { label: "Note stores", value: "4.7★" },
+    ],
+    highlights: ["KYC vidéo IA", "Paiements QR marchands", "PCI-DSS niveau 1"],
   },
   {
     id: "demo-5",
@@ -104,6 +152,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Kubernetes", "Terraform", "AWS", "Grafana"],
+    client: "Assureur régional",
+    year: "2025",
+    duration: "5 mois",
+    kpis: [
+      { label: "Coûts infra", value: "-38%" },
+      { label: "Uptime", value: "99.98%" },
+      { label: "Deploys/sem", value: "45+" },
+    ],
+    highlights: ["Zero-downtime migration", "IaC 100% Terraform", "Zero-trust réseau"],
   },
   {
     id: "demo-6",
@@ -115,6 +172,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Wazuh", "Suricata", "Cloudflare", "Vault"],
+    client: "Groupe bancaire",
+    year: "2025",
+    duration: "3 mois",
+    kpis: [
+      { label: "Vulnérabilités", value: "142 → 0" },
+      { label: "MTTR incidents", value: "-72%" },
+      { label: "Collaborateurs", value: "850" },
+    ],
+    highlights: ["Pentest interne + externe", "SOC 24/7 opérationnel", "Certif ISO 27001"],
   },
   {
     id: "demo-7",
@@ -126,6 +192,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Next.js", "Sanity", "Framer Motion", "Vercel"],
+    client: "Cabinet de conseil",
+    year: "2025",
+    duration: "10 semaines",
+    kpis: [
+      { label: "Leads qualifiés", value: "+180%" },
+      { label: "PageSpeed", value: "98/100" },
+      { label: "Trafic organique", value: "×3,2" },
+    ],
+    highlights: ["Animations 3D WebGL", "CMS éditorial autonome", "SEO technique complet"],
   },
   {
     id: "demo-8",
@@ -137,6 +212,15 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Python", "FastAPI", "React", "TensorFlow"],
+    client: "Retail multi-enseignes",
+    year: "2025",
+    duration: "6 mois",
+    kpis: [
+      { label: "Précision ML", value: "94%" },
+      { label: "Décisions/jour", value: "1 200+" },
+      { label: "Sources data", value: "23" },
+    ],
+    highlights: ["Prédiction ventes J+30", "Alertes Slack/Teams", "Exports PDF auto"],
   },
   {
     id: "demo-9",
@@ -148,8 +232,18 @@ const DEMO_PROJECTS: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80",
     technologies: ["Prometheus", "Grafana", "Ansible", "PagerDuty"],
+    client: "Opérateur télécom",
+    year: "2024",
+    duration: "4 mois",
+    kpis: [
+      { label: "Serveurs supervisés", value: "2 400+" },
+      { label: "Incidents auto-résolus", value: "78%" },
+      { label: "Alertes/jour", value: "-85%" },
+    ],
+    highlights: ["Runbooks Ansible", "Escalade PagerDuty", "Dashboards NOC"],
   },
 ];
+
 
 
 function PortfolioPage() {
@@ -481,17 +575,83 @@ function PortfolioPage() {
                       </div>
 
                       <div className="p-6 relative">
+                        {/* Meta strip: client · année · durée */}
+                        {(p.client || p.year || p.duration) && (
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground mb-3">
+                            {p.client && (
+                              <span className="inline-flex items-center gap-1.5">
+                                <Building2 className="h-3.5 w-3.5 text-[oklch(0.62_0.2_255)]" />
+                                {p.client}
+                              </span>
+                            )}
+                            {p.year && (
+                              <span className="inline-flex items-center gap-1.5">
+                                <Calendar className="h-3.5 w-3.5 text-[oklch(0.62_0.2_255)]" />
+                                {p.year}
+                              </span>
+                            )}
+                            {p.duration && (
+                              <span className="inline-flex items-center gap-1.5">
+                                <Clock className="h-3.5 w-3.5 text-[oklch(0.62_0.2_255)]" />
+                                {p.duration}
+                              </span>
+                            )}
+                          </div>
+                        )}
+
                         <h3 className="font-display text-xl font-bold mb-2 group-hover:text-[oklch(0.62_0.2_255)] transition-colors duration-300">
                           {p.title}
                         </h3>
                         <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
                           {p.description}
                         </p>
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[oklch(0.62_0.2_255)]">
-                          Voir le projet
-                          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                        </span>
+
+                        {/* KPI cards */}
+                        {p.kpis && p.kpis.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2 mb-4">
+                            {p.kpis.map((k) => (
+                              <div
+                                key={k.label}
+                                className="rounded-xl border border-border bg-secondary/40 px-2 py-2 text-center hover:border-[oklch(0.62_0.2_255)]/40 hover:bg-[oklch(0.62_0.2_255)]/5 transition-colors"
+                              >
+                                <div className="font-display text-sm font-extrabold bg-gradient-to-r from-[oklch(0.82_0.16_210)] to-[oklch(0.62_0.2_255)] bg-clip-text text-transparent leading-tight">
+                                  {k.value}
+                                </div>
+                                <div className="text-[9px] uppercase tracking-wider text-muted-foreground mt-0.5 leading-tight">
+                                  {k.label}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Highlights */}
+                        {p.highlights && p.highlights.length > 0 && (
+                          <ul className="space-y-1.5 mb-5">
+                            {p.highlights.slice(0, 3).map((h) => (
+                              <li
+                                key={h}
+                                className="flex items-start gap-2 text-xs text-foreground/80"
+                              >
+                                <CheckCircle2 className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-[oklch(0.62_0.2_255)]" />
+                                <span>{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        <div className="flex items-center justify-between pt-4 border-t border-border/60">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[oklch(0.62_0.2_255)]">
+                            Voir l'étude de cas
+                            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                          </span>
+                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                            <TrendingUp className="h-3 w-3" />
+                            Livré
+                          </span>
+                        </div>
                       </div>
+
                     </Link>
                   </motion.div>
                 ))}
