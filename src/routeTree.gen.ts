@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProfilRouteImport } from './routes/profil'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -26,8 +27,12 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminProjetsRouteImport } from './routes/admin.projets'
 import { Route as AdminDemandesRouteImport } from './routes/admin.demandes'
 import { Route as AdminArticlesRouteImport } from './routes/admin.articles'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as BlogAssistantIndexRouteImport } from './routes/blog.assistant.index'
 import { Route as BlogAssistantThreadIdRouteImport } from './routes/blog.assistant.$threadId'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -37,6 +42,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const ProfilRoute = ProfilRouteImport.update({
   id: '/profil',
   path: '/profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -114,6 +124,18 @@ const AdminArticlesRoute = AdminArticlesRouteImport.update({
   path: '/articles',
   getParentRoute: () => AdminRoute,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogAssistantIndexRoute = BlogAssistantIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -124,6 +146,17 @@ const BlogAssistantThreadIdRoute = BlogAssistantThreadIdRouteImport.update({
   path: '/$threadId',
   getParentRoute: () => BlogAssistantRoute,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -131,8 +164,11 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
   '/services': typeof ServicesRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/projets': typeof AdminProjetsRoute
@@ -143,6 +179,8 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
   '/blog/assistant/': typeof BlogAssistantIndexRoute
 }
@@ -151,8 +189,11 @@ export interface FileRoutesByTo {
   '/a-propos': typeof AProposRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
   '/services': typeof ServicesRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/projets': typeof AdminProjetsRoute
@@ -162,6 +203,8 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/realisations': typeof RealisationsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
   '/blog/assistant': typeof BlogAssistantIndexRoute
 }
@@ -172,8 +215,11 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
   '/services': typeof ServicesRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/projets': typeof AdminProjetsRoute
@@ -184,6 +230,8 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
   '/blog/assistant/': typeof BlogAssistantIndexRoute
 }
@@ -195,8 +243,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/mcp'
     | '/profil'
     | '/services'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/demandes'
     | '/admin/projets'
@@ -207,6 +258,8 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/realisations/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
     | '/blog/assistant/$threadId'
     | '/blog/assistant/'
   fileRoutesByTo: FileRoutesByTo
@@ -215,8 +268,11 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/auth'
     | '/contact'
+    | '/mcp'
     | '/profil'
     | '/services'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/demandes'
     | '/admin/projets'
@@ -226,6 +282,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/blog'
     | '/realisations'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
     | '/blog/assistant/$threadId'
     | '/blog/assistant'
   id:
@@ -235,8 +293,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/mcp'
     | '/profil'
     | '/services'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/demandes'
     | '/admin/projets'
@@ -247,6 +308,8 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/realisations/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
     | '/blog/assistant/$threadId'
     | '/blog/assistant/'
   fileRoutesById: FileRoutesById
@@ -257,14 +320,19 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  McpRoute: typeof McpRoute
   ProfilRoute: typeof ProfilRoute
   ServicesRoute: typeof ServicesRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogAssistantRoute: typeof BlogAssistantRouteWithChildren
   RealisationsSlugRoute: typeof RealisationsSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   RealisationsIndexRoute: typeof RealisationsIndexRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -281,6 +349,13 @@ declare module '@tanstack/react-router' {
       path: '/profil'
       fullPath: '/profil'
       preLoaderRoute: typeof ProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -388,6 +463,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminArticlesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/assistant/': {
       id: '/blog/assistant/'
       path: '/'
@@ -401,6 +490,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/assistant/$threadId'
       preLoaderRoute: typeof BlogAssistantThreadIdRouteImport
       parentRoute: typeof BlogAssistantRoute
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -441,14 +544,20 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  McpRoute: McpRoute,
   ProfilRoute: ProfilRoute,
   ServicesRoute: ServicesRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ApiChatRoute: ApiChatRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogAssistantRoute: BlogAssistantRouteWithChildren,
   RealisationsSlugRoute: RealisationsSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   RealisationsIndexRoute: RealisationsIndexRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
