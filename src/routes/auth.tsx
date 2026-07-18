@@ -18,6 +18,9 @@ export const Route = createFileRoute("/auth")({
       { name: "robots", content: "noindex" },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: typeof s.next === "string" && s.next.startsWith("/") && !s.next.startsWith("//") ? s.next : undefined,
+  }),
   component: AuthPage,
 });
 
@@ -34,18 +37,28 @@ function GoogleIcon() {
 
 function AuthPage() {
   const nav = useNavigate();
+  const { next } = Route.useSearch();
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
+  const goNext = () => {
+    if (next) window.location.href = next;
+    else nav({ to: "/profil" });
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) nav({ to: "/profil" });
+      if (data.session) goNext();
     });
-  }, [nav]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onGoogle = async () => {
     setGoogleLoading(true);
-    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/profil" });
+    const redirectTarget = next
+      ? window.location.origin + next
+      : window.location.origin + "/profil";
+    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: redirectTarget });
     if (result.error) {
       setGoogleLoading(false);
       toast.error("Connexion Google impossible");
@@ -53,7 +66,7 @@ function AuthPage() {
     }
     if (result.redirected) return; // navigating away
     setGoogleLoading(false);
-    nav({ to: "/profil" });
+    goNext();
   };
 
   const onLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -67,7 +80,7 @@ function AuthPage() {
     setLoading(false);
     if (error) { toast.error(error.message); return; }
     toast.success("Connexion réussie");
-    nav({ to: "/profil" });
+    goNext();
   };
 
   const onSignup = async (e: FormEvent<HTMLFormElement>) => {
@@ -78,10 +91,13 @@ function AuthPage() {
     const fullName = String(fd.get("full_name") ?? "").trim();
     if (!email.success || !pwd.success) { toast.error("Données invalides"); return; }
     setLoading(true);
+    const emailRedirectTo = next
+      ? `${window.location.origin}${next}`
+      : `${window.location.origin}/profil`;
     const { error } = await supabase.auth.signUp({
       email: email.data,
       password: pwd.data,
-      options: { emailRedirectTo: `${window.location.origin}/profil`, data: { full_name: fullName } },
+      options: { emailRedirectTo, data: { full_name: fullName } },
     });
     setLoading(false);
     if (error) { toast.error(error.message); return; }
