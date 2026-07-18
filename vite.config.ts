@@ -19,8 +19,7 @@ export default defineConfig({
       nodeCompat: true,
     },
   },
-  vite: {
-    plugins: [mcpPlugin()],
-  },
+  plugins: [mcpPlugin()],
+
 });
 
