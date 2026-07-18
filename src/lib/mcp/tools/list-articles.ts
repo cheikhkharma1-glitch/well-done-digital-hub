@@ -15,7 +15,7 @@ export default defineTool({
     const { data, error } = await sb
       .from("articles")
       .select("id,title,slug,excerpt,published_at,category")
-      .eq("status", "published")
+      .eq("published", true)
       .order("published_at", { ascending: false })
       .limit(limit ?? 20);
     if (error) return toolError(error.message);

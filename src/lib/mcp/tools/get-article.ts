@@ -16,7 +16,7 @@ export default defineTool({
       .from("articles")
       .select("id,title,slug,excerpt,content,category,published_at")
       .eq("slug", slug)
-      .eq("status", "published")
+      .eq("published", true)
       .maybeSingle();
     if (error) return toolError(error.message);
     if (!data) return toolError("Article introuvable.");

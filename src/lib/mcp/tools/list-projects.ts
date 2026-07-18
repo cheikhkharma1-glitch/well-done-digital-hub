@@ -15,9 +15,9 @@ export default defineTool({
     const sb = supabaseForUser(ctx);
     let q = sb
       .from("projects")
-      .select("id,title,slug,summary,category,client,year")
-      .eq("status", "published")
-      .order("created_at", { ascending: false })
+      .select("id,title,slug,description,category,client_name,technologies,image_url")
+      .eq("published", true)
+      .order("display_order", { ascending: true })
       .limit(limit ?? 20);
     if (category) q = q.eq("category", category);
     const { data, error } = await q;
