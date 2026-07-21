@@ -346,62 +346,9 @@ function HomePage() {
 
 
 
-      {/* MOT DU PDG */}
-      <section className="py-24 lg:py-32 relative overflow-hidden">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Photo */}
-            <div className="relative animate-fade-in">
-              <div className="absolute -top-6 -left-6 w-24 h-24 grid grid-cols-5 gap-1.5 opacity-60">
-                {Array.from({ length: 25 }).map((_, i) => (
-                  <span key={i} className="w-1.5 h-1.5 rounded-full bg-primary" />
-                ))}
-              </div>
-              <div className="absolute -top-4 right-8 w-16 h-[110%] bg-primary/90 rounded-sm hidden lg:block" />
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 grid grid-cols-5 gap-1.5 opacity-60">
-                {Array.from({ length: 25 }).map((_, i) => (
-                  <span key={i} className="w-1.5 h-1.5 rounded-full bg-primary" />
-                ))}
-              </div>
-              <div className="relative rounded-2xl overflow-hidden shadow-elegant ring-1 ring-border hover-scale">
-                <img
-                  src={ceoImg}
-                  alt="M. Cheikh Mbacke Kharma — Président Directeur Général de Well Done Services Company"
-                  className="w-full h-auto object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
+      {/* MOT DU PDG — immersive 3D leadership showcase */}
+      <LeadershipShowcase />
 
-            {/* Texte */}
-            <div className="animate-fade-in [animation-delay:150ms]">
-              <p className="text-sm font-semibold text-primary-glow uppercase tracking-wider mb-3">Mot du Président</p>
-              <h2 className="font-display text-3xl lg:text-5xl font-bold mb-8 leading-tight">
-                Une vision <span className="text-gradient">tournée vers l'avenir</span>.
-              </h2>
-              <div className="relative pl-6 border-l-2 border-primary/30">
-                <Quote className="absolute -top-2 -left-3 h-8 w-8 text-primary bg-background p-1" />
-                <p className="text-base lg:text-lg text-foreground/85 leading-relaxed italic">
-                  Passionné par l'innovation technologique, je m'engage pleinement dans la transformation digitale des entreprises. Avec une solide compréhension des enjeux numériques et des processus métiers, je mets mes compétences au service de solutions durables, agiles et orientées résultats.
-                </p>
-                <p className="mt-4 text-base lg:text-lg text-foreground/85 leading-relaxed italic">
-                  Ma vision : faire du digital un levier de performance et de croissance pour chaque organisation. Résolument tourné vers l'avenir, je crois en l'alliance entre technologie, stratégie et intelligence collective pour bâtir un monde plus connecté, efficace et humain.
-                </p>
-              </div>
-              <div className="mt-8 flex items-center gap-4">
-                <div className="h-14 w-14 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground font-display font-bold text-lg shadow-glow">
-                  CK
-                </div>
-                <div>
-                  <div className="font-display font-bold text-lg">M. Cheikh Mbacke Kharma</div>
-                  <div className="text-sm text-muted-foreground">Président Directeur Général</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* TESTIMONIALS */}
       <section className="py-24 lg:py-32">
