@@ -25,6 +25,7 @@ import { Route as BlogAssistantRouteImport } from './routes/blog.assistant'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminProjetsRouteImport } from './routes/admin.projets'
+import { Route as AdminLeadershipRouteImport } from './routes/admin.leadership'
 import { Route as AdminDemandesRouteImport } from './routes/admin.demandes'
 import { Route as AdminArticlesRouteImport } from './routes/admin.articles'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -114,6 +115,11 @@ const AdminProjetsRoute = AdminProjetsRouteImport.update({
   path: '/projets',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLeadershipRoute = AdminLeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDemandesRoute = AdminDemandesRouteImport.update({
   id: '/demandes',
   path: '/demandes',
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
+  '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/projets': typeof AdminProjetsRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -196,6 +203,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
+  '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/projets': typeof AdminProjetsRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -222,6 +230,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/demandes': typeof AdminDemandesRoute
+  '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/projets': typeof AdminProjetsRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/demandes'
+    | '/admin/leadership'
     | '/admin/projets'
     | '/api/chat'
     | '/blog/$slug'
@@ -275,6 +285,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/demandes'
+    | '/admin/leadership'
     | '/admin/projets'
     | '/api/chat'
     | '/blog/$slug'
@@ -300,6 +311,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/demandes'
+    | '/admin/leadership'
     | '/admin/projets'
     | '/api/chat'
     | '/blog/$slug'
@@ -449,6 +461,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProjetsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/leadership': {
+      id: '/admin/leadership'
+      path: '/leadership'
+      fullPath: '/admin/leadership'
+      preLoaderRoute: typeof AdminLeadershipRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/demandes': {
       id: '/admin/demandes'
       path: '/demandes'
@@ -511,6 +530,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminArticlesRoute: typeof AdminArticlesRoute
   AdminDemandesRoute: typeof AdminDemandesRoute
+  AdminLeadershipRoute: typeof AdminLeadershipRoute
   AdminProjetsRoute: typeof AdminProjetsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -518,6 +538,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminArticlesRoute: AdminArticlesRoute,
   AdminDemandesRoute: AdminDemandesRoute,
+  AdminLeadershipRoute: AdminLeadershipRoute,
   AdminProjetsRoute: AdminProjetsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
