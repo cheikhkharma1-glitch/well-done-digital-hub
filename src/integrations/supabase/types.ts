@@ -238,6 +238,57 @@ export type Database = {
         }
         Relationships: []
       }
+      site_leadership: {
+        Row: {
+          badge: string
+          ceo_initials: string
+          ceo_name: string
+          ceo_role: string
+          id: string
+          portrait_url: string | null
+          quote1: string
+          quote2: string
+          quote3: string
+          stats: Json
+          title_highlight: string
+          title_prefix: string
+          title_suffix: string
+          updated_at: string
+        }
+        Insert: {
+          badge?: string
+          ceo_initials?: string
+          ceo_name?: string
+          ceo_role?: string
+          id?: string
+          portrait_url?: string | null
+          quote1?: string
+          quote2?: string
+          quote3?: string
+          stats?: Json
+          title_highlight?: string
+          title_prefix?: string
+          title_suffix?: string
+          updated_at?: string
+        }
+        Update: {
+          badge?: string
+          ceo_initials?: string
+          ceo_name?: string
+          ceo_role?: string
+          id?: string
+          portrait_url?: string | null
+          quote1?: string
+          quote2?: string
+          quote3?: string
+          stats?: Json
+          title_highlight?: string
+          title_prefix?: string
+          title_suffix?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
