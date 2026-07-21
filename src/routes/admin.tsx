@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { LayoutDashboard, FolderKanban, Newspaper, Inbox, LogOut, ExternalLink } from "lucide-react";
+import { LayoutDashboard, FolderKanban, Newspaper, Inbox, LogOut, ExternalLink, UserSquare2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -14,6 +14,7 @@ const links: { to: string; label: string; icon: typeof LayoutDashboard; exact?: 
   { to: "/admin", label: "Tableau de bord", icon: LayoutDashboard, exact: true },
   { to: "/admin/projets", label: "Projets", icon: FolderKanban },
   { to: "/admin/articles", label: "Articles", icon: Newspaper },
+  { to: "/admin/leadership", label: "Mot du Président", icon: UserSquare2 },
   { to: "/admin/demandes", label: "Demandes", icon: Inbox },
 ];
 
