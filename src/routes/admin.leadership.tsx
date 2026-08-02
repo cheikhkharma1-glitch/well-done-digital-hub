@@ -13,6 +13,15 @@ export const Route = createFileRoute("/admin/leadership")({
 });
 
 type Stat = { k: string; v: string };
+type PortraitVariant = {
+  id: string;
+  label: string;
+  url: string;
+  fit: "contain" | "cover";
+  scale: number;
+  pos_x: number;
+  pos_y: number;
+};
 type Row = {
   id: string;
   badge: string;
@@ -26,8 +35,20 @@ type Row = {
   ceo_role: string;
   ceo_initials: string;
   portrait_url: string | null;
+  portraits: PortraitVariant[];
+  active_portrait: string | null;
   stats: Stat[];
 };
+
+const newVariant = (): PortraitVariant => ({
+  id: (globalThis.crypto?.randomUUID?.() ?? String(Date.now() + Math.random())),
+  label: "Nouveau portrait",
+  url: "",
+  fit: "contain",
+  scale: 1,
+  pos_x: 50,
+  pos_y: 50,
+});
 
 const EMPTY: Row = {
   id: "main",
@@ -42,8 +63,11 @@ const EMPTY: Row = {
   ceo_role: "",
   ceo_initials: "",
   portrait_url: "",
+  portraits: [],
+  active_portrait: null,
   stats: [{ k: "", v: "" }, { k: "", v: "" }, { k: "", v: "" }],
 };
+
 
 function AdminLeadership() {
   const [row, setRow] = useState<Row>(EMPTY);
