@@ -212,6 +212,147 @@ function AdminLeadership() {
         </section>
 
         <section>
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h2 className="font-display text-lg font-semibold">Variantes de portrait</h2>
+              <p className="text-xs text-muted-foreground">
+                Créez plusieurs versions (URL, recadrage, taille) et choisissez celle affichée sur le site.
+              </p>
+            </div>
+            <Button variant="outline" size="sm" onClick={addVariant}>
+              <Plus className="h-4 w-4 mr-1" /> Ajouter une variante
+            </Button>
+          </div>
+
+          <div className="space-y-4">
+            {row.portraits.map((p) => {
+              const active = row.active_portrait === p.id;
+              return (
+                <div
+                  key={p.id}
+                  className={`rounded-xl border p-4 ${active ? "border-primary ring-1 ring-primary/30" : "border-border"}`}
+                >
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <div className="w-40 h-52 shrink-0 rounded-lg bg-muted overflow-hidden border">
+                      {p.url ? (
+                        <img
+                          src={p.url}
+                          alt={p.label}
+                          className="w-full h-full"
+                          style={{
+                            objectFit: p.fit,
+                            objectPosition: `${p.pos_x}% ${p.pos_y}%`,
+                            transform: `scale(${p.scale})`,
+                            transformOrigin: "bottom center",
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full grid place-items-center text-xs text-muted-foreground">
+                          Aperçu
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex-1 space-y-3">
+                      <div className="grid md:grid-cols-2 gap-3">
+                        <div>
+                          <Label className="text-xs">Nom de la variante</Label>
+                          <Input value={p.label} onChange={(e) => setVariant(p.id, { label: e.target.value })} />
+                        </div>
+                        <div>
+                          <Label className="text-xs">Cadrage</Label>
+                          <select
+                            className="w-full h-9 rounded-md border border-input bg-background px-3 text-sm"
+                            value={p.fit}
+                            onChange={(e) => setVariant(p.id, { fit: e.target.value as "contain" | "cover" })}
+                          >
+                            <option value="contain">Entier (contain)</option>
+                            <option value="cover">Rempli / recadré (cover)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label className="text-xs">URL de l'image</Label>
+                        <Input
+                          value={p.url}
+                          onChange={(e) => setVariant(p.id, { url: e.target.value })}
+                          placeholder="https://…"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-xs">Ou téléverser</Label>
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => e.target.files?.[0] && uploadVariant(p.id, e.target.files[0])}
+                        />
+                      </div>
+
+                      <div className="grid sm:grid-cols-3 gap-3">
+                        <div>
+                          <Label className="text-xs">Taille ({p.scale.toFixed(2)}×)</Label>
+                          <input
+                            type="range"
+                            min={0.5}
+                            max={1.6}
+                            step={0.05}
+                            value={p.scale}
+                            onChange={(e) => setVariant(p.id, { scale: Number(e.target.value) })}
+                            className="w-full accent-primary"
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-xs">Position horizontale ({p.pos_x}%)</Label>
+                          <input
+                            type="range"
+                            min={0}
+                            max={100}
+                            value={p.pos_x}
+                            onChange={(e) => setVariant(p.id, { pos_x: Number(e.target.value) })}
+                            className="w-full accent-primary"
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-xs">Position verticale ({p.pos_y}%)</Label>
+                          <input
+                            type="range"
+                            min={0}
+                            max={100}
+                            value={p.pos_y}
+                            onChange={(e) => setVariant(p.id, { pos_y: Number(e.target.value) })}
+                            className="w-full accent-primary"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-1">
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant={active ? "default" : "outline"}
+                          onClick={() => update("active_portrait", p.id)}
+                        >
+                          {active ? "Variante affichée" : "Afficher cette variante"}
+                        </Button>
+                        <Button type="button" size="sm" variant="ghost" onClick={() => rmVariant(p.id)}>
+                          <Trash2 className="h-4 w-4 mr-1" /> Supprimer
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {row.portraits.length === 0 && (
+              <p className="text-sm text-muted-foreground">
+                Aucune variante. Le portrait ci-dessus est utilisé par défaut.
+              </p>
+            )}
+          </div>
+        </section>
+
+        <section>
           <h2 className="font-display text-lg font-semibold mb-3">Discours en trois temps</h2>
           <div className="space-y-4">
             {(["quote1", "quote2", "quote3"] as const).map((f, i) => (
