@@ -81,6 +81,8 @@ function AdminLeadership() {
         setRow({
           ...(data as any),
           stats: Array.isArray((data as any).stats) ? (data as any).stats : EMPTY.stats,
+          portraits: Array.isArray((data as any).portraits) ? (data as any).portraits : [],
+          active_portrait: (data as any).active_portrait ?? null,
         });
       }
       setLoading(false);
@@ -93,11 +95,31 @@ function AdminLeadership() {
   const addStat = () => setRow((r) => ({ ...r, stats: [...r.stats, { k: "", v: "" }] }));
   const rmStat = (i: number) => setRow((r) => ({ ...r, stats: r.stats.filter((_, idx) => idx !== i) }));
 
+  // --- Variantes de portrait ---
+  const setVariant = (id: string, patch: Partial<PortraitVariant>) =>
+    setRow((r) => ({ ...r, portraits: r.portraits.map((p) => (p.id === id ? { ...p, ...patch } : p)) }));
+  const addVariant = () =>
+    setRow((r) => {
+      const v = newVariant();
+      return { ...r, portraits: [...r.portraits, v], active_portrait: r.active_portrait ?? v.id };
+    });
+  const rmVariant = (id: string) =>
+    setRow((r) => {
+      const portraits = r.portraits.filter((p) => p.id !== id);
+      return { ...r, portraits, active_portrait: r.active_portrait === id ? (portraits[0]?.id ?? null) : r.active_portrait };
+    });
+  const uploadVariant = (id: string, file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => setVariant(id, { url: String(reader.result) });
+    reader.readAsDataURL(file);
+  };
+
   const save = async () => {
     setSaving(true);
     const payload = {
       ...row,
       portrait_url: row.portrait_url?.trim() || null,
+      portraits: row.portraits.filter((p) => p.url.trim()),
       stats: row.stats.filter((s) => s.k.trim() || s.v.trim()),
     };
     const { error } = await supabase.from("site_leadership").upsert(payload as any, { onConflict: "id" });
@@ -112,6 +134,7 @@ function AdminLeadership() {
     reader.onload = () => update("portrait_url", String(reader.result));
     reader.readAsDataURL(file);
   };
+
 
   if (loading) return <div className="text-muted-foreground">Chargement…</div>;
 
