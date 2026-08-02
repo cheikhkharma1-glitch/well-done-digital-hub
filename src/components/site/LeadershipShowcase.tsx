@@ -6,6 +6,16 @@ import { useIsMobile } from "@/hooks/useMotionPref";
 import { supabase } from "@/integrations/supabase/client";
 import ceoImg from "@/assets/costume.png";
 
+export type PortraitVariant = {
+  id: string;
+  label: string;
+  url: string;
+  fit: "contain" | "cover";
+  scale: number; // 0.5 – 1.6
+  pos_x: number; // 0 – 100 (%)
+  pos_y: number; // 0 – 100 (%)
+};
+
 type LeadershipContent = {
   badge: string;
   title_prefix: string;
@@ -18,7 +28,16 @@ type LeadershipContent = {
   ceo_role: string;
   ceo_initials: string;
   portrait_url: string | null;
+  portraits: PortraitVariant[];
+  active_portrait: string | null;
   stats: { k: string; v: string }[];
+};
+
+export const DEFAULT_VARIANT: Omit<PortraitVariant, "id" | "label" | "url"> = {
+  fit: "contain",
+  scale: 1,
+  pos_x: 50,
+  pos_y: 50,
 };
 
 const DEFAULTS: LeadershipContent = {
@@ -36,12 +55,15 @@ const DEFAULTS: LeadershipContent = {
   ceo_role: "Président Directeur Général",
   ceo_initials: "CK",
   portrait_url: null,
+  portraits: [],
+  active_portrait: null,
   stats: [
     { k: "+10 ans", v: "d'expertise IT" },
     { k: "50+", v: "clients accompagnés" },
     { k: "3 pays", v: "de présence" },
   ],
 };
+
 
 export function LeadershipShowcase() {
   const reduce = useReducedMotion();
@@ -68,6 +90,8 @@ export function LeadershipShowcase() {
           ceo_role: data.ceo_role ?? DEFAULTS.ceo_role,
           ceo_initials: data.ceo_initials ?? DEFAULTS.ceo_initials,
           portrait_url: data.portrait_url ?? null,
+          portraits: Array.isArray((data as any).portraits) ? ((data as any).portraits as PortraitVariant[]) : [],
+          active_portrait: (data as any).active_portrait ?? null,
           stats: Array.isArray(data.stats) ? (data.stats as any) : DEFAULTS.stats,
         });
       }
@@ -83,7 +107,18 @@ export function LeadershipShowcase() {
 
   // Mobile perf: disable heavy 3D layers and looping animations on small screens.
   const heavy = !isMobile && !reduce;
-  const portraitSrc = c.portrait_url || ceoImg;
+
+  // Portrait variant selection (URL, cadrage, taille) — éditable depuis l'admin.
+  const variant =
+    c.portraits.find((p) => p.id === c.active_portrait) || c.portraits[0] || null;
+  const portraitSrc = variant?.url || c.portrait_url || ceoImg;
+  const portraitStyle: React.CSSProperties = {
+    objectFit: variant?.fit ?? "contain",
+    objectPosition: `${variant?.pos_x ?? 50}% ${variant?.pos_y ?? 50}%`,
+    transform: `scale(${variant?.scale ?? 1})`,
+    transformOrigin: "bottom center",
+  };
+
 
   return (
     <section
@@ -209,14 +244,17 @@ export function LeadershipShowcase() {
               <motion.img
                 src={portraitSrc}
                 alt={`${c.ceo_name} — ${c.ceo_role} de Well Done Services Company`}
-                className="relative z-10 w-full h-full object-contain drop-shadow-[0_25px_45px_rgba(6,182,212,0.35)]"
+                className="relative z-10 w-full h-full rounded-2xl drop-shadow-[0_25px_45px_rgba(6,182,212,0.35)]"
+                style={portraitStyle}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                loading="lazy"
+                loading="eager"
+                fetchPriority="high"
                 decoding="async"
               />
+
 
               {/* Floating KPI cards — hidden on mobile to save GPU */}
               {!isMobile && floats.map((f, idx) => {

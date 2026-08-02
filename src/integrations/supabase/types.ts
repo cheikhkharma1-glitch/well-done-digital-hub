@@ -240,12 +240,14 @@ export type Database = {
       }
       site_leadership: {
         Row: {
+          active_portrait: string | null
           badge: string
           ceo_initials: string
           ceo_name: string
           ceo_role: string
           id: string
           portrait_url: string | null
+          portraits: Json
           quote1: string
           quote2: string
           quote3: string
@@ -256,12 +258,14 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          active_portrait?: string | null
           badge?: string
           ceo_initials?: string
           ceo_name?: string
           ceo_role?: string
           id?: string
           portrait_url?: string | null
+          portraits?: Json
           quote1?: string
           quote2?: string
           quote3?: string
@@ -272,12 +276,14 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          active_portrait?: string | null
           badge?: string
           ceo_initials?: string
           ceo_name?: string
           ceo_role?: string
           id?: string
           portrait_url?: string | null
+          portraits?: Json
           quote1?: string
           quote2?: string
           quote3?: string
