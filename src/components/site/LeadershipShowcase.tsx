@@ -90,6 +90,8 @@ export function LeadershipShowcase() {
           ceo_role: data.ceo_role ?? DEFAULTS.ceo_role,
           ceo_initials: data.ceo_initials ?? DEFAULTS.ceo_initials,
           portrait_url: data.portrait_url ?? null,
+          portraits: Array.isArray((data as any).portraits) ? ((data as any).portraits as PortraitVariant[]) : [],
+          active_portrait: (data as any).active_portrait ?? null,
           stats: Array.isArray(data.stats) ? (data.stats as any) : DEFAULTS.stats,
         });
       }
@@ -105,7 +107,18 @@ export function LeadershipShowcase() {
 
   // Mobile perf: disable heavy 3D layers and looping animations on small screens.
   const heavy = !isMobile && !reduce;
-  const portraitSrc = c.portrait_url || ceoImg;
+
+  // Portrait variant selection (URL, cadrage, taille) — éditable depuis l'admin.
+  const variant =
+    c.portraits.find((p) => p.id === c.active_portrait) || c.portraits[0] || null;
+  const portraitSrc = variant?.url || c.portrait_url || ceoImg;
+  const portraitStyle: React.CSSProperties = {
+    objectFit: variant?.fit ?? "contain",
+    objectPosition: `${variant?.pos_x ?? 50}% ${variant?.pos_y ?? 50}%`,
+    transform: `scale(${variant?.scale ?? 1})`,
+    transformOrigin: "bottom center",
+  };
+
 
   return (
     <section
