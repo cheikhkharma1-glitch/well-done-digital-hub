@@ -6,6 +6,16 @@ import { useIsMobile } from "@/hooks/useMotionPref";
 import { supabase } from "@/integrations/supabase/client";
 import ceoImg from "@/assets/costume.png";
 
+export type PortraitVariant = {
+  id: string;
+  label: string;
+  url: string;
+  fit: "contain" | "cover";
+  scale: number; // 0.5 – 1.6
+  pos_x: number; // 0 – 100 (%)
+  pos_y: number; // 0 – 100 (%)
+};
+
 type LeadershipContent = {
   badge: string;
   title_prefix: string;
@@ -18,7 +28,16 @@ type LeadershipContent = {
   ceo_role: string;
   ceo_initials: string;
   portrait_url: string | null;
+  portraits: PortraitVariant[];
+  active_portrait: string | null;
   stats: { k: string; v: string }[];
+};
+
+export const DEFAULT_VARIANT: Omit<PortraitVariant, "id" | "label" | "url"> = {
+  fit: "contain",
+  scale: 1,
+  pos_x: 50,
+  pos_y: 50,
 };
 
 const DEFAULTS: LeadershipContent = {
@@ -36,12 +55,15 @@ const DEFAULTS: LeadershipContent = {
   ceo_role: "Président Directeur Général",
   ceo_initials: "CK",
   portrait_url: null,
+  portraits: [],
+  active_portrait: null,
   stats: [
     { k: "+10 ans", v: "d'expertise IT" },
     { k: "50+", v: "clients accompagnés" },
     { k: "3 pays", v: "de présence" },
   ],
 };
+
 
 export function LeadershipShowcase() {
   const reduce = useReducedMotion();
