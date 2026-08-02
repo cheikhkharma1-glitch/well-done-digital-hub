@@ -1,15 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote, ShieldCheck, Lock, Eye, Zap } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { CyberShield } from "@/components/site/CyberShield";
 import { HoloRig } from "@/components/site/HoloRig";
-import { DataCube3D } from "@/components/site/DataCube3D";
 import { ParticleField } from "@/components/site/ParticleField";
-import { Timeline3D } from "@/components/site/Timeline3D";
 import { LeadershipShowcase } from "@/components/site/LeadershipShowcase";
+
+// Below-the-fold 3D sections are code-split so the first paint stays fast (PWA/mobile).
+const DataCube3D = lazy(() => import("@/components/site/DataCube3D").then((m) => ({ default: m.DataCube3D })));
+const Timeline3D = lazy(() => import("@/components/site/Timeline3D").then((m) => ({ default: m.Timeline3D })));
+const CyberShield = lazy(() => import("@/components/site/CyberShield").then((m) => ({ default: m.CyberShield })));
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
 import ceoImg from "@/assets/ceo-kharma.png";
@@ -171,60 +173,9 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="py-24 lg:py-32 relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
-        <div className="container mx-auto px-4 lg:px-8 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mb-16"
-          >
-            <p className="text-xs font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-[0.35em] mb-5">Nos expertises</p>
-            <h2 className="font-display text-4xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
-              Une offre <span className="text-cyber">complète</span>
-              <br className="hidden sm:block" />
-              <span className="text-muted-foreground font-light"> pour digitaliser votre activité.</span>
-            </h2>
-            <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
-              Du site vitrine à l'ERP métier, en passant par la gestion scolaire et l'infrastructure réseau.
-            </p>
-          </motion.div>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {services.map((s, i) => (
-              <motion.div
-                key={s.title}
-                custom={i}
-                variants={fadeUp}
-                whileHover={prefersReduced ? undefined : { y: -6 }}
-                transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                className="group relative p-6 lg:p-8 rounded-2xl bg-gradient-card border border-border hover:border-[oklch(0.82_0.16_210)]/60 hover:shadow-cyber transition-all duration-500 overflow-hidden"
-              >
-                <div aria-hidden className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[oklch(0.82_0.16_210)]/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div aria-hidden className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-cyber scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
-                <div className="relative h-12 w-12 rounded-xl bg-gradient-cyber text-white flex items-center justify-center mb-5 shadow-cyber transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
-                  <s.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-display text-lg font-bold mb-2 relative">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed relative">{s.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-          <div className="mt-10">
-            <Button asChild variant="ghost" className="group hover:text-[oklch(0.62_0.2_255)]">
-              <Link to="/services">Voir tous les services <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-smooth" /></Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+
+      {/* MOT DU PDG — immersive 3D leadership showcase */}
+      <LeadershipShowcase />
 
       {/* PROJETS */}
       <section className="py-24 lg:py-32 bg-surface relative overflow-hidden">
@@ -277,6 +228,92 @@ function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+
+      {/* CTA */}
+      <section className="py-24 lg:py-32">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-hero p-10 lg:p-20 text-center shadow-elegant">
+            <div className="absolute inset-0 bg-gradient-glow" />
+            <div className="relative max-w-3xl mx-auto">
+              <h2 className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground mb-5">
+                Prêt à accélérer votre transformation digitale ?
+              </h2>
+              <p className="text-primary-foreground/80 text-lg mb-8">
+                Échangeons sur votre projet. Nous vous proposons une étude personnalisée et un devis gratuit sous 48h.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button asChild size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
+                  <Link to="/contact">Demander un devis gratuit <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
+                  <Link to="/contact">Nous contacter</Link>
+                </Button>
+              </div>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/70">
+                <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary-glow" /> Devis sous 48h</span>
+                <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary-glow" /> Sans engagement</span>
+                <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary-glow" /> Équipe locale Dakar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section className="py-24 lg:py-32 relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mb-16"
+          >
+            <p className="text-xs font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-[0.35em] mb-5">Nos expertises</p>
+            <h2 className="font-display text-4xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+              Une offre <span className="text-cyber">complète</span>
+              <br className="hidden sm:block" />
+              <span className="text-muted-foreground font-light"> pour digitaliser votre activité.</span>
+            </h2>
+            <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
+              Du site vitrine à l'ERP métier, en passant par la gestion scolaire et l'infrastructure réseau.
+            </p>
+          </motion.div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {services.map((s, i) => (
+              <motion.div
+                key={s.title}
+                custom={i}
+                variants={fadeUp}
+                whileHover={prefersReduced ? undefined : { y: -6 }}
+                transition={{ type: "spring", stiffness: 220, damping: 22 }}
+                className="group relative p-6 lg:p-8 rounded-2xl bg-gradient-card border border-border hover:border-[oklch(0.82_0.16_210)]/60 hover:shadow-cyber transition-all duration-500 overflow-hidden"
+              >
+                <div aria-hidden className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[oklch(0.82_0.16_210)]/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div aria-hidden className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-cyber scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
+                <div className="relative h-12 w-12 rounded-xl bg-gradient-cyber text-white flex items-center justify-center mb-5 shadow-cyber transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
+                  <s.icon className="h-6 w-6" />
+                </div>
+                <h3 className="font-display text-lg font-bold mb-2 relative">{s.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed relative">{s.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+          <div className="mt-10">
+            <Button asChild variant="ghost" className="group hover:text-[oklch(0.62_0.2_255)]">
+              <Link to="/services">Voir tous les services <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-smooth" /></Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -336,19 +373,14 @@ function HomePage() {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <DataCube3D />
+              <Suspense fallback={<div className="aspect-square w-full rounded-3xl bg-white/5" />}><DataCube3D /></Suspense>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* TRANSFORMATION TIMELINE */}
-      <Timeline3D />
-
-
-
-      {/* MOT DU PDG — immersive 3D leadership showcase */}
-      <LeadershipShowcase />
+      <Suspense fallback={<div className="h-64" />}><Timeline3D /></Suspense>
 
 
       {/* TESTIMONIALS */}
@@ -385,7 +417,7 @@ function HomePage() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <CyberShield />
+              <Suspense fallback={<div className="aspect-square w-full rounded-3xl bg-white/5" />}><CyberShield /></Suspense>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -443,36 +475,6 @@ function HomePage() {
                 {name}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-hero p-10 lg:p-20 text-center shadow-elegant">
-            <div className="absolute inset-0 bg-gradient-glow" />
-            <div className="relative max-w-3xl mx-auto">
-              <h2 className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground mb-5">
-                Prêt à accélérer votre transformation digitale ?
-              </h2>
-              <p className="text-primary-foreground/80 text-lg mb-8">
-                Échangeons sur votre projet. Nous vous proposons une étude personnalisée et un devis gratuit sous 48h.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button asChild size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
-                  <Link to="/contact">Demander un devis gratuit <ArrowRight className="ml-1 h-4 w-4" /></Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
-                  <Link to="/contact">Nous contacter</Link>
-                </Button>
-              </div>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/70">
-                <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary-glow" /> Devis sous 48h</span>
-                <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary-glow" /> Sans engagement</span>
-                <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary-glow" /> Équipe locale Dakar</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
