@@ -244,14 +244,17 @@ export function LeadershipShowcase() {
               <motion.img
                 src={portraitSrc}
                 alt={`${c.ceo_name} — ${c.ceo_role} de Well Done Services Company`}
-                className="relative z-10 w-full h-full object-contain drop-shadow-[0_25px_45px_rgba(6,182,212,0.35)]"
+                className="relative z-10 w-full h-full rounded-2xl drop-shadow-[0_25px_45px_rgba(6,182,212,0.35)]"
+                style={portraitStyle}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                loading="lazy"
+                loading="eager"
+                fetchPriority="high"
                 decoding="async"
               />
+
 
               {/* Floating KPI cards — hidden on mobile to save GPU */}
               {!isMobile && floats.map((f, idx) => {
