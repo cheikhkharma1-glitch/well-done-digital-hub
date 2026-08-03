@@ -155,7 +155,7 @@ function ServicesPage() {
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="max-w-4xl"
+            className="max-w-6xl"
           >
             <motion.div
               variants={fadeUp}
