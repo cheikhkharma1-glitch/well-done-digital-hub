@@ -267,14 +267,37 @@ function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl mb-16"
+            className="max-w-5xl mb-16"
           >
             <p className="text-xs font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-[0.35em] mb-5">Nos expertises</p>
-            <h2 className="font-display text-4xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
-              Une offre <span className="text-cyber">complète</span>
-              <br className="hidden sm:block" />
-              <span className="text-muted-foreground font-light"> pour digitaliser votre activité.</span>
+            <h2
+              className="font-display font-bold leading-[1.1] tracking-tight mb-6 whitespace-nowrap text-[clamp(1.05rem,4.2vw,3.25rem)]"
+              style={{ perspective: "900px" }}
+            >
+              {[
+                { t: "Une", c: "" },
+                { t: "offre", c: "" },
+                { t: "complète", c: "text-cyber" },
+                { t: "pour", c: "text-muted-foreground font-light" },
+                { t: "digitaliser", c: "text-muted-foreground font-light" },
+                { t: "votre", c: "text-muted-foreground font-light" },
+                { t: "activité.", c: "text-muted-foreground font-light" },
+              ].map((w, i) => (
+                <motion.span
+                  key={w.t}
+                  className={`inline-block mr-[0.25em] ${w.c}`}
+                  style={{ transformStyle: "preserve-3d" }}
+                  initial={{ opacity: 0, rotateX: -85, y: 18 }}
+                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ rotateX: 12, rotateY: -10, scale: 1.06 }}
+                >
+                  {w.t}
+                </motion.span>
+              ))}
             </h2>
+
             <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
               Du site vitrine à l'ERP métier, en passant par la gestion scolaire et l'infrastructure réseau.
             </p>
