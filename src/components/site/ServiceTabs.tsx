@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, type LucideIcon } from "lucide-react";
-import { useMotionPref } from "@/hooks/useMotionPref";
+import { useMotionPref, useIsMobile } from "@/hooks/useMotionPref";
 import webImg from "@/assets/service-web.jpg";
 import softwareImg from "@/assets/service-software.jpg";
 import networkImg from "@/assets/service-network.jpg";
@@ -84,7 +84,10 @@ const services: Service[] = [
 ];
 
 export function ServiceTabs() {
-  const { reduce } = useMotionPref();
+  const { reduce: prefReduce } = useMotionPref();
+  const isMobile = useIsMobile();
+  // On mobile we behave like reduced motion: no parallax/zoom, no scan-line.
+  const reduce = prefReduce || isMobile;
   const [active, setActive] = useState(0);
   const current = services[active];
 
