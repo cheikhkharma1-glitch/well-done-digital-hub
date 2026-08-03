@@ -37,12 +37,6 @@ type Project = {
   image_url: string | null;
 };
 
-const services = [
-  { icon: Code2, title: "Développement Web", desc: "Sites vitrines, e-commerce, applications web et landing pages performantes." },
-  { icon: Database, title: "Solutions logicielles", desc: "ERP, CRM, logiciels métiers et solutions SaaS sur mesure." },
-  { icon: Network, title: "Maintenance & Réseaux", desc: "Maintenance informatique, gestion réseau et support technique réactif." },
-  { icon: GraduationCap, title: "Gestion scolaire", desc: "Élèves, notes, communication parents-école et statistiques avancées." },
-];
 
 const stats = [
   { value: "50+", label: "Projets réalisés" },
