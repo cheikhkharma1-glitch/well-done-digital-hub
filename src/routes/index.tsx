@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { HoloRig } from "@/components/site/HoloRig";
 import { ParticleField } from "@/components/site/ParticleField";
 import { LeadershipShowcase } from "@/components/site/LeadershipShowcase";
+import { ServiceTabs } from "@/components/site/ServiceTabs";
+
 
 // Below-the-fold 3D sections are code-split so the first paint stays fast (PWA/mobile).
 const DataCube3D = lazy(() => import("@/components/site/DataCube3D").then((m) => ({ default: m.DataCube3D })));
