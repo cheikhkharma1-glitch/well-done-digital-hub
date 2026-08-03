@@ -31,13 +31,38 @@ export function Timeline3D() {
       <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-25 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]" />
 
       <div className="container mx-auto px-4 lg:px-8 relative">
-        <div className="max-w-3xl mb-16 lg:mb-20">
+        <div className="max-w-5xl mb-16 lg:mb-20">
           <p className="text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
             Méthodologie
           </p>
-          <h2 id="timeline-heading" className="font-display text-3xl lg:text-5xl font-bold leading-tight mb-6">
-            La <span className="text-holo">transformation digitale</span>, en 5 étapes.
+          <h2
+            id="timeline-heading"
+            className="font-display font-bold leading-tight mb-6 whitespace-nowrap text-[clamp(1rem,4.2vw,3rem)]"
+            style={{ perspective: "900px" }}
+          >
+            {[
+              { t: "La", c: "" },
+              { t: "transformation", c: "text-holo" },
+              { t: "digitale,", c: "text-holo" },
+              { t: "en", c: "" },
+              { t: "5", c: "" },
+              { t: "étapes.", c: "" },
+            ].map((w, i) => (
+              <motion.span
+                key={w.t}
+                className={`inline-block mr-[0.25em] ${w.c}`}
+                style={{ transformStyle: "preserve-3d" }}
+                initial={{ opacity: 0, rotateX: -85, y: 18 }}
+                whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ rotateX: 12, rotateY: -10, scale: 1.06 }}
+              >
+                {w.t}
+              </motion.span>
+            ))}
           </h2>
+
           <p className="text-white/75 text-base lg:text-lg leading-relaxed">
             Une méthode éprouvée pour livrer vite, bien, et pérenniser dans le temps.
           </p>
