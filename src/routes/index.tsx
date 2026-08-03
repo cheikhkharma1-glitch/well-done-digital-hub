@@ -284,36 +284,19 @@ function HomePage() {
             </p>
           </motion.div>
           <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            {services.map((s, i) => (
-              <motion.div
-                key={s.title}
-                custom={i}
-                variants={fadeUp}
-                whileHover={prefersReduced ? undefined : { y: -6 }}
-                transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                className="group relative p-6 lg:p-8 rounded-2xl bg-gradient-card border border-border hover:border-[oklch(0.82_0.16_210)]/60 hover:shadow-cyber transition-all duration-500 overflow-hidden"
-              >
-                <div aria-hidden className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[oklch(0.82_0.16_210)]/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div aria-hidden className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-cyber scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
-                <div className="relative h-12 w-12 rounded-xl bg-gradient-cyber text-white flex items-center justify-center mb-5 shadow-cyber transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
-                  <s.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-display text-lg font-bold mb-2 relative">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed relative">{s.desc}</p>
-              </motion.div>
-            ))}
+            <ServiceTabs />
           </motion.div>
           <div className="mt-10">
             <Button asChild variant="ghost" className="group hover:text-[oklch(0.62_0.2_255)]">
               <Link to="/services">Voir tous les services <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-smooth" /></Link>
             </Button>
           </div>
+
         </div>
       </section>
 
