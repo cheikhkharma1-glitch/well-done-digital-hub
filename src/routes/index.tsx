@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, Sparkles, Quote, ShieldCheck, Lock, Eye, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles, Quote, ShieldCheck, Lock, Eye, Zap } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { HoloRig } from "@/components/site/HoloRig";
