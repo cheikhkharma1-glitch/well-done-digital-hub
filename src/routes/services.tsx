@@ -169,23 +169,46 @@ function ServicesPage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6"
+              className="font-display font-extrabold leading-[1.05] mb-6 whitespace-nowrap text-[clamp(0.95rem,3.6vw,3.75rem)]"
+              style={{ perspective: "1000px" }}
             >
-              Une expertise IT à{" "}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 bg-clip-text text-transparent">
-                  360°
-                </span>
-                <motion.span
-                  aria-hidden
-                  className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-to-r from-amber-300 to-amber-600"
-                  initial={{ scaleX: 0, transformOrigin: "left" }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                />
-              </span>{" "}
-              pour faire grandir votre activité.
+              {["Une", "expertise", "IT", "à", "360°", "pour", "faire", "grandir", "votre", "activité."].map(
+                (word, i) => {
+                  const isGold = word === "360°";
+                  return (
+                    <motion.span
+                      key={word + i}
+                      className="inline-block mr-[0.24em] relative"
+                      style={{ transformStyle: "preserve-3d" }}
+                      initial={{ opacity: 0, rotateX: -88, y: 22 }}
+                      animate={{ opacity: 1, rotateX: 0, y: 0 }}
+                      transition={{ duration: 0.65, delay: 0.15 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                      whileHover={{ rotateX: 14, rotateY: -12, scale: 1.08, z: 40 }}
+                    >
+                      <span
+                        className={
+                          isGold
+                            ? "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_0_18px_rgba(251,191,36,0.35)]"
+                            : ""
+                        }
+                      >
+                        {word}
+                      </span>
+                      {isGold && (
+                        <motion.span
+                          aria-hidden
+                          className="absolute -bottom-1 left-0 right-0 h-[0.08em] rounded-full bg-gradient-to-r from-amber-300 to-amber-600"
+                          initial={{ scaleX: 0, transformOrigin: "left" }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: 1, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                        />
+                      )}
+                    </motion.span>
+                  );
+                },
+              )}
             </motion.h1>
+
 
             <motion.p
               variants={fadeUp}
