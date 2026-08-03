@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Code2, Database, Network, GraduationCap, CheckCircle2, type LucideIcon } from "lucide-react";
-import { useMotionPref } from "@/hooks/useMotionPref";
+import { useMotionPref, useIsMobile } from "@/hooks/useMotionPref";
 import webImg from "@/assets/service-web.jpg";
 import softwareImg from "@/assets/service-software.jpg";
 import networkImg from "@/assets/service-network.jpg";
@@ -84,7 +84,10 @@ const services: Service[] = [
 ];
 
 export function ServiceTabs() {
-  const { reduce } = useMotionPref();
+  const { reduce: prefReduce } = useMotionPref();
+  const isMobile = useIsMobile();
+  // On mobile we behave like reduced motion: no parallax/zoom, no scan-line.
+  const reduce = prefReduce || isMobile;
   const [active, setActive] = useState(0);
   const current = services[active];
 
@@ -128,7 +131,7 @@ export function ServiceTabs() {
                   layoutId="service-tab-pill"
                   aria-hidden
                   className="absolute inset-0 rounded-xl bg-gradient-cyber shadow-cyber"
-                  transition={{ type: "spring", stiffness: 320, damping: 30 }}
+                  transition={reduce ? { duration: 0.15 } : { type: "spring", stiffness: 320, damping: 30 }}
                 />
               )}
               <span className="relative flex items-center gap-2.5">
@@ -156,21 +159,29 @@ export function ServiceTabs() {
         <div className="relative grid lg:grid-cols-[1.05fr_1fr]">
           {/* Visual */}
           <div className="relative min-h-[16rem] lg:min-h-[26rem] overflow-hidden">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.img
                 key={current.id}
                 src={current.image}
                 alt={current.alt}
                 width={1280}
                 height={960}
-                loading="lazy"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 initial={{ opacity: 0, scale: reduce ? 1 : 1.08 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: reduce ? 0.25 : 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </AnimatePresence>
+            {/* Preload the other service visuals so tab switches never flash */}
+            <div aria-hidden className="hidden">
+              {services.map((s) => (
+                <img key={s.id} src={s.image} alt="" width={16} height={12} loading="eager" decoding="async" />
+              ))}
+            </div>
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0b1226]/85 via-[#0b1226]/25 to-transparent" />
             <div aria-hidden className="absolute inset-0 mix-blend-screen opacity-40" style={{ background: "var(--gradient-glow)" }} />
             {!reduce && (
@@ -188,9 +199,9 @@ export function ServiceTabs() {
               {current.metrics.map((m, i) => (
                 <motion.div
                   key={`${current.id}-${m.label}`}
-                  initial={{ opacity: 0, y: 14 }}
+                  initial={{ opacity: 0, y: reduce ? 0 : 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}
+                  transition={{ delay: reduce ? 0 : 0.15 + i * 0.08, duration: reduce ? 0.2 : 0.5 }}
                   className="rounded-xl border border-[color:var(--cyber-cyan)]/40 bg-[#0b1226]/70 px-3 py-2 backdrop-blur"
                 >
                   <div className="font-display text-base lg:text-lg font-bold text-primary-foreground">{m.value}</div>
@@ -208,7 +219,7 @@ export function ServiceTabs() {
                 initial={{ opacity: 0, y: reduce ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: reduce ? 0 : -12 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: reduce ? 0.2 : 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                   <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--cyber-cyan)]" />
@@ -222,7 +233,7 @@ export function ServiceTabs() {
                       key={f}
                       initial={{ opacity: 0, x: reduce ? 0 : -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
+                      transition={{ delay: reduce ? 0 : 0.1 + i * 0.07, duration: reduce ? 0.2 : 0.4 }}
                       className="flex items-start gap-3 text-sm lg:text-base"
                     >
                       <CheckCircle2 className="mt-0.5 h-4.5 w-4.5 shrink-0 text-[color:var(--cyber-cyan)]" />
