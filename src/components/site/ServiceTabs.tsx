@@ -131,7 +131,7 @@ export function ServiceTabs() {
                   layoutId="service-tab-pill"
                   aria-hidden
                   className="absolute inset-0 rounded-xl bg-gradient-cyber shadow-cyber"
-                  transition={{ type: "spring", stiffness: 320, damping: 30 }}
+                  transition={reduce ? { duration: 0.15 } : { type: "spring", stiffness: 320, damping: 30 }}
                 />
               )}
               <span className="relative flex items-center gap-2.5">
@@ -219,7 +219,7 @@ export function ServiceTabs() {
                 initial={{ opacity: 0, y: reduce ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: reduce ? 0 : -12 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: reduce ? 0.2 : 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                   <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--cyber-cyan)]" />
@@ -233,7 +233,7 @@ export function ServiceTabs() {
                       key={f}
                       initial={{ opacity: 0, x: reduce ? 0 : -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
+                      transition={{ delay: reduce ? 0 : 0.1 + i * 0.07, duration: reduce ? 0.2 : 0.4 }}
                       className="flex items-start gap-3 text-sm lg:text-base"
                     >
                       <CheckCircle2 className="mt-0.5 h-4.5 w-4.5 shrink-0 text-[color:var(--cyber-cyan)]" />
