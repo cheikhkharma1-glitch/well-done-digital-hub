@@ -159,21 +159,29 @@ export function ServiceTabs() {
         <div className="relative grid lg:grid-cols-[1.05fr_1fr]">
           {/* Visual */}
           <div className="relative min-h-[16rem] lg:min-h-[26rem] overflow-hidden">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.img
                 key={current.id}
                 src={current.image}
                 alt={current.alt}
                 width={1280}
                 height={960}
-                loading="lazy"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 initial={{ opacity: 0, scale: reduce ? 1 : 1.08 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: reduce ? 0.25 : 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </AnimatePresence>
+            {/* Preload the other service visuals so tab switches never flash */}
+            <div aria-hidden className="hidden">
+              {services.map((s) => (
+                <img key={s.id} src={s.image} alt="" width={16} height={12} loading="eager" decoding="async" />
+              ))}
+            </div>
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0b1226]/85 via-[#0b1226]/25 to-transparent" />
             <div aria-hidden className="absolute inset-0 mix-blend-screen opacity-40" style={{ background: "var(--gradient-glow)" }} />
             {!reduce && (
@@ -191,9 +199,9 @@ export function ServiceTabs() {
               {current.metrics.map((m, i) => (
                 <motion.div
                   key={`${current.id}-${m.label}`}
-                  initial={{ opacity: 0, y: 14 }}
+                  initial={{ opacity: 0, y: reduce ? 0 : 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}
+                  transition={{ delay: reduce ? 0 : 0.15 + i * 0.08, duration: reduce ? 0.2 : 0.5 }}
                   className="rounded-xl border border-[color:var(--cyber-cyan)]/40 bg-[#0b1226]/70 px-3 py-2 backdrop-blur"
                 >
                   <div className="font-display text-base lg:text-lg font-bold text-primary-foreground">{m.value}</div>
