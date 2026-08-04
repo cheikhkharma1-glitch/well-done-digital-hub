@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-4 lg:px-8 py-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="bg-background/95 rounded-lg p-3 inline-block mb-4">
-            <img src={logo} alt="Well Done Services Company" className="h-12 w-auto" />
+            <img src={logo.url} alt="Well Done Services Company" className="h-12 w-auto" />
           </div>
           <p className="text-sm opacity-75 leading-relaxed">
             Acteur de la transformation digitale au Sénégal et en Afrique. Nous concevons des solutions IT robustes et orientées résultats.

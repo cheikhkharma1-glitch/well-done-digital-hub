@@ -82,7 +82,7 @@ export function Header() {
             )}
           >
             <img
-              src={logo}
+              src={logo.url}
               alt="Well Done Services Company"
               className={cn(
                 "w-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
