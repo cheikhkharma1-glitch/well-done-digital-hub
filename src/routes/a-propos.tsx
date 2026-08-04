@@ -3,7 +3,9 @@ import { Target, Eye, Heart, Award, Quote } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
+import { FitText } from "@/components/site/FitText";
 import portraitFounder from "@/assets/portrait-founder.png";
+
 
 export const Route = createFileRoute("/a-propos")({
   head: () => ({
