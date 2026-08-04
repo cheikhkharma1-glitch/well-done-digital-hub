@@ -74,7 +74,7 @@ export function Header() {
           scrolled ? "h-14 lg:h-16" : "h-16 lg:h-20",
         )}
       >
-        <Link to="/" className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md">
+        <Link to="/" className="flex items-center gap-3 group min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md">
           <span
             className={cn(
               "inline-flex items-center justify-center rounded-md transition-all duration-500",
@@ -85,9 +85,10 @@ export function Header() {
               src={logo.url}
               alt="Well Done Services Company"
               className={cn(
-                "w-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "w-auto h-auto object-contain shrink-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "max-w-[140px] sm:max-w-[180px] lg:max-w-[240px]",
                 "group-hover:scale-105 group-hover:drop-shadow-[0_4px_12px_hsl(var(--primary)/0.25)]",
-                scrolled ? "h-9 lg:h-10" : "h-11 lg:h-14",
+                scrolled ? "h-7 sm:h-8 lg:h-9" : "h-9 sm:h-10 lg:h-12",
               )}
             />
           </span>
