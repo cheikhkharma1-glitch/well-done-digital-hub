@@ -17,6 +17,7 @@ const CyberShield = lazy(() => import("@/components/site/CyberShield").then((m) 
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
 import ceoImg from "@/assets/ceo-kharma.png";
+import { FitText } from "@/components/site/FitText";
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Search, Compass, Hammer, Rocket, LifeBuoy, ArrowRight } from "lucide-react";
 import { useMotionPref } from "@/hooks/useMotionPref";
+import { FitText } from "@/components/site/FitText";
 
 const steps = [
   { icon: Search, title: "Audit & découverte", desc: "Nous cartographions vos processus, votre stack et vos objectifs business.", kpi: "S1 · 2 semaines" },
