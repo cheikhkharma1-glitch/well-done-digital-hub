@@ -7,8 +7,12 @@ export function Footer() {
     <footer className="bg-foreground text-background mt-24">
       <div className="container mx-auto px-4 lg:px-8 py-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="bg-background/95 rounded-lg p-3 inline-block mb-4">
-            <img src={logo.url} alt="Well Done Services Company" className="h-12 w-auto" />
+          <div className="bg-background/95 rounded-lg p-3 inline-flex items-center justify-center mb-4">
+            <img
+              src={logo.url}
+              alt="Well Done Services Company"
+              className="w-auto h-auto object-contain max-w-[160px] sm:max-w-[200px] lg:max-w-[260px] h-10 sm:h-12 lg:h-14"
+            />
           </div>
           <p className="text-sm opacity-75 leading-relaxed">
             Acteur de la transformation digitale au Sénégal et en Afrique. Nous concevons des solutions IT robustes et orientées résultats.
