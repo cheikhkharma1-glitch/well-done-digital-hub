@@ -3,7 +3,9 @@ import { Target, Eye, Heart, Award, Quote } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
+import { FitText } from "@/components/site/FitText";
 import portraitFounder from "@/assets/portrait-founder.png";
+
 
 export const Route = createFileRoute("/a-propos")({
   head: () => ({
@@ -29,7 +31,37 @@ function AboutPage() {
       <section className="py-20 lg:py-28 bg-gradient-hero text-primary-foreground">
         <div className="container mx-auto px-4 lg:px-8">
           <p className="text-sm font-semibold text-primary-glow uppercase tracking-wider mb-3">À propos</p>
-          <h1 className="font-display text-4xl lg:text-6xl font-extrabold mb-6 max-w-3xl">Bâtir l'Afrique digitale, un projet à la fois.</h1>
+          <h1
+            className="font-display font-extrabold mb-6 max-w-4xl"
+            style={{ perspective: "900px" }}
+          >
+            <FitText>
+              {[
+                { t: "Bâtir", c: "" },
+                { t: "l'Afrique", c: "" },
+                { t: "digitale,", c: "text-holo" },
+                { t: "un", c: "" },
+                { t: "projet", c: "" },
+                { t: "à", c: "" },
+                { t: "la", c: "" },
+                { t: "fois.", c: "text-gradient" },
+              ].map((w, i) => (
+                <motion.span
+                  key={w.t}
+                  className={`inline-block mr-[0.25em] ${w.c}`}
+                  style={{ transformStyle: "preserve-3d" }}
+                  initial={{ opacity: 0, rotateX: -85, y: 18 }}
+                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ rotateX: 12, rotateY: -10, scale: 1.06 }}
+                >
+                  {w.t}
+                </motion.span>
+              ))}
+            </FitText>
+          </h1>
+
           <p className="text-lg text-primary-foreground/80 max-w-2xl">
             Well Done Services Company SARL est une société sénégalaise spécialisée dans les solutions IT et digitales. Depuis plus de 5 ans, nous accompagnons nos clients dans leur transformation numérique.
           </p>
