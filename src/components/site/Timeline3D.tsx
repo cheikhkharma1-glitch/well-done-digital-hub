@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Search, Compass, Hammer, Rocket, LifeBuoy, ArrowRight } from "lucide-react";
 import { useMotionPref } from "@/hooks/useMotionPref";
+import { FitText } from "@/components/site/FitText";
 
 const steps = [
   { icon: Search, title: "Audit & découverte", desc: "Nous cartographions vos processus, votre stack et vos objectifs business.", kpi: "S1 · 2 semaines" },
@@ -37,9 +38,10 @@ export function Timeline3D() {
           </p>
           <h2
             id="timeline-heading"
-            className="font-display font-bold leading-tight mb-6 whitespace-nowrap text-[clamp(1rem,4.2vw,3rem)]"
+            className="font-display font-bold leading-tight mb-6 text-[clamp(1.5rem,4.2vw,3rem)]"
             style={{ perspective: "900px" }}
           >
+            <FitText>
             {[
               { t: "La", c: "" },
               { t: "transformation", c: "text-holo" },
@@ -61,7 +63,9 @@ export function Timeline3D() {
                 {w.t}
               </motion.span>
             ))}
+            </FitText>
           </h2>
+
 
           <p className="text-white/75 text-base lg:text-lg leading-relaxed">
             Une méthode éprouvée pour livrer vite, bien, et pérenniser dans le temps.

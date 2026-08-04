@@ -18,6 +18,7 @@ import {
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
+import { FitText } from "@/components/site/FitText";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -169,9 +170,10 @@ function ServicesPage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-display font-extrabold leading-[1.05] mb-6 whitespace-nowrap text-[clamp(0.95rem,3.6vw,3.75rem)]"
+              className="font-display font-extrabold leading-[1.05] mb-6 text-[clamp(1.5rem,3.6vw,3.75rem)]"
               style={{ perspective: "1000px" }}
             >
+              <FitText>
               {["Une", "expertise", "IT", "à", "360°", "pour", "faire", "grandir", "votre", "activité."].map(
                 (word, i) => {
                   const isGold = word === "360°";
@@ -207,6 +209,7 @@ function ServicesPage() {
                   );
                 },
               )}
+              </FitText>
             </motion.h1>
 
 

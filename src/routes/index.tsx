@@ -17,6 +17,7 @@ const CyberShield = lazy(() => import("@/components/site/CyberShield").then((m) 
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
 import ceoImg from "@/assets/ceo-kharma.png";
+import { FitText } from "@/components/site/FitText";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -271,9 +272,10 @@ function HomePage() {
           >
             <p className="text-xs font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-[0.35em] mb-5">Nos expertises</p>
             <h2
-              className="font-display font-bold leading-[1.1] tracking-tight mb-6 whitespace-nowrap text-[clamp(1.05rem,4.2vw,3.25rem)]"
+              className="font-display font-bold leading-[1.1] tracking-tight mb-6 text-[clamp(1.5rem,4.2vw,3.25rem)]"
               style={{ perspective: "900px" }}
             >
+              <FitText>
               {[
                 { t: "Une", c: "" },
                 { t: "offre", c: "" },
@@ -296,7 +298,9 @@ function HomePage() {
                   {w.t}
                 </motion.span>
               ))}
+              </FitText>
             </h2>
+
 
             <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
               Du site vitrine à l'ERP métier, en passant par la gestion scolaire et l'infrastructure réseau.
