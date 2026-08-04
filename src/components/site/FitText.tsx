@@ -27,8 +27,8 @@ export function FitText({
     if (!available || !natural) return;
     const next = Math.max(min, Math.min(1, available / natural));
     setScale(next);
-    setHeight(inner.getBoundingClientRect().height / (scale || 1) * next);
-  }, [min, scale]);
+    setHeight(inner.offsetHeight * next);
+  }, [min]);
 
   useEffect(() => {
     measure();
