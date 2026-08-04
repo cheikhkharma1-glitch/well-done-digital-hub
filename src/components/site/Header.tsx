@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, LogIn, LogOut, User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.png.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import { ThemeToggle } from "./ThemeToggle";
@@ -82,7 +82,7 @@ export function Header() {
             )}
           >
             <img
-              src={logo}
+              src={logo.url}
               alt="Well Done Services Company"
               className={cn(
                 "w-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
