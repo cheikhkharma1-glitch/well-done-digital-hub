@@ -19,6 +19,10 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { FitText } from "@/components/site/FitText";
+import webImg from "@/assets/service-web.jpg";
+import softwareImg from "@/assets/service-software.jpg";
+import networkImg from "@/assets/service-network.jpg";
+import schoolImg from "@/assets/service-school.jpg";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
