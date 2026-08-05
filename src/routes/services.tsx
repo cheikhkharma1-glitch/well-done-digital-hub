@@ -19,6 +19,10 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { FitText } from "@/components/site/FitText";
+import webImg from "@/assets/service-web.jpg";
+import softwareImg from "@/assets/service-software.jpg";
+import networkImg from "@/assets/service-network.jpg";
+import schoolImg from "@/assets/service-school.jpg";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -40,6 +44,8 @@ const services = [
     title: "Développement Web",
     tag: "Web & Mobile",
     desc: "Sites et applications web modernes, rapides et orientés conversion.",
+    image: webImg,
+    alt: "Développeur front-end travaillant sur une interface e-commerce moderne",
     items: [
       "Sites vitrines & corporate",
       "E-commerce avec mobile money",
@@ -54,6 +60,8 @@ const services = [
     title: "Solutions logicielles",
     tag: "ERP / CRM",
     desc: "Logiciels métiers conçus pour vos processus réels.",
+    image: softwareImg,
+    alt: "Tableaux de bord ERP et CRM affichés sur plusieurs écrans",
     items: [
       "ERP — gestion intégrée",
       "CRM commercial & marketing",
@@ -68,6 +76,8 @@ const services = [
     title: "Maintenance & Réseaux",
     tag: "Infrastructure",
     desc: "Une infrastructure stable et sécurisée, supervisée par nos experts.",
+    image: networkImg,
+    alt: "Ingénieur réseau inspectant des baies de serveurs en datacenter",
     items: [
       "Maintenance informatique",
       "Gestion réseau & VPN",
@@ -82,6 +92,8 @@ const services = [
     title: "Gestion scolaire",
     tag: "EdTech",
     desc: "Une plateforme tout-en-un pour piloter votre établissement.",
+    image: schoolImg,
+    alt: "Plateforme de gestion scolaire présentée à des élèves en salle informatique",
     items: [
       "Gestion des élèves & inscriptions",
       "Notes & bulletins automatisés",
@@ -308,7 +320,7 @@ function ServicesPage() {
                 variants={fadeUp}
                 whileHover={prefersReduced ? undefined : { y: -8 }}
                 transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                className="group relative p-8 lg:p-10 rounded-3xl bg-gradient-card border border-border shadow-soft hover:shadow-elegant transition-all duration-500 overflow-hidden"
+                className="group relative rounded-3xl bg-gradient-card border border-border shadow-soft hover:shadow-elegant transition-all duration-500 overflow-hidden"
               >
                 {/* Glow blob */}
                 <div
@@ -318,20 +330,45 @@ function ServicesPage() {
                 {/* Top gradient bar */}
                 <div
                   aria-hidden
-                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${s.accent} scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out`}
+                  className={`absolute top-0 left-0 right-0 z-20 h-1 bg-gradient-to-r ${s.accent} scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out`}
                 />
 
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
+                {/* Visuel réel */}
+                <div className="relative h-48 lg:h-56 overflow-hidden">
+                  <img
+                    src={s.image}
+                    alt={s.alt}
+                    width={1280}
+                    height={720}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                  />
+                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0b1226]/95 via-[#0b1226]/45 to-transparent" />
+                  <div aria-hidden className={`absolute inset-0 mix-blend-overlay opacity-50 bg-gradient-to-br ${s.accent}`} />
+                  {!prefersReduced && (
+                    <motion.div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-0 h-16 opacity-0 group-hover:opacity-60"
+                      style={{ background: "linear-gradient(to bottom, transparent, rgb(6 182 212 / 0.45), transparent)" }}
+                      animate={{ y: ["-30%", "420%"] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                    />
+                  )}
+                  <div className="absolute inset-x-6 bottom-5 flex items-end justify-between gap-3">
                     <div
-                      className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${s.accent} text-white flex items-center justify-center shadow-glow transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}
+                      className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${s.accent} text-white flex items-center justify-center shadow-glow transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}
                     >
-                      <s.icon className="h-8 w-8" />
+                      <s.icon className="h-7 w-7" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground border border-border rounded-full px-3 py-1">
+                    <span className="rounded-full border border-white/30 bg-black/35 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur">
                       {s.tag}
                     </span>
                   </div>
+                </div>
+
+                <div className="relative p-8 lg:p-10">
+
 
                   <h3 className="font-display text-2xl lg:text-3xl font-bold mb-3">
                     {s.title}
