@@ -1,9 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Code2,
-  Database,
-  Network,
-  GraduationCap,
   Check,
   ArrowRight,
   Sparkles,
@@ -320,7 +316,8 @@ function ServicesPage() {
                   </ul>
 
                   <Link
-                    to="/contact"
+                    to="/services/$slug"
+                    params={{ slug: s.slug }}
                     className="inline-flex items-center gap-2 text-sm font-bold text-primary group/cta"
                   >
                     En savoir plus
