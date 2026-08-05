@@ -369,7 +369,6 @@ function ServicesPage() {
 
                 <div className="relative p-8 lg:p-10">
 
-                  </div>
 
                   <h3 className="font-display text-2xl lg:text-3xl font-bold mb-3">
                     {s.title}
