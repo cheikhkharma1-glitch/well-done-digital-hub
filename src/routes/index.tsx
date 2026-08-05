@@ -17,7 +17,7 @@ const CyberShield = lazy(() => import("@/components/site/CyberShield").then((m) 
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/hero-network.jpg";
 import ceoImg from "@/assets/ceo-kharma.png";
-import { FitText } from "@/components/site/FitText";
+import { Holo3DTitle } from "@/components/site/Holo3DTitle";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -111,24 +111,23 @@ function HomePage() {
                 <Sparkles className="h-3.5 w-3.5 text-[color:var(--cyber-cyan)]" />
                 <span>Acteur de la transformation digitale en Afrique</span>
               </motion.div>
-              <motion.h1
-                variants={fadeUp}
-                className="font-display text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-foreground leading-[1.05] mb-6"
-              >
-                Des solutions IT
-                <br />
-                <span className="relative inline-block">
-                  <span className="text-holo">qui transforment</span>
-                  <motion.span
-                    aria-hidden
-                    className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-cyber"
-                    initial={{ scaleX: 0, transformOrigin: "left" }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </span>{" "}
-                votre entreprise.
-              </motion.h1>
+              <motion.div variants={fadeUp}>
+                <Holo3DTitle
+                  as="h1"
+                  animateOnView={false}
+                  baseDelay={0.15}
+                  words={[
+                    { t: "Des" },
+                    { t: "solutions" },
+                    { t: "IT" },
+                    { t: "qui", c: "text-holo" },
+                    { t: "transforment", c: "text-holo" },
+                    { t: "votre" },
+                    { t: "entreprise." },
+                  ]}
+                  className="font-display font-extrabold text-primary-foreground leading-[1.05] mb-6 text-[clamp(1.75rem,5.2vw,4.25rem)]"
+                />
+              </motion.div>
               <motion.p variants={fadeUp} className="text-base lg:text-xl text-primary-foreground/85 max-w-2xl leading-relaxed mb-10">
                 Well Done Services Company conçoit et déploie des solutions web, logicielles et réseau sur mesure pour les PME, écoles, administrations et startups au Sénégal et en Afrique.
               </motion.p>
@@ -271,35 +270,18 @@ function HomePage() {
             className="max-w-5xl mb-16"
           >
             <p className="text-xs font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-[0.35em] mb-5">Nos expertises</p>
-            <h2
-              className="font-display font-bold leading-[1.1] tracking-tight mb-6 text-[clamp(1.5rem,4.2vw,3.25rem)]"
-              style={{ perspective: "900px" }}
-            >
-              <FitText>
-              {[
-                { t: "Une", c: "" },
-                { t: "offre", c: "" },
+            <Holo3DTitle
+              words={[
+                { t: "Une" },
+                { t: "offre" },
                 { t: "complète", c: "text-cyber" },
                 { t: "pour", c: "text-muted-foreground font-light" },
                 { t: "digitaliser", c: "text-muted-foreground font-light" },
                 { t: "votre", c: "text-muted-foreground font-light" },
                 { t: "activité.", c: "text-muted-foreground font-light" },
-              ].map((w, i) => (
-                <motion.span
-                  key={w.t}
-                  className={`inline-block mr-[0.25em] ${w.c}`}
-                  style={{ transformStyle: "preserve-3d" }}
-                  initial={{ opacity: 0, rotateX: -85, y: 18 }}
-                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ rotateX: 12, rotateY: -10, scale: 1.06 }}
-                >
-                  {w.t}
-                </motion.span>
-              ))}
-              </FitText>
-            </h2>
+              ]}
+              className="font-display font-bold leading-[1.1] tracking-tight mb-6 text-[clamp(1.5rem,4.2vw,3.25rem)]"
+            />
 
 
             <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">

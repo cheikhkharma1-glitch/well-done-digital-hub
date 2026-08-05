@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProfilRouteImport } from './routes/profil'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -17,9 +16,11 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as RealisationsIndexRouteImport } from './routes/realisations.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
 import { Route as BlogAssistantRouteImport } from './routes/blog.assistant'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -35,11 +36,6 @@ import { Route as BlogAssistantThreadIdRouteImport } from './routes/blog.assista
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProfilRoute = ProfilRouteImport.update({
   id: '/profil',
   path: '/profil',
@@ -75,6 +71,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RealisationsIndexRoute = RealisationsIndexRouteImport.update({
   id: '/realisations/',
   path: '/realisations/',
@@ -89,6 +90,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
   id: '/realisations/$slug',
@@ -172,7 +178,6 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
-  '/services': typeof ServicesRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
@@ -183,9 +188,11 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
+  '/services/': typeof ServicesIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
@@ -198,7 +205,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
-  '/services': typeof ServicesRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
@@ -208,9 +214,11 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/realisations': typeof RealisationsIndexRoute
+  '/services': typeof ServicesIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
@@ -225,7 +233,6 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
-  '/services': typeof ServicesRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
@@ -236,9 +243,11 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
+  '/services/': typeof ServicesIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/blog/assistant/$threadId': typeof BlogAssistantThreadIdRoute
@@ -254,7 +263,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/mcp'
     | '/profil'
-    | '/services'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
@@ -265,9 +273,11 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/assistant'
     | '/realisations/$slug'
+    | '/services/$slug'
     | '/admin/'
     | '/blog/'
     | '/realisations/'
+    | '/services/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/blog/assistant/$threadId'
@@ -280,7 +290,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/mcp'
     | '/profil'
-    | '/services'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
@@ -290,9 +299,11 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/$slug'
     | '/realisations/$slug'
+    | '/services/$slug'
     | '/admin'
     | '/blog'
     | '/realisations'
+    | '/services'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/blog/assistant/$threadId'
@@ -306,7 +317,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/mcp'
     | '/profil'
-    | '/services'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
@@ -317,9 +327,11 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/assistant'
     | '/realisations/$slug'
+    | '/services/$slug'
     | '/admin/'
     | '/blog/'
     | '/realisations/'
+    | '/services/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/blog/assistant/$threadId'
@@ -334,28 +346,22 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   McpRoute: typeof McpRoute
   ProfilRoute: typeof ProfilRoute
-  ServicesRoute: typeof ServicesRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogAssistantRoute: typeof BlogAssistantRouteWithChildren
   RealisationsSlugRoute: typeof RealisationsSlugRoute
+  ServicesSlugRoute: typeof ServicesSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   RealisationsIndexRoute: typeof RealisationsIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/profil': {
       id: '/profil'
       path: '/profil'
@@ -405,6 +411,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/realisations/': {
       id: '/realisations/'
       path: '/realisations'
@@ -425,6 +438,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/realisations/$slug': {
       id: '/realisations/$slug'
@@ -567,7 +587,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   McpRoute: McpRoute,
   ProfilRoute: ProfilRoute,
-  ServicesRoute: ServicesRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
@@ -575,8 +594,10 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   BlogAssistantRoute: BlogAssistantRouteWithChildren,
   RealisationsSlugRoute: RealisationsSlugRoute,
+  ServicesSlugRoute: ServicesSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   RealisationsIndexRoute: RealisationsIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }

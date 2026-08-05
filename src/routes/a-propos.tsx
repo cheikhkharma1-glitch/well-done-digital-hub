@@ -3,7 +3,7 @@ import { Target, Eye, Heart, Award, Quote } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { FitText } from "@/components/site/FitText";
+import { Holo3DTitle } from "@/components/site/Holo3DTitle";
 import portraitFounder from "@/assets/portrait-founder.png";
 
 
@@ -31,36 +31,21 @@ function AboutPage() {
       <section className="py-20 lg:py-28 bg-gradient-hero text-primary-foreground">
         <div className="container mx-auto px-4 lg:px-8">
           <p className="text-sm font-semibold text-primary-glow uppercase tracking-wider mb-3">À propos</p>
-          <h1
-            className="font-display font-extrabold mb-6 max-w-4xl"
-            style={{ perspective: "900px" }}
-          >
-            <FitText>
-              {[
-                { t: "Bâtir", c: "" },
-                { t: "l'Afrique", c: "" },
-                { t: "digitale,", c: "text-holo" },
-                { t: "un", c: "" },
-                { t: "projet", c: "" },
-                { t: "à", c: "" },
-                { t: "la", c: "" },
-                { t: "fois.", c: "text-gradient" },
-              ].map((w, i) => (
-                <motion.span
-                  key={w.t}
-                  className={`inline-block mr-[0.25em] ${w.c}`}
-                  style={{ transformStyle: "preserve-3d" }}
-                  initial={{ opacity: 0, rotateX: -85, y: 18 }}
-                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ rotateX: 12, rotateY: -10, scale: 1.06 }}
-                >
-                  {w.t}
-                </motion.span>
-              ))}
-            </FitText>
-          </h1>
+          <Holo3DTitle
+            as="h1"
+            animateOnView={false}
+            words={[
+              { t: "Bâtir" },
+              { t: "l'Afrique" },
+              { t: "digitale,", c: "text-holo" },
+              { t: "un" },
+              { t: "projet" },
+              { t: "à" },
+              { t: "la" },
+              { t: "fois.", c: "text-gradient" },
+            ]}
+            className="font-display font-extrabold mb-6 max-w-4xl text-[clamp(1.6rem,5vw,3.5rem)]"
+          />
 
           <p className="text-lg text-primary-foreground/80 max-w-2xl">
             Well Done Services Company SARL est une société sénégalaise spécialisée dans les solutions IT et digitales. Depuis plus de 5 ans, nous accompagnons nos clients dans leur transformation numérique.
@@ -133,9 +118,18 @@ function AboutPage() {
               className="lg:col-span-7"
             >
               <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Le mot du fondateur</p>
-              <h2 className="font-display text-3xl lg:text-5xl font-extrabold leading-tight mb-6">
-                Une vision claire, une exécution <span className="text-gradient">sans compromis</span>.
-              </h2>
+              <Holo3DTitle
+                words={[
+                  { t: "Une" },
+                  { t: "vision" },
+                  { t: "claire,", c: "text-holo" },
+                  { t: "une" },
+                  { t: "exécution" },
+                  { t: "sans", c: "text-gradient" },
+                  { t: "compromis.", c: "text-gradient" },
+                ]}
+                className="font-display font-extrabold leading-tight mb-6 text-[clamp(1.4rem,4vw,3rem)]"
+              />
               <div className="relative pl-6 border-l-4 border-primary/70 mb-6">
                 <Quote className="absolute -left-3 -top-2 h-6 w-6 text-primary bg-background" />
                 <p className="text-lg text-muted-foreground leading-relaxed italic">
@@ -186,7 +180,17 @@ function AboutPage() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="rounded-3xl bg-surface p-10 lg:p-16 border border-border">
             <div className="max-w-2xl">
-              <h2 className="font-display text-3xl lg:text-4xl font-bold mb-5">Pourquoi choisir Well Done Services ?</h2>
+              <Holo3DTitle
+                words={[
+                  { t: "Pourquoi" },
+                  { t: "choisir", c: "text-holo" },
+                  { t: "Well" },
+                  { t: "Done" },
+                  { t: "Services", c: "text-gradient" },
+                  { t: "?" },
+                ]}
+                className="font-display font-bold mb-5 text-[clamp(1.3rem,3.8vw,2.25rem)]"
+              />
               <ul className="space-y-3 text-muted-foreground">
                 <li>✓ Une équipe locale basée à Dakar, qui comprend votre contexte.</li>
                 <li>✓ Plus de 50 projets livrés avec 98% de satisfaction client.</li>

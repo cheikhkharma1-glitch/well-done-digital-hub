@@ -1,9 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Code2,
-  Database,
-  Network,
-  GraduationCap,
   Check,
   ArrowRight,
   Sparkles,
@@ -18,13 +14,10 @@ import {
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { FitText } from "@/components/site/FitText";
-import webImg from "@/assets/service-web.jpg";
-import softwareImg from "@/assets/service-software.jpg";
-import networkImg from "@/assets/service-network.jpg";
-import schoolImg from "@/assets/service-school.jpg";
+import { Holo3DTitle } from "@/components/site/Holo3DTitle";
+import { services } from "@/lib/services-data";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: "Nos services IT — Well Done Services Company" },
@@ -38,72 +31,6 @@ export const Route = createFileRoute("/services")({
   component: ServicesPage,
 });
 
-const services = [
-  {
-    icon: Code2,
-    title: "Développement Web",
-    tag: "Web & Mobile",
-    desc: "Sites et applications web modernes, rapides et orientés conversion.",
-    image: webImg,
-    alt: "Développeur front-end travaillant sur une interface e-commerce moderne",
-    items: [
-      "Sites vitrines & corporate",
-      "E-commerce avec mobile money",
-      "Applications web sur mesure",
-      "Landing pages haute conversion",
-    ],
-    accent: "from-amber-400 to-amber-600",
-    glow: "bg-amber-500/20",
-  },
-  {
-    icon: Database,
-    title: "Solutions logicielles",
-    tag: "ERP / CRM",
-    desc: "Logiciels métiers conçus pour vos processus réels.",
-    image: softwareImg,
-    alt: "Tableaux de bord ERP et CRM affichés sur plusieurs écrans",
-    items: [
-      "ERP — gestion intégrée",
-      "CRM commercial & marketing",
-      "Logiciels métiers personnalisés",
-      "Solutions SaaS multi-clients",
-    ],
-    accent: "from-primary to-primary-glow",
-    glow: "bg-primary/20",
-  },
-  {
-    icon: Network,
-    title: "Maintenance & Réseaux",
-    tag: "Infrastructure",
-    desc: "Une infrastructure stable et sécurisée, supervisée par nos experts.",
-    image: networkImg,
-    alt: "Ingénieur réseau inspectant des baies de serveurs en datacenter",
-    items: [
-      "Maintenance informatique",
-      "Gestion réseau & VPN",
-      "Support technique réactif",
-      "Audit & cybersécurité",
-    ],
-    accent: "from-emerald-400 to-teal-600",
-    glow: "bg-emerald-500/20",
-  },
-  {
-    icon: GraduationCap,
-    title: "Gestion scolaire",
-    tag: "EdTech",
-    desc: "Une plateforme tout-en-un pour piloter votre établissement.",
-    image: schoolImg,
-    alt: "Plateforme de gestion scolaire présentée à des élèves en salle informatique",
-    items: [
-      "Gestion des élèves & inscriptions",
-      "Notes & bulletins automatisés",
-      "Communication parents-école",
-      "Statistiques & tableaux de bord",
-    ],
-    accent: "from-fuchsia-400 to-purple-600",
-    glow: "bg-fuchsia-500/20",
-  },
-];
 
 const benefits = [
   { icon: Rocket, label: "Mise en production rapide", value: "2–6 sem." },
@@ -180,49 +107,25 @@ function ServicesPage() {
               </span>
             </motion.div>
 
-            <motion.h1
-              variants={fadeUp}
-              className="font-display font-extrabold leading-[1.05] mb-6 text-[clamp(1.5rem,3.6vw,3.75rem)]"
-              style={{ perspective: "1000px" }}
-            >
-              <FitText>
-              {["Une", "expertise", "IT", "à", "360°", "pour", "faire", "grandir", "votre", "activité."].map(
-                (word, i) => {
-                  const isGold = word === "360°";
-                  return (
-                    <motion.span
-                      key={word + i}
-                      className="inline-block mr-[0.24em] relative"
-                      style={{ transformStyle: "preserve-3d" }}
-                      initial={{ opacity: 0, rotateX: -88, y: 22 }}
-                      animate={{ opacity: 1, rotateX: 0, y: 0 }}
-                      transition={{ duration: 0.65, delay: 0.15 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                      whileHover={{ rotateX: 14, rotateY: -12, scale: 1.08, z: 40 }}
-                    >
-                      <span
-                        className={
-                          isGold
-                            ? "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_0_18px_rgba(251,191,36,0.35)]"
-                            : ""
-                        }
-                      >
-                        {word}
-                      </span>
-                      {isGold && (
-                        <motion.span
-                          aria-hidden
-                          className="absolute -bottom-1 left-0 right-0 h-[0.08em] rounded-full bg-gradient-to-r from-amber-300 to-amber-600"
-                          initial={{ scaleX: 0, transformOrigin: "left" }}
-                          animate={{ scaleX: 1 }}
-                          transition={{ duration: 1, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                        />
-                      )}
-                    </motion.span>
-                  );
-                },
-              )}
-              </FitText>
-            </motion.h1>
+            <motion.div variants={fadeUp}>
+              <Holo3DTitle
+                as="h1"
+                animateOnView={false}
+                words={[
+                  { t: "Une" },
+                  { t: "expertise" },
+                  { t: "IT" },
+                  { t: "à" },
+                  { t: "360°", c: "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 bg-clip-text text-transparent" },
+                  { t: "pour" },
+                  { t: "faire" },
+                  { t: "grandir" },
+                  { t: "votre" },
+                  { t: "activité." },
+                ]}
+                className="font-display font-extrabold leading-[1.05] mb-6 text-[clamp(1.5rem,3.6vw,3.75rem)]"
+              />
+            </motion.div>
 
 
             <motion.p
@@ -389,7 +292,8 @@ function ServicesPage() {
                   </ul>
 
                   <Link
-                    to="/contact"
+                    to="/services/$slug"
+                    params={{ slug: s.slug }}
                     className="inline-flex items-center gap-2 text-sm font-bold text-primary group/cta"
                   >
                     En savoir plus
