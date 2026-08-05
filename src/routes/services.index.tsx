@@ -19,12 +19,9 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { FitText } from "@/components/site/FitText";
-import webImg from "@/assets/service-web.jpg";
-import softwareImg from "@/assets/service-software.jpg";
-import networkImg from "@/assets/service-network.jpg";
-import schoolImg from "@/assets/service-school.jpg";
+import { services } from "@/lib/services-data";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: "Nos services IT — Well Done Services Company" },
@@ -38,72 +35,6 @@ export const Route = createFileRoute("/services")({
   component: ServicesPage,
 });
 
-const services = [
-  {
-    icon: Code2,
-    title: "Développement Web",
-    tag: "Web & Mobile",
-    desc: "Sites et applications web modernes, rapides et orientés conversion.",
-    image: webImg,
-    alt: "Développeur front-end travaillant sur une interface e-commerce moderne",
-    items: [
-      "Sites vitrines & corporate",
-      "E-commerce avec mobile money",
-      "Applications web sur mesure",
-      "Landing pages haute conversion",
-    ],
-    accent: "from-amber-400 to-amber-600",
-    glow: "bg-amber-500/20",
-  },
-  {
-    icon: Database,
-    title: "Solutions logicielles",
-    tag: "ERP / CRM",
-    desc: "Logiciels métiers conçus pour vos processus réels.",
-    image: softwareImg,
-    alt: "Tableaux de bord ERP et CRM affichés sur plusieurs écrans",
-    items: [
-      "ERP — gestion intégrée",
-      "CRM commercial & marketing",
-      "Logiciels métiers personnalisés",
-      "Solutions SaaS multi-clients",
-    ],
-    accent: "from-primary to-primary-glow",
-    glow: "bg-primary/20",
-  },
-  {
-    icon: Network,
-    title: "Maintenance & Réseaux",
-    tag: "Infrastructure",
-    desc: "Une infrastructure stable et sécurisée, supervisée par nos experts.",
-    image: networkImg,
-    alt: "Ingénieur réseau inspectant des baies de serveurs en datacenter",
-    items: [
-      "Maintenance informatique",
-      "Gestion réseau & VPN",
-      "Support technique réactif",
-      "Audit & cybersécurité",
-    ],
-    accent: "from-emerald-400 to-teal-600",
-    glow: "bg-emerald-500/20",
-  },
-  {
-    icon: GraduationCap,
-    title: "Gestion scolaire",
-    tag: "EdTech",
-    desc: "Une plateforme tout-en-un pour piloter votre établissement.",
-    image: schoolImg,
-    alt: "Plateforme de gestion scolaire présentée à des élèves en salle informatique",
-    items: [
-      "Gestion des élèves & inscriptions",
-      "Notes & bulletins automatisés",
-      "Communication parents-école",
-      "Statistiques & tableaux de bord",
-    ],
-    accent: "from-fuchsia-400 to-purple-600",
-    glow: "bg-fuchsia-500/20",
-  },
-];
 
 const benefits = [
   { icon: Rocket, label: "Mise en production rapide", value: "2–6 sem." },
