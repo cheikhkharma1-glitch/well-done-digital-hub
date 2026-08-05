@@ -36,35 +36,17 @@ export function Timeline3D() {
           <p className="text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
             Méthodologie
           </p>
-          <h2
-            id="timeline-heading"
-            className="font-display font-bold leading-tight mb-6 text-[clamp(1.5rem,4.2vw,3rem)]"
-            style={{ perspective: "900px" }}
-          >
-            <FitText>
-            {[
-              { t: "La", c: "" },
+          <Holo3DTitle
+            words={[
+              { t: "La" },
               { t: "transformation", c: "text-holo" },
               { t: "digitale,", c: "text-holo" },
-              { t: "en", c: "" },
-              { t: "5", c: "" },
-              { t: "étapes.", c: "" },
-            ].map((w, i) => (
-              <motion.span
-                key={w.t}
-                className={`inline-block mr-[0.25em] ${w.c}`}
-                style={{ transformStyle: "preserve-3d" }}
-                initial={{ opacity: 0, rotateX: -85, y: 18 }}
-                whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                viewport={{ once: true, amount: 0.6 }}
-                transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ rotateX: 12, rotateY: -10, scale: 1.06 }}
-              >
-                {w.t}
-              </motion.span>
-            ))}
-            </FitText>
-          </h2>
+              { t: "en" },
+              { t: "5" },
+              { t: "étapes." },
+            ]}
+            className="font-display font-bold leading-tight mb-6 text-[clamp(1.5rem,4.2vw,3rem)]"
+          />
 
 
           <p className="text-white/75 text-base lg:text-lg leading-relaxed">
