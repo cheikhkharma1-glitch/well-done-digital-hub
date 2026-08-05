@@ -44,6 +44,8 @@ const services = [
     title: "Développement Web",
     tag: "Web & Mobile",
     desc: "Sites et applications web modernes, rapides et orientés conversion.",
+    image: webImg,
+    alt: "Développeur front-end travaillant sur une interface e-commerce moderne",
     items: [
       "Sites vitrines & corporate",
       "E-commerce avec mobile money",
@@ -58,6 +60,8 @@ const services = [
     title: "Solutions logicielles",
     tag: "ERP / CRM",
     desc: "Logiciels métiers conçus pour vos processus réels.",
+    image: softwareImg,
+    alt: "Tableaux de bord ERP et CRM affichés sur plusieurs écrans",
     items: [
       "ERP — gestion intégrée",
       "CRM commercial & marketing",
@@ -72,6 +76,8 @@ const services = [
     title: "Maintenance & Réseaux",
     tag: "Infrastructure",
     desc: "Une infrastructure stable et sécurisée, supervisée par nos experts.",
+    image: networkImg,
+    alt: "Ingénieur réseau inspectant des baies de serveurs en datacenter",
     items: [
       "Maintenance informatique",
       "Gestion réseau & VPN",
@@ -86,6 +92,8 @@ const services = [
     title: "Gestion scolaire",
     tag: "EdTech",
     desc: "Une plateforme tout-en-un pour piloter votre établissement.",
+    image: schoolImg,
+    alt: "Plateforme de gestion scolaire présentée à des élèves en salle informatique",
     items: [
       "Gestion des élèves & inscriptions",
       "Notes & bulletins automatisés",
