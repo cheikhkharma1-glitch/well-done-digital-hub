@@ -15,19 +15,26 @@ export function FitText({
 }) {
   const outerRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
+  const rafRef = useRef<number | null>(null);
   const [scale, setScale] = useState(1);
   const [height, setHeight] = useState<number | undefined>(undefined);
 
   const measure = useCallback(() => {
-    const outer = outerRef.current;
-    const inner = innerRef.current;
-    if (!outer || !inner) return;
-    const available = outer.clientWidth;
-    const natural = inner.scrollWidth;
-    if (!available || !natural) return;
-    const next = Math.max(min, Math.min(1, available / natural));
-    setScale(next);
-    setHeight(inner.offsetHeight * next);
+    // Throttle to one measurement per frame: avoids layout thrashing
+    // (and visible jank) on low-end phones during resize / font load.
+    if (rafRef.current !== null) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      const outer = outerRef.current;
+      const inner = innerRef.current;
+      if (!outer || !inner) return;
+      const available = outer.clientWidth;
+      const natural = inner.scrollWidth;
+      if (!available || !natural) return;
+      const next = Math.max(min, Math.min(1, available / natural));
+      setScale((prev) => (Math.abs(prev - next) < 0.002 ? prev : next));
+      setHeight(inner.offsetHeight * next);
+    });
   }, [min]);
 
   useEffect(() => {
@@ -36,13 +43,13 @@ export function FitText({
     if (!outer || typeof ResizeObserver === "undefined") return;
     const ro = new ResizeObserver(() => measure());
     ro.observe(outer);
-    if (innerRef.current) ro.observe(innerRef.current);
     window.addEventListener("resize", measure, { passive: true });
     const t = window.setTimeout(measure, 300);
     return () => {
       ro.disconnect();
       window.removeEventListener("resize", measure);
       window.clearTimeout(t);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,8 +62,8 @@ export function FitText({
     >
       <span
         ref={innerRef}
-        className="inline-block whitespace-nowrap origin-top-left"
-        style={{ transform: `scale(${scale})` }}
+        className="inline-block whitespace-nowrap origin-top-left [backface-visibility:hidden]"
+        style={{ transform: `scale(${scale}) translateZ(0)` }}
       >
         {children}
       </span>
