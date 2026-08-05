@@ -20,6 +20,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RealisationsIndexRouteImport } from './routes/realisations.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
 import { Route as BlogAssistantRouteImport } from './routes/blog.assistant'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -89,6 +90,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ServicesRoute,
 } as any)
 const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
   id: '/realisations/$slug',
@@ -172,7 +178,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
@@ -183,6 +189,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
@@ -198,7 +205,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
@@ -208,6 +215,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/realisations': typeof RealisationsIndexRoute
@@ -225,7 +233,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/mcp': typeof McpRoute
   '/profil': typeof ProfilRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
@@ -236,6 +244,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/realisations/': typeof RealisationsIndexRoute
@@ -265,6 +274,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/assistant'
     | '/realisations/$slug'
+    | '/services/$slug'
     | '/admin/'
     | '/blog/'
     | '/realisations/'
@@ -290,6 +300,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/$slug'
     | '/realisations/$slug'
+    | '/services/$slug'
     | '/admin'
     | '/blog'
     | '/realisations'
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/assistant'
     | '/realisations/$slug'
+    | '/services/$slug'
     | '/admin/'
     | '/blog/'
     | '/realisations/'
@@ -334,7 +346,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   McpRoute: typeof McpRoute
   ProfilRoute: typeof ProfilRoute
-  ServicesRoute: typeof ServicesRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -425,6 +437,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof ServicesRoute
     }
     '/realisations/$slug': {
       id: '/realisations/$slug'
@@ -545,6 +564,18 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface ServicesRouteChildren {
+  ServicesSlugRoute: typeof ServicesSlugRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesSlugRoute: ServicesSlugRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 interface BlogAssistantRouteChildren {
   BlogAssistantThreadIdRoute: typeof BlogAssistantThreadIdRoute
   BlogAssistantIndexRoute: typeof BlogAssistantIndexRoute
@@ -567,7 +598,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   McpRoute: McpRoute,
   ProfilRoute: ProfilRoute,
-  ServicesRoute: ServicesRoute,
+  ServicesRoute: ServicesRouteWithChildren,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,

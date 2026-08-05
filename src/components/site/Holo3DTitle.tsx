@@ -68,9 +68,6 @@ export function Holo3DTitle({
               ease: [0.22, 1, 0.36, 1],
             }}
             whileHover={light ? undefined : { rotateX: 12, rotateY: -10, scale: 1.06 }}
-            onAnimationComplete={(def) => {
-              void def;
-            }}
           >
             {w.t}
           </motion.span>
