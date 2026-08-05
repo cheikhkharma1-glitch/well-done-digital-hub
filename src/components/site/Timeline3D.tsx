@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Search, Compass, Hammer, Rocket, LifeBuoy, ArrowRight } from "lucide-react";
 import { useMotionPref } from "@/hooks/useMotionPref";
-import { FitText } from "@/components/site/FitText";
+import { Holo3DTitle } from "@/components/site/Holo3DTitle";
 
 const steps = [
   { icon: Search, title: "Audit & découverte", desc: "Nous cartographions vos processus, votre stack et vos objectifs business.", kpi: "S1 · 2 semaines" },
@@ -26,7 +26,7 @@ export function Timeline3D() {
     <section
       ref={rootRef}
       className="relative overflow-hidden bg-[#0b1226] py-24 lg:py-32 text-white"
-      aria-labelledby="timeline-heading"
+      aria-label="La transformation digitale en 5 étapes"
     >
       <div aria-hidden className="absolute inset-0 bg-gradient-mesh opacity-40" />
       <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-25 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]" />
