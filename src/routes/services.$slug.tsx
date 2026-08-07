@@ -9,11 +9,13 @@ import {
   Sparkles,
   Cpu,
   Target,
+  MessageCircle,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { Holo3DTitle } from "@/components/site/Holo3DTitle";
 import { services, getService } from "@/lib/services-data";
+import { WHATSAPP_NUMBER } from "@/routes/contact";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
