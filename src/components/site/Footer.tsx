@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
         <div>
           <div className="bg-background/95 rounded-lg p-3 inline-flex items-center justify-center mb-4">
             <img
-              src={logo.url}
+              src={logo}
               alt="Well Done Services Company"
               className="w-auto h-auto object-contain max-w-[160px] sm:max-w-[200px] lg:max-w-[260px] h-10 sm:h-12 lg:h-14"
             />
