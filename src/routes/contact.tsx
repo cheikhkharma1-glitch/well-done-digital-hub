@@ -36,8 +36,7 @@ const schema = z.object({
   message: z.string().trim().min(20, "Message trop court (20 caractères min.)").max(4000),
 });
 
-// 🔧 Mettez à jour ce numéro WhatsApp au format international sans "+" (ex: 221771234567)
-const WHATSAPP_NUMBER = "221000000000";
+export const WHATSAPP_NUMBER = "221000000000";
 
 const types = ["Site web", "E-commerce", "ERP / CRM", "Gestion scolaire", "Maintenance & réseau", "Autre"];
 const perks = [

@@ -9,11 +9,13 @@ import {
   Sparkles,
   Cpu,
   Target,
+  MessageCircle,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { Holo3DTitle } from "@/components/site/Holo3DTitle";
 import { services, getService } from "@/lib/services-data";
+import { WHATSAPP_NUMBER } from "@/routes/contact";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -72,6 +74,11 @@ function ServiceDetailPage() {
     c: i === 0 ? "text-holo" : "",
   }));
 
+  const whatsappText = encodeURIComponent(
+    `Bonjour Well Done Services,\n\nJe suis intéressé par votre service *${service.title}*.\nMes besoins : [décrivez vos besoins ici].\n\nPouvez-vous me recontacter pour affiner mon projet ?\nMerci.`,
+  );
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappText}`;
+
   return (
     <SiteLayout>
       {/* HERO */}
@@ -127,6 +134,16 @@ function ServiceDetailPage() {
             </Button>
             <Button asChild size="lg" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 hover:text-white">
               <Link to="/realisations">Voir nos réalisations</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="bg-transparent border-emerald-400/40 text-emerald-300 hover:bg-emerald-500/10 hover:text-emerald-200 hover:border-emerald-400 transition-all"
+            >
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-1.5 h-4 w-4" /> Demander sur WhatsApp
+              </a>
             </Button>
           </div>
 
@@ -305,6 +322,16 @@ function ServiceDetailPage() {
                 <Link to="/contact">
                   Demander un devis <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="bg-transparent border-emerald-400/40 text-emerald-300 hover:bg-emerald-500/10 hover:text-emerald-200 hover:border-emerald-400 transition-all"
+              >
+                <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="mr-1.5 h-4 w-4" /> Demander sur WhatsApp
+                </a>
               </Button>
             </div>
           </div>
