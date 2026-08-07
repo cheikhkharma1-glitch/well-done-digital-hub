@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import { Sparkles, ArrowUpRight, Calendar, Tag, Search, Terminal, Clock, BookOpen } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { TechNewsFeed } from "@/components/site/TechNewsFeed";
 import { supabase } from "@/integrations/supabase/client";
 
 const SITE_URL = "https://well-done-digital-hub.lovable.app";
