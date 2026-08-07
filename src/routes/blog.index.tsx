@@ -387,6 +387,9 @@ function BlogIndex() {
           )}
         </div>
       </section>
+
+      {/* VEILLE TECH TEMPS RÉEL */}
+      <TechNewsFeed />
     </SiteLayout>
   );
 }
