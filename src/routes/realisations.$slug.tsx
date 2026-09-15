@@ -4,8 +4,25 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import terangaBridgeLogo from "@/assets/teranga-bridge-africa-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/realisations/$slug")({
+  head: () => ({
+    meta: [
+      { title: "Étude de cas digitale — Well Done Services Company" },
+      {
+        name: "description",
+        content: "Découvrez une réalisation web professionnelle conçue par Well Done Services Company.",
+      },
+      { property: "og:title", content: "Étude de cas digitale — Well Done Services Company" },
+      {
+        property: "og:description",
+        content: "Conception web, expérience utilisateur et valorisation d’une entreprise ambitieuse.",
+      },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: ProjectPage,
   notFoundComponent: () => (
     <SiteLayout>
@@ -29,6 +46,20 @@ type Project = {
   project_url: string | null;
 };
 
+const TERANGA_BRIDGE_PROJECT: Project = {
+  id: "teranga-bridge-africa",
+  title: "Site web Teranga Bridge Africa",
+  description:
+    "Création d’une présence digitale professionnelle pour présenter l’entreprise, valoriser son expertise dans la fourniture de matières premières et faciliter les échanges commerciaux entre partenaires africains et internationaux.",
+  category: "Web & Commerce",
+  image_url: terangaBridgeLogo.url,
+  technologies: ["React", "Design UX/UI", "SEO", "Responsive"],
+  results:
+    "Une image de marque renforcée, une présentation claire des offres et un parcours de contact fluide pour les demandes commerciales B2B.",
+  client_name: "Teranga Bridge Africa",
+  project_url: null,
+};
+
 function ProjectPage() {
   const { slug } = Route.useParams();
   const [project, setProject] = useState<Project | null>(null);
@@ -42,7 +73,7 @@ function ProjectPage() {
       .eq("published", true)
       .maybeSingle()
       .then(({ data }) => {
-        setProject(data);
+        setProject(data ?? (slug === "teranga-bridge-africa" ? TERANGA_BRIDGE_PROJECT : null));
         setLoading(false);
       });
   }, [slug]);
@@ -62,8 +93,12 @@ function ProjectPage() {
           <p className="text-lg text-muted-foreground leading-relaxed mb-10">{project.description}</p>
 
           {project.image_url && (
-            <div className="rounded-2xl overflow-hidden border border-border mb-10">
-              <img src={project.image_url} alt={project.title} className="w-full" />
+            <div className={`rounded-2xl overflow-hidden border border-border mb-10 ${project.id === "teranga-bridge-africa" ? "bg-foreground p-10 sm:p-16" : ""}`}>
+              <img
+                src={project.image_url}
+                alt={`Logo et identité visuelle de ${project.client_name ?? project.title}`}
+                className={project.id === "teranga-bridge-africa" ? "mx-auto w-full max-w-xl object-contain" : "w-full"}
+              />
             </div>
           )}
 

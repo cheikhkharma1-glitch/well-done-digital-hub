@@ -21,6 +21,7 @@ import {
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import terangaBridgeLogo from "@/assets/teranga-bridge-africa-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/realisations/")({
   head: () => ({
@@ -31,6 +32,13 @@ export const Route = createFileRoute("/realisations/")({
         content:
           "Découvrez nos projets : plateformes de gestion scolaire, ERP, CRM, sites web et applications développés au Sénégal.",
       },
+      { property: "og:title", content: "Réalisations & portfolio — Well Done Services Company" },
+      {
+        property: "og:description",
+        content: "Sites web, plateformes métier et solutions digitales conçus pour des entreprises ambitieuses.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: PortfolioPage,
@@ -49,6 +57,8 @@ type Project = {
   duration?: string;
   kpis?: { label: string; value: string }[];
   highlights?: string[];
+  featured?: boolean;
+  imageFit?: "cover" | "contain";
 };
 
 
@@ -61,7 +71,34 @@ const stats = [
 
 // Portfolio de démonstration (affiché si la table `projects` est vide)
 // Images IT réelles servies par Unsplash (libres de droits).
+const TERANGA_BRIDGE_PROJECT: Project = {
+  id: "teranga-bridge-africa",
+  slug: "teranga-bridge-africa",
+  title: "Site web Teranga Bridge Africa",
+  description:
+    "Conception d’une vitrine digitale professionnelle pour une entreprise spécialisée dans la fourniture et la mise en relation autour des matières premières africaines.",
+  category: "Web & Commerce",
+  image_url: terangaBridgeLogo.url,
+  imageFit: "contain",
+  featured: true,
+  technologies: ["React", "Design UX/UI", "SEO", "Responsive"],
+  client: "Teranga Bridge Africa",
+  year: "2026",
+  duration: "8 semaines",
+  kpis: [
+    { label: "Présence digitale", value: "360°" },
+    { label: "Marchés ciblés", value: "B2B" },
+    { label: "Mobile", value: "100%" },
+  ],
+  highlights: [
+    "Catalogue clair des matières premières",
+    "Demandes de devis et prises de contact simplifiées",
+    "Identité panafricaine valorisée avec professionnalisme",
+  ],
+};
+
 const DEMO_PROJECTS: Project[] = [
+  TERANGA_BRIDGE_PROJECT,
   {
     id: "demo-1",
     slug: "plateforme-gestion-scolaire",
@@ -261,7 +298,11 @@ function PortfolioPage() {
       .order("display_order", { ascending: true })
       .then(({ data }) => {
         const list = data ?? [];
-        setProjects(list.length ? list : DEMO_PROJECTS);
+        setProjects(
+          list.length
+            ? [TERANGA_BRIDGE_PROJECT, ...list.filter((project) => project.slug !== TERANGA_BRIDGE_PROJECT.slug)]
+            : DEMO_PROJECTS,
+        );
         setLoading(false);
       });
   }, []);
@@ -531,13 +572,13 @@ function PortfolioPage() {
                         className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[oklch(0.82_0.16_210)] to-[oklch(0.62_0.2_255)] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out z-10"
                       />
 
-                      <div className="aspect-[4/3] bg-gradient-primary relative overflow-hidden">
+                      <div className={`aspect-[4/3] relative overflow-hidden ${p.imageFit === "contain" ? "bg-foreground" : "bg-gradient-primary"}`}>
                         {p.image_url ? (
                           <img
                             src={p.image_url}
                             alt={p.title}
-                            loading="lazy"
-                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                            loading={p.featured ? "eager" : "lazy"}
+                            className={`w-full h-full transition-transform duration-700 ease-out group-hover:scale-105 ${p.imageFit === "contain" ? "object-contain p-8 sm:p-10" : "object-cover"}`}
                           />
                         ) : (
                           <div className="absolute inset-0 bg-gradient-primary flex items-center justify-center">
@@ -553,6 +594,12 @@ function PortfolioPage() {
                         <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-sm text-[10px] font-bold uppercase tracking-widest text-foreground shadow-md">
                           {p.category}
                         </span>
+
+                        {p.featured && (
+                          <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full border border-primary-glow/30 bg-background/95 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary shadow-md backdrop-blur-sm">
+                            <Sparkles className="h-3 w-3 text-primary-glow" /> Projet à la une
+                          </span>
+                        )}
 
                         {/* Hover arrow */}
                         <div className="absolute top-4 right-4 h-10 w-10 rounded-full bg-gradient-cyber text-white flex items-center justify-center shadow-glow translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
