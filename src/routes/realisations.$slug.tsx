@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { Holo3DTitle } from "@/components/site/Holo3DTitle";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import terangaBridgeLogo from "@/assets/teranga-bridge-africa-logo.jpg.asset.json";
@@ -94,9 +95,48 @@ function ProjectPage() {
           <Link to="/realisations" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8">
             <ArrowLeft className="h-4 w-4" /> Retour au portfolio
           </Link>
-          <p className="text-sm font-semibold text-primary-glow uppercase tracking-wider mb-3">{project.category}</p>
-          <h1 className="font-display text-4xl lg:text-6xl font-extrabold mb-6">{project.title}</h1>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-10">{project.description}</p>
+          <header className="relative mb-12 overflow-hidden border-y border-border py-8 sm:py-10">
+            <div aria-hidden="true" className="absolute inset-0 bg-grid-cyber opacity-40 [mask-image:linear-gradient(to_right,black,transparent_85%)]" />
+            <div aria-hidden="true" className="absolute left-0 top-0 h-px w-32 bg-gradient-primary animate-cyber-pulse" />
+
+            <div className="relative grid gap-6 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-8">
+              <div className="flex items-start gap-3 sm:block">
+                <span className="font-mono text-xs font-semibold text-primary-glow">ÉTUDE / 01</span>
+                <div aria-hidden="true" className="mt-2 hidden h-16 w-px bg-gradient-primary sm:block" />
+              </div>
+
+              <div className="min-w-0">
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center gap-2 border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-semibold uppercase text-primary-glow">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary-glow animate-cyber-pulse" />
+                    {project.category}
+                  </span>
+                  {project.client_name && (
+                    <span className="text-xs font-medium uppercase text-muted-foreground">
+                      Pour {project.client_name}
+                    </span>
+                  )}
+                </div>
+
+                <Holo3DTitle
+                  as="h1"
+                  words={project.title.split(" ").map((word, index, words) => ({
+                    t: word,
+                    c: index >= Math.max(1, words.length - 3) ? "text-holo" : undefined,
+                  }))}
+                  animateOnView={false}
+                  className="font-display text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl"
+                />
+
+                <div className="mt-6 grid gap-5 border-l-2 border-primary/40 pl-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:gap-8">
+                  <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                    {project.description}
+                  </p>
+                  <span className="whitespace-nowrap font-mono text-xs text-primary-glow">WD / DIGITAL DELIVERY</span>
+                </div>
+              </div>
+            </div>
+          </header>
 
           {project.image_url && (
             <div className={`rounded-2xl overflow-hidden border border-border mb-10 ${project.id === "teranga-bridge-africa" ? "bg-foreground p-10 sm:p-16" : ""}`}>
