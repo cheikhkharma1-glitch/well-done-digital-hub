@@ -66,6 +66,12 @@ function ProjectPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (slug === "teranga-bridge-africa") {
+      setProject(TERANGA_BRIDGE_PROJECT);
+      setLoading(false);
+      return;
+    }
+
     supabase
       .from("projects")
       .select("id,title,description,category,image_url,technologies,results,client_name,project_url")
@@ -73,7 +79,7 @@ function ProjectPage() {
       .eq("published", true)
       .maybeSingle()
       .then(({ data }) => {
-        setProject(data ?? (slug === "teranga-bridge-africa" ? TERANGA_BRIDGE_PROJECT : null));
+        setProject(data);
         setLoading(false);
       });
   }, [slug]);
