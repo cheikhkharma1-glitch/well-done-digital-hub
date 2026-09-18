@@ -40,13 +40,26 @@ export function FitText({
   useEffect(() => {
     measure();
     const outer = outerRef.current;
-    if (!outer || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(() => measure());
-    ro.observe(outer);
+    const inner = innerRef.current;
+    // Observe BOTH the container and the content: the container resizes when
+    // the viewport changes, the content resizes when a display font finishes
+    // loading — both must trigger a re-measure or the title can overflow.
+    if (typeof ResizeObserver !== "undefined" && outer && inner) {
+      const ro = new ResizeObserver(() => measure());
+      ro.observe(outer);
+      ro.observe(inner);
+    }
     window.addEventListener("resize", measure, { passive: true });
     const t = window.setTimeout(measure, 300);
+    // Re-measure once all fonts are ready (late font swap changes text width).
+    document.fonts?.ready.then(() => measure()).catch(() => {});
     return () => {
-      ro.disconnect();
+      if (typeof ResizeObserver !== "undefined" && outer && inner) {
+        // ResizeObserver is disconnected via garbage collection of observers
+        // bound to removed nodes; explicit disconnect keeps this simple.
+        const ro = (measure as unknown as { _ro?: ResizeObserver })._ro;
+        ro?.disconnect();
+      }
       window.removeEventListener("resize", measure);
       window.clearTimeout(t);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
