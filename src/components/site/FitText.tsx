@@ -18,6 +18,7 @@ export function FitText({
   const rafRef = useRef<number | null>(null);
   const [scale, setScale] = useState(1);
   const [height, setHeight] = useState<number | undefined>(undefined);
+  const roRef = useRef<ResizeObserver | null>(null);
 
   const measure = useCallback(() => {
     // Throttle to one measurement per frame: avoids layout thrashing
@@ -27,6 +28,7 @@ export function FitText({
       rafRef.current = null;
       const outer = outerRef.current;
       const inner = innerRef.current;
+      console.log("[FitText]", { outer: !!outer, inner: !!inner, avail: outer?.clientWidth, natural: inner?.scrollWidth });
       if (!outer || !inner) return;
       const available = outer.clientWidth;
       const natural = inner.scrollWidth;
@@ -40,13 +42,23 @@ export function FitText({
   useEffect(() => {
     measure();
     const outer = outerRef.current;
-    if (!outer || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(() => measure());
-    ro.observe(outer);
+    const inner = innerRef.current;
+    // Observe BOTH the container and the content: the container resizes when
+    // the viewport changes, the content resizes when a display font finishes
+    // loading — both must trigger a re-measure or the title can overflow.
+    if (typeof ResizeObserver !== "undefined" && outer && inner) {
+      const ro = new ResizeObserver(() => measure());
+      ro.observe(outer);
+      ro.observe(inner);
+      roRef.current = ro;
+    }
     window.addEventListener("resize", measure, { passive: true });
     const t = window.setTimeout(measure, 300);
+    // Re-measure once all fonts are ready (late font swap changes text width).
+    document.fonts?.ready.then(() => measure()).catch(() => {});
     return () => {
-      ro.disconnect();
+      roRef.current?.disconnect();
+      roRef.current = null;
       window.removeEventListener("resize", measure);
       window.clearTimeout(t);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
