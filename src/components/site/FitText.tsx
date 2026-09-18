@@ -18,6 +18,7 @@ export function FitText({
   const rafRef = useRef<number | null>(null);
   const [scale, setScale] = useState(1);
   const [height, setHeight] = useState<number | undefined>(undefined);
+  const roRef = useRef<ResizeObserver | null>(null);
 
   const measure = useCallback(() => {
     // Throttle to one measurement per frame: avoids layout thrashing
