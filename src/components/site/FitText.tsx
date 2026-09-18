@@ -49,18 +49,15 @@ export function FitText({
       const ro = new ResizeObserver(() => measure());
       ro.observe(outer);
       ro.observe(inner);
+      roRef.current = ro;
     }
     window.addEventListener("resize", measure, { passive: true });
     const t = window.setTimeout(measure, 300);
     // Re-measure once all fonts are ready (late font swap changes text width).
     document.fonts?.ready.then(() => measure()).catch(() => {});
     return () => {
-      if (typeof ResizeObserver !== "undefined" && outer && inner) {
-        // ResizeObserver is disconnected via garbage collection of observers
-        // bound to removed nodes; explicit disconnect keeps this simple.
-        const ro = (measure as unknown as { _ro?: ResizeObserver })._ro;
-        ro?.disconnect();
-      }
+      roRef.current?.disconnect();
+      roRef.current = null;
       window.removeEventListener("resize", measure);
       window.clearTimeout(t);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
