@@ -36,7 +36,7 @@ const schema = z.object({
   message: z.string().trim().min(20, "Message trop court (20 caractères min.)").max(4000),
 });
 
-export const WHATSAPP_NUMBER = "221772386977";
+export { WHATSAPP_NUMBER } from "@/lib/contact-info";
 
 const types = ["Site web", "E-commerce", "ERP / CRM", "Gestion scolaire", "Maintenance & réseau", "Autre"];
 const perks = [

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { CONTACT_EMAIL, COMPANY_ADDRESS, PHONE_DISPLAY, PHONE_TEL_HREF, whatsappHref } from "@/lib/contact-info";
 import logo from "@/assets/logo.png";
 
 export function Footer() {
