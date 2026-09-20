@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { CONTACT_EMAIL, COMPANY_ADDRESS, PHONE_DISPLAY, PHONE_TEL_HREF, whatsappHref } from "@/lib/contact-info";
 import logo from "@/assets/logo.png";
 
 export function Footer() {
@@ -43,9 +44,10 @@ export function Footer() {
         <div>
           <h4 className="font-display text-sm font-semibold mb-4 uppercase tracking-wider opacity-90">Contact</h4>
           <ul className="space-y-3 text-sm opacity-75">
-            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Dakar, Sénégal</li>
-            <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /> contact@welldonescompany.com</li>
-            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> +221 77 238 69 77</li>
+            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /> {COMPANY_ADDRESS}</li>
+            <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /> <a href={`mailto:${CONTACT_EMAIL}`} className="hover:opacity-100 hover:underline">{CONTACT_EMAIL}</a></li>
+            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> <a href={PHONE_TEL_HREF} className="hover:opacity-100 hover:underline">{PHONE_DISPLAY}</a></li>
+            <li className="flex items-start gap-2"><MessageCircle className="h-4 w-4 mt-0.5 shrink-0" /> <a href={whatsappHref("Bonjour Well Done Services, je souhaite discuter d'un projet.")} target="_blank" rel="noopener noreferrer" className="hover:opacity-100 hover:underline">WhatsApp {PHONE_DISPLAY}</a></li>
           </ul>
         </div>
       </div>

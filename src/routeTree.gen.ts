@@ -24,6 +24,7 @@ import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
 import { Route as BlogAssistantRouteImport } from './routes/blog.assistant'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as ApiOrientationRouteImport } from './routes/api/orientation'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminProjetsRouteImport } from './routes/admin.projets'
 import { Route as AdminLeadershipRouteImport } from './routes/admin.leadership'
@@ -111,6 +112,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiOrientationRoute = ApiOrientationRouteImport.update({
+  id: '/api/orientation',
+  path: '/api/orientation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -185,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/projets': typeof AdminProjetsRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/orientation': typeof ApiOrientationRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
@@ -212,6 +219,7 @@ export interface FileRoutesByTo {
   '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/projets': typeof AdminProjetsRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/orientation': typeof ApiOrientationRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -240,6 +248,7 @@ export interface FileRoutesById {
   '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/projets': typeof AdminProjetsRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/orientation': typeof ApiOrientationRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/assistant': typeof BlogAssistantRouteWithChildren
   '/realisations/$slug': typeof RealisationsSlugRoute
@@ -270,6 +279,7 @@ export interface FileRouteTypes {
     | '/admin/leadership'
     | '/admin/projets'
     | '/api/chat'
+    | '/api/orientation'
     | '/blog/$slug'
     | '/blog/assistant'
     | '/realisations/$slug'
@@ -297,6 +307,7 @@ export interface FileRouteTypes {
     | '/admin/leadership'
     | '/admin/projets'
     | '/api/chat'
+    | '/api/orientation'
     | '/blog/$slug'
     | '/realisations/$slug'
     | '/services/$slug'
@@ -324,6 +335,7 @@ export interface FileRouteTypes {
     | '/admin/leadership'
     | '/admin/projets'
     | '/api/chat'
+    | '/api/orientation'
     | '/blog/$slug'
     | '/blog/assistant'
     | '/realisations/$slug'
@@ -349,6 +361,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiOrientationRoute: typeof ApiOrientationRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogAssistantRoute: typeof BlogAssistantRouteWithChildren
   RealisationsSlugRoute: typeof RealisationsSlugRoute
@@ -465,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/orientation': {
+      id: '/api/orientation'
+      path: '/api/orientation'
+      fullPath: '/api/orientation'
+      preLoaderRoute: typeof ApiOrientationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -591,6 +611,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiOrientationRoute: ApiOrientationRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogAssistantRoute: BlogAssistantRouteWithChildren,
   RealisationsSlugRoute: RealisationsSlugRoute,

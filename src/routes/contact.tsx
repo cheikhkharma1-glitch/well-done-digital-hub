@@ -11,6 +11,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { ProjectOrientation } from "@/components/site/ProjectOrientation";
+import {
+  CONTACT_EMAIL,
+  COMPANY_ADDRESS,
+  PHONE_DISPLAY,
+  PHONE_TEL_HREF,
+  WHATSAPP_NUMBER,
+} from "@/lib/contact-info";
 
 const searchSchema = z.object({
   source: z.string().max(60).optional(),
@@ -36,7 +44,7 @@ const schema = z.object({
   message: z.string().trim().min(20, "Message trop court (20 caractères min.)").max(4000),
 });
 
-export const WHATSAPP_NUMBER = "221772386977";
+export { WHATSAPP_NUMBER };
 
 const types = ["Site web", "E-commerce", "ERP / CRM", "Gestion scolaire", "Maintenance & réseau", "Autre"];
 const perks = [
@@ -45,7 +53,6 @@ const perks = [
   { icon: Zap, label: "Devis gratuit" },
 ];
 
-const CONTACT_EMAIL = "contact@welldonescompany.com";
 
 function ContactPage() {
   const search = Route.useSearch();
