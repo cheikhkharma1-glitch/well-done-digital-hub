@@ -45,7 +45,7 @@ export function Footer() {
           <ul className="space-y-3 text-sm opacity-75">
             <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Dakar, Sénégal</li>
             <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /> contact@welldonescompany.com</li>
-            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> +221 00 000 00 00</li>
+            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> +221 77 238 69 77</li>
           </ul>
         </div>
       </div>

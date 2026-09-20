@@ -36,7 +36,7 @@ const schema = z.object({
   message: z.string().trim().min(20, "Message trop court (20 caractères min.)").max(4000),
 });
 
-export const WHATSAPP_NUMBER = "221000000000";
+export const WHATSAPP_NUMBER = "221772386977";
 
 const types = ["Site web", "E-commerce", "ERP / CRM", "Gestion scolaire", "Maintenance & réseau", "Autre"];
 const perks = [
@@ -182,7 +182,7 @@ function ContactPage() {
                 {[
                   { icon: MapPin, text: "Dakar, Sénégal" },
                   { icon: Mail, text: "contact@welldonescompany.com" },
-                  { icon: Phone, text: "+221 00 000 00 00" },
+                  { icon: Phone, text: "+221 77 238 69 77" },
                 ].map((item) => (
                   <li key={item.text} className="flex items-start gap-3 group/item">
                     <span className="h-9 w-9 rounded-lg bg-[oklch(0.82_0.16_210)]/15 text-[oklch(0.62_0.2_255)] flex items-center justify-center shrink-0 group-hover/item:bg-gradient-cyber group-hover/item:text-white transition-all duration-300">
