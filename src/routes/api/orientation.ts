@@ -71,19 +71,10 @@ export const Route = createFileRoute("/api/orientation")({
             .join("\n");
 
           const result = streamText({
-            model: lovable.responses("openai/gpt-6-astra"),
+            model: gateway("google/gemini-3-flash-preview"),
             system: SYSTEM_PROMPT,
             prompt: userPrompt,
             abortSignal: request.signal,
-            providerOptions: {
-              openai: {
-                store: false,
-                forceReasoning: true,
-                reasoningEffort: "low",
-                reasoningSummary: "auto",
-                include: ["reasoning.encrypted_content"],
-              },
-            },
           });
 
           return result.toTextStreamResponse({
