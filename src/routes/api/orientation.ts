@@ -59,14 +59,7 @@ export const Route = createFileRoute("/api/orientation")({
           const key = process.env.LOVABLE_API_KEY;
           if (!key) return new Response("LOVABLE_API_KEY manquante", { status: 500 });
 
-          const lovable = createOpenAI({
-            baseURL: "https://ai.gateway.lovable.dev/v1",
-            apiKey: key,
-            headers: {
-              "Lovable-API-Key": key,
-              "X-Lovable-AIG-SDK": "vercel-ai-sdk",
-            },
-          });
+          const gateway = createLovableAiGatewayProvider(key);
 
           const userPrompt = [
             `Description du projet : ${description}`,
