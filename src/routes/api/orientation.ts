@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { streamText } from "ai";
-import { createOpenAI } from "@ai-sdk/openai";
+import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 import { services } from "@/lib/services-data";
 
 const CATALOG = services
@@ -59,14 +59,7 @@ export const Route = createFileRoute("/api/orientation")({
           const key = process.env.LOVABLE_API_KEY;
           if (!key) return new Response("LOVABLE_API_KEY manquante", { status: 500 });
 
-          const lovable = createOpenAI({
-            baseURL: "https://ai.gateway.lovable.dev/v1",
-            apiKey: key,
-            headers: {
-              "Lovable-API-Key": key,
-              "X-Lovable-AIG-SDK": "vercel-ai-sdk",
-            },
-          });
+          const gateway = createLovableAiGatewayProvider(key);
 
           const userPrompt = [
             `Description du projet : ${description}`,
@@ -78,19 +71,10 @@ export const Route = createFileRoute("/api/orientation")({
             .join("\n");
 
           const result = streamText({
-            model: lovable.responses("openai/gpt-6-astra"),
+            model: gateway("google/gemini-3-flash-preview"),
             system: SYSTEM_PROMPT,
             prompt: userPrompt,
             abortSignal: request.signal,
-            providerOptions: {
-              openai: {
-                store: false,
-                forceReasoning: true,
-                reasoningEffort: "low",
-                reasoningSummary: "auto",
-                include: ["reasoning.encrypted_content"],
-              },
-            },
           });
 
           return result.toTextStreamResponse({
