@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { streamText } from "ai";
-import { createOpenAI } from "@ai-sdk/openai";
+import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 import { services } from "@/lib/services-data";
 
 const CATALOG = services
