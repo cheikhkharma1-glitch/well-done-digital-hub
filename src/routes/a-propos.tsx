@@ -76,7 +76,7 @@ function AboutPage() {
         />
         <div className="container mx-auto px-4 lg:px-8 relative">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
+            <div className="min-w-0 lg:col-span-7">
               <p className="font-mono text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
                 À propos · Dakar, Sénégal
               </p>
@@ -126,7 +126,7 @@ function AboutPage() {
               initial={reduce ? false : { opacity: 0, scale: 0.94 }}
               animate={reduce ? undefined : { opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-5"
+              className="min-w-0 lg:col-span-5"
             >
               <div className="relative rounded-3xl overflow-hidden ring-1 ring-white/15 shadow-cyber">
                 <img
@@ -159,7 +159,7 @@ function AboutPage() {
               whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-5 relative"
+              className="min-w-0 lg:col-span-5 relative"
             >
               <div className="relative max-w-md mx-auto lg:mx-0">
                 <div className="absolute -top-6 -left-6 w-24 h-full bg-primary/90 rounded-2xl hidden sm:block" aria-hidden />
@@ -216,7 +216,7 @@ function AboutPage() {
               whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="lg:col-span-7"
+              className="min-w-0 lg:col-span-7"
             >
               <p className="font-mono text-xs font-bold text-primary uppercase tracking-[0.3em] mb-3">Le mot du fondateur</p>
               <Holo3DTitle
@@ -266,7 +266,7 @@ function AboutPage() {
               whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7 }}
-              className="lg:col-span-6 order-2 lg:order-1"
+              className="min-w-0 lg:col-span-6 order-2 lg:order-1"
             >
               <div className="relative rounded-3xl overflow-hidden ring-1 ring-white/15 shadow-cyber">
                 <img
@@ -281,7 +281,7 @@ function AboutPage() {
               </div>
             </motion.div>
 
-            <div className="lg:col-span-6 order-1 lg:order-2">
+            <div className="min-w-0 lg:col-span-6 order-1 lg:order-2">
               <p className="font-mono text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
                 Culture d'ingénierie
               </p>
@@ -409,7 +409,7 @@ function AboutPage() {
           <div className="rounded-3xl bg-surface p-10 lg:p-16 border border-border relative overflow-hidden">
             <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-[0.07]" />
             <div className="relative grid lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-7">
+              <div className="min-w-0 lg:col-span-7">
                 <Holo3DTitle
                   words={[
                     { t: "Pourquoi" },
@@ -434,7 +434,7 @@ function AboutPage() {
                   </Link>
                 </Button>
               </div>
-              <div className="lg:col-span-5">
+              <div className="min-w-0 lg:col-span-5">
                 <CyberShield className="mx-auto max-w-sm" />
               </div>
             </div>
