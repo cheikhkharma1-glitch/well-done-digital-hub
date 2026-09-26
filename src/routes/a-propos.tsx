@@ -76,8 +76,8 @@ function AboutPage() {
         />
         <div className="container mx-auto px-4 lg:px-8 relative">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              <p className="font-mono text-[11px] font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
+            <div className="min-w-0 lg:col-span-7">
+              <p className="font-mono text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
                 À propos · Dakar, Sénégal
               </p>
               <Holo3DTitle
@@ -105,7 +105,7 @@ function AboutPage() {
                 {["Kubernetes", "Docker", "CI/CD", "PostgreSQL", "Zero-Trust", "Cloudflare"].map((t) => (
                   <span
                     key={t}
-                    className="rounded-full border border-[color:var(--cyber-cyan)]/40 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/80 backdrop-blur"
+                    className="rounded-full border border-[color:var(--cyber-cyan)]/40 bg-white/5 px-3 py-1 font-mono text-xs uppercase tracking-wider text-white/80 backdrop-blur"
                   >
                     {t}
                   </span>
@@ -126,7 +126,7 @@ function AboutPage() {
               initial={reduce ? false : { opacity: 0, scale: 0.94 }}
               animate={reduce ? undefined : { opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-5"
+              className="min-w-0 lg:col-span-5"
             >
               <div className="relative rounded-3xl overflow-hidden ring-1 ring-white/15 shadow-cyber">
                 <img
@@ -139,7 +139,7 @@ function AboutPage() {
                 <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0b1226] via-[#0b1226]/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/10 px-4 py-3 backdrop-blur">
                   <Terminal className="h-4 w-4 text-[color:var(--cyber-cyan)]" />
-                  <p className="font-mono text-[11px] text-white/85">
+                  <p className="font-mono text-xs text-white/85">
                     build: passing · uptime 99.9% · équipe locale
                   </p>
                 </div>
@@ -159,7 +159,7 @@ function AboutPage() {
               whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-5 relative"
+              className="min-w-0 lg:col-span-5 relative"
             >
               <div className="relative max-w-md mx-auto lg:mx-0">
                 <div className="absolute -top-6 -left-6 w-24 h-full bg-primary/90 rounded-2xl hidden sm:block" aria-hidden />
@@ -216,9 +216,9 @@ function AboutPage() {
               whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="lg:col-span-7"
+              className="min-w-0 lg:col-span-7"
             >
-              <p className="font-mono text-[11px] font-bold text-primary uppercase tracking-[0.3em] mb-3">Le mot du fondateur</p>
+              <p className="font-mono text-xs font-bold text-primary uppercase tracking-[0.3em] mb-3">Le mot du fondateur</p>
               <Holo3DTitle
                 words={[
                   { t: "Une" },
@@ -266,7 +266,7 @@ function AboutPage() {
               whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7 }}
-              className="lg:col-span-6 order-2 lg:order-1"
+              className="min-w-0 lg:col-span-6 order-2 lg:order-1"
             >
               <div className="relative rounded-3xl overflow-hidden ring-1 ring-white/15 shadow-cyber">
                 <img
@@ -281,8 +281,8 @@ function AboutPage() {
               </div>
             </motion.div>
 
-            <div className="lg:col-span-6 order-1 lg:order-2">
-              <p className="font-mono text-[11px] font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
+            <div className="min-w-0 lg:col-span-6 order-1 lg:order-2">
+              <p className="font-mono text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
                 Culture d'ingénierie
               </p>
               <Holo3DTitle
@@ -316,7 +316,7 @@ function AboutPage() {
                     <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-cyber shadow-cyber mb-3">
                       <d.icon className="h-5 w-5 text-white" strokeWidth={1.75} />
                     </div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">{d.k}</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">{d.k}</p>
                     <p className="font-display font-bold mt-1">{d.v}</p>
                     <p className="text-sm text-white/70 mt-1.5 leading-relaxed">{d.d}</p>
                   </motion.div>
@@ -362,7 +362,7 @@ function AboutPage() {
       {/* VALUES */}
       <section className="py-20 lg:py-28 bg-surface">
         <div className="container mx-auto px-4 lg:px-8">
-          <p className="font-mono text-[11px] font-bold text-primary uppercase tracking-[0.3em] mb-4">Nos principes</p>
+          <p className="font-mono text-xs font-bold text-primary uppercase tracking-[0.3em] mb-4">Nos principes</p>
           <Holo3DTitle
             words={[
               { t: "Ce" },
@@ -388,7 +388,7 @@ function AboutPage() {
               >
                 <span
                   aria-hidden
-                  className="absolute right-4 top-4 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60"
+                  className="absolute right-4 top-4 font-mono text-xs uppercase tracking-wider text-muted-foreground/60"
                 >
                   {v.tag}
                 </span>
@@ -409,7 +409,7 @@ function AboutPage() {
           <div className="rounded-3xl bg-surface p-10 lg:p-16 border border-border relative overflow-hidden">
             <div aria-hidden className="absolute inset-0 bg-grid-cyber opacity-[0.07]" />
             <div className="relative grid lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-7">
+              <div className="min-w-0 lg:col-span-7">
                 <Holo3DTitle
                   words={[
                     { t: "Pourquoi" },
@@ -434,7 +434,7 @@ function AboutPage() {
                   </Link>
                 </Button>
               </div>
-              <div className="lg:col-span-5">
+              <div className="min-w-0 lg:col-span-5">
                 <CyberShield className="mx-auto max-w-sm" />
               </div>
             </div>

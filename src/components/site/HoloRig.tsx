@@ -75,7 +75,7 @@ export function HoloRig({ className = "" }: { className?: string }) {
       <div className="absolute inset-0 grid place-items-center">
         <div className="h-20 w-20 rounded-2xl bg-gradient-cyber shadow-cyber grid place-items-center">
           <div className="h-10 w-10 rounded-lg bg-[#0f172a] grid place-items-center">
-            <span className="text-[10px] font-mono text-[color:var(--cyber-cyan)]">WDS</span>
+            <span className="text-xs font-mono text-[color:var(--cyber-cyan)]">WDS</span>
           </div>
         </div>
       </div>

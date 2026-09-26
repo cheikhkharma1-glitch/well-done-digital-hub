@@ -100,7 +100,7 @@ export function CyberShield({ className = "" }: { className?: string }) {
         ].map((c) => (
           <motion.span
             key={c.t}
-            className="absolute px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-white/80 dark:bg-white/10 text-primary dark:text-white backdrop-blur border border-[color:var(--cyber-cyan)]/40 shadow-sm"
+            className="absolute px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-white/80 dark:bg-white/10 text-primary dark:text-white backdrop-blur border border-[color:var(--cyber-cyan)]/40 shadow-sm"
             style={{ left: c.x, top: c.y }}
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 4, delay: c.d, repeat: Infinity, ease: "easeInOut" }}

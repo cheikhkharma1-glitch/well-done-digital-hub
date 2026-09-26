@@ -48,7 +48,9 @@ export function Holo3DTitle({
       className={className}
       style={light ? undefined : { perspective: "900px" }}
     >
-      <FitText>
+      {/* On small phones, forcing a single line would shrink the text below
+          readability — allow natural wrapping instead of FitText scaling. */}
+      <FitText disabled={light}>
         {words.map((w, i) => (
           <motion.span
             key={w.t + i}

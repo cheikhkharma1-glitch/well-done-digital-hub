@@ -219,7 +219,7 @@ export function TechNewsFeed() {
               Afficher uniquement mes thèmes
             </label>
           </div>
-          <p className="text-[11px] text-muted-foreground mt-3">
+          <p className="text-xs text-muted-foreground mt-3">
             {themes.length
               ? "Vos préférences sont enregistrées sur cet appareil et remontent vos sujets favoris en tête du fil."
               : "Sélectionnez vos sujets favoris pour recevoir un fil personnalisé."}
@@ -257,7 +257,7 @@ export function TechNewsFeed() {
               <SlidersHorizontal className="h-4 w-4" />
               Filtres avancés
               {activeFilters > 0 && (
-                <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-gradient-cyber px-1.5 text-[10px] text-white">
+                <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-gradient-cyber px-1.5 text-xs text-white">
                   {activeFilters}
                 </span>
               )}
@@ -267,7 +267,7 @@ export function TechNewsFeed() {
           {showFilters && (
             <div className="grid gap-4 sm:grid-cols-3 rounded-2xl border border-border bg-card/60 backdrop-blur p-5">
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                <label className="block text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">
                   Date de publication
                 </label>
                 <select
@@ -283,7 +283,7 @@ export function TechNewsFeed() {
                 </select>
               </div>
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                <label className="block text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">
                   Type / thème
                 </label>
                 <select
@@ -300,7 +300,7 @@ export function TechNewsFeed() {
                 </select>
               </div>
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                <label className="block text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">
                   Source
                 </label>
                 <select
@@ -351,7 +351,7 @@ export function TechNewsFeed() {
               </button>
             ))}
             {updatedAt && (
-              <span className="ml-auto font-mono text-[11px] text-muted-foreground">
+              <span className="ml-auto font-mono text-xs text-muted-foreground">
                 sync : {new Date(updatedAt).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
               </span>
             )}
@@ -414,7 +414,7 @@ export function TechNewsFeed() {
                   </div>
                 )}
                 <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 text-[11px] mb-3">
+                  <div className="flex items-center gap-2 text-xs mb-3">
                     <span className="px-2 py-0.5 rounded-full bg-gradient-cyber text-white font-bold uppercase tracking-widest">
                       {n.category}
                     </span>

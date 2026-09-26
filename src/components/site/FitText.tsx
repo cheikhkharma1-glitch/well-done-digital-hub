@@ -8,10 +8,13 @@ export function FitText({
   children,
   className = "",
   min = 0.2,
+  disabled = false,
 }: {
   children: ReactNode;
   className?: string;
   min?: number;
+  /** When true, render children with natural wrapping (no scaling). */
+  disabled?: boolean;
 }) {
   const outerRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
@@ -28,7 +31,6 @@ export function FitText({
       rafRef.current = null;
       const outer = outerRef.current;
       const inner = innerRef.current;
-      console.log("[FitText]", { outer: !!outer, inner: !!inner, avail: outer?.clientWidth, natural: inner?.scrollWidth });
       if (!outer || !inner) return;
       const available = outer.clientWidth;
       const natural = inner.scrollWidth;

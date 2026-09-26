@@ -110,7 +110,7 @@ function ServiceDetailPage() {
             <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${service.accent} flex items-center justify-center shadow-glow`}>
               <Icon className="h-6 w-6 text-white" />
             </div>
-            <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest backdrop-blur">
+            <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest backdrop-blur">
               {service.tag}
             </span>
           </div>
@@ -210,7 +210,7 @@ function ServiceDetailPage() {
               <div className="space-y-6">
                 {service.technologies.map((g) => (
                   <div key={g.group}>
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                    <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
                       {g.group}
                     </p>
                     <div className="flex flex-wrap gap-2">
