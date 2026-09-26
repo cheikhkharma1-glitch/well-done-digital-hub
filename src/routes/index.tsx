@@ -103,7 +103,7 @@ function HomePage() {
 
         <div className="container mx-auto px-4 lg:px-8 relative">
           <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-16 items-center">
-            <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-3xl">
+            <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-3xl min-w-0">
               <motion.div
                 variants={fadeUp}
                 className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs lg:text-sm text-primary-foreground mb-6"
