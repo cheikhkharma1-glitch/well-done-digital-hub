@@ -338,7 +338,7 @@ function HomePage() {
                 ].map((s) => (
                   <div key={s.v} className="glass rounded-xl p-4">
                     <div className="font-display text-2xl font-bold text-white">{s.k}</div>
-                    <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--cyber-cyan)] mt-1">
+                    <div className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--cyber-cyan)] mt-1">
                       {s.v}
                     </div>
                   </div>

@@ -264,7 +264,7 @@ function ServicesPage() {
                     >
                       <s.icon className="h-7 w-7" />
                     </div>
-                    <span className="rounded-full border border-white/30 bg-black/35 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur">
+                    <span className="rounded-full border border-white/30 bg-black/35 px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest text-white backdrop-blur">
                       {s.tag}
                     </span>
                   </div>

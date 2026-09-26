@@ -106,7 +106,7 @@ export function ValuesShowcase() {
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block font-display text-lg font-bold">{v.title}</span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
                   {v.tag}
                 </span>
               </span>

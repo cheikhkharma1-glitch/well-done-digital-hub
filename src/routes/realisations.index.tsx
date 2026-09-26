@@ -591,12 +591,12 @@ function PortfolioPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
 
                         {/* Category badge */}
-                        <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-sm text-[10px] font-bold uppercase tracking-widest text-foreground shadow-md">
+                        <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-sm text-xs font-bold uppercase tracking-widest text-foreground shadow-md">
                           {p.category}
                         </span>
 
                         {p.featured && (
-                          <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full border border-primary-glow/30 bg-background/95 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary shadow-md backdrop-blur-sm">
+                          <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full border border-primary-glow/30 bg-background/95 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary shadow-md backdrop-blur-sm">
                             <Sparkles className="h-3 w-3 text-primary-glow" /> Projet à la une
                           </span>
                         )}
@@ -612,7 +612,7 @@ function PortfolioPage() {
                             {p.technologies.slice(0, 4).map((t) => (
                               <span
                                 key={t}
-                                className="px-2 py-1 rounded-md bg-white/95 backdrop-blur-sm text-[10px] font-semibold text-foreground"
+                                className="px-2 py-1 rounded-md bg-white/95 backdrop-blur-sm text-xs font-semibold text-foreground"
                               >
                                 {t}
                               </span>
@@ -624,7 +624,7 @@ function PortfolioPage() {
                       <div className="p-6 relative">
                         {/* Meta strip: client · année · durée */}
                         {(p.client || p.year || p.duration) && (
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground mb-3">
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-medium text-muted-foreground mb-3">
                             {p.client && (
                               <span className="inline-flex items-center gap-1.5">
                                 <Building2 className="h-3.5 w-3.5 text-[oklch(0.62_0.2_255)]" />
@@ -692,7 +692,7 @@ function PortfolioPage() {
                             Voir l'étude de cas
                             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                           </span>
-                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
                             <TrendingUp className="h-3 w-3" />
                             Livré
                           </span>

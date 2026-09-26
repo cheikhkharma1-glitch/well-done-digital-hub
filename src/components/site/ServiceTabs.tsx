@@ -138,7 +138,7 @@ export function ServiceTabs() {
                 <s.icon className="h-4.5 w-4.5 shrink-0" strokeWidth={1.8} />
                 <span className="flex flex-col">
                   <span className="font-display text-sm font-bold leading-tight">{s.title}</span>
-                  <span className={`font-mono text-[10px] uppercase tracking-[0.14em] ${isActive ? "text-primary-foreground/80" : "text-muted-foreground/70"}`}>
+                  <span className={`font-mono text-xs uppercase tracking-[0.14em] ${isActive ? "text-primary-foreground/80" : "text-muted-foreground/70"}`}>
                     {s.tagline}
                   </span>
                 </span>
@@ -221,7 +221,7 @@ export function ServiceTabs() {
                 exit={{ opacity: 0, y: reduce ? 0 : -12 }}
                 transition={{ duration: reduce ? 0.2 : 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground">
                   <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--cyber-cyan)]" />
                   {current.tagline}
                 </div>

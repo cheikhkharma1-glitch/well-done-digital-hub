@@ -279,7 +279,7 @@ function BlogIndex() {
                         </div>
                       )}
                       <div className="absolute inset-0 bg-gradient-to-tr from-foreground/60 via-transparent to-transparent" />
-                      <span className="absolute top-5 left-5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-cyber text-white text-[10px] font-bold uppercase tracking-widest shadow-cyber">
+                      <span className="absolute top-5 left-5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-cyber text-white text-xs font-bold uppercase tracking-widest shadow-cyber">
                         <Sparkles className="h-3 w-3" /> À la une
                       </span>
                     </div>

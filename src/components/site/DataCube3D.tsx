@@ -212,7 +212,7 @@ export function DataCube3D({ className = "" }: { className?: string }) {
                 </div>
                 <div className="relative text-center">
                   <div className="font-display text-lg font-bold tracking-tight">{f.label}</div>
-                  <div className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--cyber-cyan)]">
+                  <div className="mt-0.5 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--cyber-cyan)]">
                     {f.sub}
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export function DataCube3D({ className = "" }: { className?: string }) {
           >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">
+                <div className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">
                   Brique sélectionnée
                 </div>
                 <div className="font-display text-lg font-bold">{faces[active].label}</div>
@@ -307,7 +307,7 @@ export function DataCube3D({ className = "" }: { className?: string }) {
         ].map((c) => (
           <motion.span
             key={c.t}
-            className="pointer-events-none absolute rounded-md border border-[color:var(--cyber-cyan)]/40 bg-white/80 px-2.5 py-1 font-mono text-[10px] font-semibold text-primary shadow-sm backdrop-blur dark:bg-white/10 dark:text-white will-change-transform"
+            className="pointer-events-none absolute rounded-md border border-[color:var(--cyber-cyan)]/40 bg-white/80 px-2.5 py-1 font-mono text-xs font-semibold text-primary shadow-sm backdrop-blur dark:bg-white/10 dark:text-white will-change-transform"
             style={{ left: c.x, top: c.y }}
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 4.5, delay: c.d, repeat: Infinity, ease: "easeInOut" }}

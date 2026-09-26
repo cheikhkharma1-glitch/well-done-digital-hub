@@ -97,7 +97,7 @@ export function TeamGallery() {
                 aria-hidden
                 className="absolute inset-0 bg-gradient-to-t from-[#0b1226] via-[#0b1226]/25 to-transparent"
               />
-              <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/40 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-white/85 backdrop-blur">
+              <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/40 px-2.5 py-1 font-mono text-xs uppercase tracking-wider text-white/85 backdrop-blur">
                 {m.unit}
               </span>
               <div className="absolute inset-x-4 bottom-4">
@@ -106,7 +106,7 @@ export function TeamGallery() {
               </div>
             </div>
             <div className="flex items-center justify-between px-4 py-3">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
                 {m.certifications.length} certification{m.certifications.length > 1 ? "s" : ""}
               </span>
               <span className="inline-flex items-center gap-1 text-xs font-medium text-primary">
@@ -143,7 +143,7 @@ export function TeamGallery() {
                 </DialogHeader>
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{selected.bio}</p>
 
-                <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+                <p className="mt-6 font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
                   Expertises
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
@@ -157,7 +157,7 @@ export function TeamGallery() {
                   ))}
                 </div>
 
-                <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+                <p className="mt-6 font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
                   Certifications
                 </p>
                 <ul className="mt-2 space-y-2">

@@ -130,7 +130,7 @@ function TimelineCard({
             <Icon className="h-6 w-6 text-white" strokeWidth={1.75} />
           </div>
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">
+            <div className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">
               Étape {index + 1} · {step.kpi}
             </div>
             <h3 className="font-display text-xl font-bold mt-1">{step.title}</h3>

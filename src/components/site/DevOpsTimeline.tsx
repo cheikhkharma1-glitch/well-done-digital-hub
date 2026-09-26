@@ -147,7 +147,7 @@ export function DevOpsTimeline() {
                     )}
                   </span>
                   <span className="min-w-0 pt-1">
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--cyber-cyan)]">
+                    <span className="block font-mono text-xs uppercase tracking-[0.3em] text-[color:var(--cyber-cyan)]">
                       étape {m.step}
                     </span>
                     <span className="mt-1 block font-display text-base font-bold text-white">
@@ -184,7 +184,7 @@ export function DevOpsTimeline() {
               />
             )}
             <div className="relative">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--cyber-cyan)]/40 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--cyber-cyan)]/40 bg-white/5 px-3 py-1 font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--cyber-cyan)]">
                 pipeline · {current.step}
               </span>
               <h3 className="mt-4 font-display text-2xl font-bold text-white lg:text-3xl">
@@ -221,7 +221,7 @@ export function DevOpsTimeline() {
                   {current.stack.map((s) => (
                     <span
                       key={s}
-                      className="rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-white/70"
+                      className="rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-xs uppercase tracking-wider text-white/70"
                     >
                       {s}
                     </span>
