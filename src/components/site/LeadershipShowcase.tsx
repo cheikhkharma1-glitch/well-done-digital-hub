@@ -324,7 +324,7 @@ export function LeadershipShowcase() {
               </div>
               <h2
                 id="leadership-heading"
-                className="font-display text-4xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-8"
+                className="font-display text-3xl lg:text-5xl font-bold leading-[1.05] tracking-tight mb-8"
               >
                 {c.title_prefix}{" "}
                 <span className="bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500 bg-clip-text text-transparent">

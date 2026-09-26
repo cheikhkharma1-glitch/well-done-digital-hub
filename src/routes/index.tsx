@@ -125,10 +125,10 @@ function HomePage() {
                     { t: "votre" },
                     { t: "entreprise." },
                   ]}
-                  className="font-display font-extrabold text-primary-foreground leading-[1.05] mb-6 text-[clamp(1.75rem,5.2vw,4.25rem)]"
+                  className="font-display font-extrabold text-primary-foreground leading-[1.05] mb-6 text-[clamp(1.5rem,3.4vw,3rem)]"
                 />
               </motion.div>
-              <motion.p variants={fadeUp} className="text-base lg:text-xl text-primary-foreground/85 max-w-2xl leading-relaxed mb-10">
+              <motion.p variants={fadeUp} className="text-base lg:text-lg text-primary-foreground/85 max-w-2xl leading-relaxed mb-10">
                 Well Done Services Company conçoit et déploie des solutions web, logicielles et réseau sur mesure pour les PME, écoles, administrations et startups au Sénégal et en Afrique.
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3">
@@ -161,7 +161,7 @@ function HomePage() {
           >
             {stats.map((s, i) => (
               <motion.div key={s.label} custom={i} variants={fadeUp} className="border-l-2 border-[color:var(--cyber-cyan)]/60 pl-4">
-                <div className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground">{s.value}</div>
+                <div className="font-display text-2xl lg:text-4xl font-bold text-primary-foreground">{s.value}</div>
                 <div className="text-xs lg:text-sm text-primary-foreground/70 mt-1">{s.label}</div>
               </motion.div>
             ))}
@@ -185,7 +185,7 @@ function HomePage() {
           >
             <div className="max-w-2xl">
               <p className="text-sm font-bold text-[oklch(0.62_0.2_255)] uppercase tracking-widest mb-3">Réalisations</p>
-              <h2 className="font-display text-3xl lg:text-5xl font-bold">Nos projets <span className="text-cyber">récents</span>.</h2>
+              <h2 className="font-display text-2xl lg:text-4xl font-bold">Nos projets <span className="text-cyber">récents</span>.</h2>
             </div>
             <Button asChild variant="outline" className="hover:border-[oklch(0.62_0.2_255)] hover:text-[oklch(0.62_0.2_255)]">
               <Link to="/realisations">Voir le portfolio complet</Link>
@@ -234,7 +234,7 @@ function HomePage() {
           <div className="relative overflow-hidden rounded-3xl bg-gradient-hero p-10 lg:p-20 text-center shadow-elegant">
             <div className="absolute inset-0 bg-gradient-glow" />
             <div className="relative max-w-3xl mx-auto">
-              <h2 className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground mb-5">
+              <h2 className="font-display text-2xl lg:text-4xl font-bold text-primary-foreground mb-5">
                 Prêt à accélérer votre transformation digitale ?
               </h2>
               <p className="text-primary-foreground/80 text-lg mb-8">
@@ -280,7 +280,7 @@ function HomePage() {
                 { t: "votre", c: "text-muted-foreground font-light" },
                 { t: "activité.", c: "text-muted-foreground font-light" },
               ]}
-              className="font-display font-bold leading-[1.1] tracking-tight mb-6 text-[clamp(1.5rem,4.2vw,3.25rem)]"
+              className="font-display font-bold leading-[1.1] tracking-tight mb-6 text-[clamp(1.4rem,3.2vw,2.5rem)]"
             />
 
 
@@ -321,7 +321,7 @@ function HomePage() {
               <p className="text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">
                 Infrastructure · Cloud · IA
               </p>
-              <h2 className="font-display text-3xl lg:text-5xl font-bold leading-tight mb-6">
+              <h2 className="font-display text-2xl lg:text-4xl font-bold leading-tight mb-6">
                 Une plateforme <span className="text-holo">connectée</span> de bout en bout.
               </h2>
               <p className="text-white/75 text-base lg:text-lg leading-relaxed mb-10 max-w-xl">
@@ -376,7 +376,7 @@ function HomePage() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-2xl mb-14">
             <p className="text-sm font-semibold text-primary-glow uppercase tracking-wider mb-3">Témoignages</p>
-            <h2 className="font-display text-3xl lg:text-5xl font-bold">Ils nous font <span className="text-gradient">confiance</span>.</h2>
+            <h2 className="font-display text-2xl lg:text-4xl font-bold">Ils nous font <span className="text-gradient">confiance</span>.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
@@ -414,7 +414,7 @@ function HomePage() {
               transition={{ duration: 0.7 }}
             >
               <p className="text-xs font-bold text-[color:var(--cyber-cyan)] uppercase tracking-[0.35em] mb-5">Cybersécurité</p>
-              <h2 className="font-display text-3xl lg:text-5xl font-bold leading-tight mb-6">
+              <h2 className="font-display text-2xl lg:text-4xl font-bold leading-tight mb-6">
                 Protégez votre <span className="text-holo">infrastructure</span> et vos données sensibles.
               </h2>
               <p className="text-white/75 text-base lg:text-lg leading-relaxed mb-8 max-w-xl">

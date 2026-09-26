@@ -154,7 +154,7 @@ function ContactPage() {
               <Sparkles className="h-3.5 w-3.5 text-[oklch(0.82_0.16_210)]" />
               <span className="text-xs font-bold uppercase tracking-widest text-white/90">Contactez-nous</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-5">
+            <motion.h1 variants={fadeUp} className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] mb-5">
               Parlons de <span className="text-cyber">votre projet</span>.
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg lg:text-xl text-white/80 max-w-2xl leading-relaxed mb-8">

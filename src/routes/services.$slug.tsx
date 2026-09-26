@@ -119,7 +119,7 @@ function ServiceDetailPage() {
             as="h1"
             animateOnView={false}
             words={titleWords}
-            className="font-display font-extrabold leading-[1.05] mb-6 text-[clamp(1.75rem,5vw,3.75rem)]"
+            className="font-display font-extrabold leading-[1.05] mb-6 text-[clamp(1.5rem,3.2vw,2.75rem)]"
           />
 
           <p className="text-lg lg:text-xl text-white/80 max-w-2xl leading-relaxed mb-8">
@@ -180,7 +180,7 @@ function ServiceDetailPage() {
                 { t: "pour", c: "text-muted-foreground font-light" },
                 { t: "vous.", c: "text-muted-foreground font-light" },
               ]}
-              className="font-display font-extrabold leading-[1.1] mb-6 text-[clamp(1.4rem,4vw,2.75rem)]"
+              className="font-display font-extrabold leading-[1.1] mb-6 text-[clamp(1.3rem,3vw,2.25rem)]"
             />
             <div className="space-y-5 text-muted-foreground text-lg leading-relaxed">
               {service.description.map((p) => (
@@ -244,7 +244,7 @@ function ServiceDetailPage() {
               { t: "résultats", c: "text-muted-foreground font-light" },
               { t: "mesurés.", c: "text-muted-foreground font-light" },
             ]}
-            className="font-display font-extrabold leading-[1.1] mb-12 text-[clamp(1.4rem,4vw,2.75rem)]"
+            className="font-display font-extrabold leading-[1.1] mb-12 text-[clamp(1.3rem,3vw,2.25rem)]"
           />
           <div className="grid md:grid-cols-3 gap-6">
             {service.examples.map((ex, i) => (
@@ -279,7 +279,7 @@ function ServiceDetailPage() {
               { t: "gagnez", c: "text-holo" },
               { t: "concrètement.", c: "text-muted-foreground font-light" },
             ]}
-            className="font-display font-extrabold leading-[1.1] mb-12 text-[clamp(1.4rem,4vw,2.75rem)]"
+            className="font-display font-extrabold leading-[1.1] mb-12 text-[clamp(1.3rem,3vw,2.25rem)]"
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {service.benefits.map((b, i) => (
