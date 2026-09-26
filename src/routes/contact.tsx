@@ -189,7 +189,7 @@ function ContactPage() {
                 {[
                   { icon: MapPin, text: "Dakar, Sénégal" },
                   { icon: Mail, text: "contact@welldonescompany.com" },
-                  { icon: Phone, text: "+221 77 238 69 77" },
+                  { icon: Phone, text: PHONE_DISPLAY },
                 ].map((item) => (
                   <li key={item.text} className="flex items-start gap-3 group/item">
                     <span className="h-9 w-9 rounded-lg bg-[oklch(0.82_0.16_210)]/15 text-[oklch(0.62_0.2_255)] flex items-center justify-center shrink-0 group-hover/item:bg-gradient-cyber group-hover/item:text-white transition-all duration-300">
