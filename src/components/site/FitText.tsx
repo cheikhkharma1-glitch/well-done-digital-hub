@@ -8,10 +8,13 @@ export function FitText({
   children,
   className = "",
   min = 0.2,
+  disabled = false,
 }: {
   children: ReactNode;
   className?: string;
   min?: number;
+  /** When true, render children with natural wrapping (no scaling). */
+  disabled?: boolean;
 }) {
   const outerRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
