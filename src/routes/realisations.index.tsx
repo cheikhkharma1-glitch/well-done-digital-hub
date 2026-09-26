@@ -381,7 +381,7 @@ function PortfolioPage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.05] mb-6"
             >
               Nos réalisations qui{" "}
               <span className="relative inline-block">

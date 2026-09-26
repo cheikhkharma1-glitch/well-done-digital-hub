@@ -93,7 +93,7 @@ function AboutPage() {
                   { t: "la" },
                   { t: "fois.", c: "text-gradient" },
                 ]}
-                className="font-display font-extrabold mb-6 max-w-4xl text-[clamp(1.6rem,5vw,3.5rem)]"
+                className="font-display font-extrabold mb-6 max-w-4xl text-[clamp(1.5rem,3.6vw,2.75rem)]"
               />
               <p className="text-base lg:text-lg text-white/75 max-w-2xl leading-relaxed">
                 Well Done Services Company SARL conçoit, sécurise et opère des plateformes
@@ -229,7 +229,7 @@ function AboutPage() {
                   { t: "sans", c: "text-gradient" },
                   { t: "compromis.", c: "text-gradient" },
                 ]}
-                className="font-display font-extrabold leading-tight mb-6 text-[clamp(1.4rem,4vw,3rem)]"
+                className="font-display font-extrabold leading-tight mb-6 text-[clamp(1.3rem,3vw,2.4rem)]"
               />
               <div className="relative pl-6 border-l-4 border-primary/70 mb-6">
                 <Quote className="absolute -left-3 -top-2 h-6 w-6 text-primary bg-background" />
@@ -295,7 +295,7 @@ function AboutPage() {
                   { t: "nos" },
                   { t: "livraisons.", c: "text-gradient" },
                 ]}
-                className="font-display font-bold leading-tight mb-6 text-[clamp(1.4rem,4vw,2.75rem)]"
+                className="font-display font-bold leading-tight mb-6 text-[clamp(1.3rem,3vw,2.25rem)]"
               />
               <p className="text-white/75 leading-relaxed mb-8">
                 Nous industrialisons chaque étape : du commit au monitoring. Résultat concret pour
@@ -349,7 +349,7 @@ function AboutPage() {
                 { t: "disponible" },
                 { t: "24/7.", c: "text-gradient" },
               ]}
-              className="font-display font-bold text-[clamp(1.3rem,4vw,2.5rem)] mb-4"
+              className="font-display font-bold text-[clamp(1.25rem,3vw,2rem)] mb-4"
             />
             <p className="text-white/80 text-sm lg:text-base">
               Hébergement redondant, sauvegardes chiffrées et supervision continue : vos services
@@ -373,7 +373,7 @@ function AboutPage() {
               { t: "nos" },
               { t: "décisions.", c: "text-gradient" },
             ]}
-            className="font-display font-bold mb-12 text-[clamp(1.3rem,3.8vw,2.25rem)]"
+            className="font-display font-bold mb-12 text-[clamp(1.2rem,2.8vw,1.875rem)]"
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v, i) => (
@@ -419,7 +419,7 @@ function AboutPage() {
                     { t: "Services", c: "text-gradient" },
                     { t: "?" },
                   ]}
-                  className="font-display font-bold mb-5 text-[clamp(1.3rem,3.8vw,2.25rem)]"
+                  className="font-display font-bold mb-5 text-[clamp(1.2rem,2.8vw,1.875rem)]"
                 />
                 <ul className="space-y-3 text-muted-foreground">
                   <li>✓ Une équipe locale basée à Dakar, qui comprend votre contexte.</li>

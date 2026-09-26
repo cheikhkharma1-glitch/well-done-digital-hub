@@ -45,7 +45,7 @@ export function Timeline3D() {
               { t: "5" },
               { t: "étapes." },
             ]}
-            className="font-display font-bold leading-tight mb-6 text-[clamp(1.5rem,4.2vw,3rem)]"
+            className="font-display font-bold leading-tight mb-6 text-[clamp(1.35rem,3vw,2.25rem)]"
           />
 
 

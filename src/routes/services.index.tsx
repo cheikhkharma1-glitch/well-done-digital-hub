@@ -123,7 +123,7 @@ function ServicesPage() {
                   { t: "votre" },
                   { t: "activité." },
                 ]}
-                className="font-display font-extrabold leading-[1.05] mb-6 text-[clamp(1.5rem,3.6vw,3.75rem)]"
+                className="font-display font-extrabold leading-[1.05] mb-6 text-[clamp(1.4rem,3vw,2.75rem)]"
               />
             </motion.div>
 

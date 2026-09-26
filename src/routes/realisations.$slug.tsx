@@ -125,7 +125,7 @@ function ProjectPage() {
                     c: index >= Math.max(1, words.length - 3) ? "text-holo" : undefined,
                   }))}
                   animateOnView={false}
-                  className="font-display text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl"
+                  className="font-display text-3xl font-extrabold leading-[1.05] sm:text-4xl lg:text-5xl"
                 />
 
                 <div className="mt-6 grid gap-5 border-l-2 border-primary/40 pl-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:gap-8">
