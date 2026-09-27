@@ -664,7 +664,7 @@ function PortfolioPage() {
                                 <div className="font-display text-sm font-extrabold bg-gradient-to-r from-[oklch(0.82_0.16_210)] to-[oklch(0.62_0.2_255)] bg-clip-text text-transparent leading-tight">
                                   {k.value}
                                 </div>
-                                <div className="text-[9px] uppercase tracking-wider text-muted-foreground mt-0.5 leading-tight">
+                                <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1 leading-snug">
                                   {k.label}
                                 </div>
                               </div>
