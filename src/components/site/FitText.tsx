@@ -68,6 +68,17 @@ export function FitText({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Natural wrapping mode: no scaling, no fixed height — the content flows
+  // and wraps like normal text. Used on small phones where forcing one line
+  // would shrink titles below readability.
+  if (disabled) {
+    return (
+      <span ref={outerRef} className={`block w-full max-w-full ${className}`}>
+        <span className="block">{children}</span>
+      </span>
+    );
+  }
+
   return (
     <span
       ref={outerRef}

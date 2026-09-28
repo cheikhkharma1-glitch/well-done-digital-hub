@@ -205,7 +205,7 @@ export function ServiceTabs() {
                   className="rounded-xl border border-[color:var(--cyber-cyan)]/40 bg-[#0b1226]/70 px-3 py-2 backdrop-blur"
                 >
                   <div className="font-display text-base lg:text-lg font-bold text-primary-foreground">{m.value}</div>
-                  <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-primary-foreground/70">{m.label}</div>
+                  <div className="font-mono text-xs uppercase tracking-[0.14em] text-primary-foreground/80 leading-snug">{m.label}</div>
                 </motion.div>
               ))}
             </div>
